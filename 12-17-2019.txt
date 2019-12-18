@@ -1,0 +1,991 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: ewiln001.mysql.guardedhost.com:3306
+-- Generation Time: Dec 17, 2019 at 06:29 AM
+-- Server version: 10.3.12-MariaDB
+-- PHP Version: 7.2.13
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `ewiln001_gold`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_annual`
+--
+
+DROP TABLE IF EXISTS `tbl_annual`;
+CREATE TABLE `tbl_annual` (
+  `annual_id` int(5) NOT NULL,
+  `annual_count` int(5) NOT NULL,
+  `dateHired` text NOT NULL,
+  `if_status` int(5) NOT NULL,
+  `emp_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_annual`
+--
+
+INSERT INTO `tbl_annual` (`annual_id`, `annual_count`, `dateHired`, `if_status`, `emp_id`) VALUES
+(1, 0, '01/08/2018', 0, 'GOLD-AR-025'),
+(4, 5, '12/04/2018', 0, 'GOLD-AR-014'),
+(5, 0, '09/17/2018', 0, 'GOLD-AR-035'),
+(6, 0, '04/10/2018', 0, 'GOLD-AR-028'),
+(7, 0, '08/07/2017', 0, 'GOLD-AR-021'),
+(8, 0, '09/08/2015', 0, 'GOLD-AR-006'),
+(9, 0, '10/28/2019', 0, 'GOLD-AR-040'),
+(10, 0, '10/28/2019', 0, 'GOLD-AR-041'),
+(11, 0, '10/08/2018', 0, 'GOLD-AR-038'),
+(12, 0, '06/10/2016', 0, 'GOLD-M-015'),
+(13, 0, '09/17/2018', 0, 'GOLD-A-034'),
+(14, 0, '02/02/2016', 0, 'GOLD-AR-010'),
+(15, 0, '02/02/2015', 0, 'GOLD-AR-004'),
+(16, 0, '04/10/2018', 0, 'GOLD-AR-029'),
+(17, 0, '10/10/2018', 0, 'GOLD-AR-027'),
+(18, 0, '10/01/2013', 0, 'GOLD-A-001'),
+(19, 0, '01/08/2018', 0, 'GOLD-AR-024');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_costcode`
+--
+
+DROP TABLE IF EXISTS `tbl_costcode`;
+CREATE TABLE `tbl_costcode` (
+  `costcode_id` int(10) UNSIGNED NOT NULL,
+  `costcode_type` text NOT NULL,
+  `costcode_number` text NOT NULL,
+  `pos_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_costcode`
+--
+
+INSERT INTO `tbl_costcode` (`costcode_id`, `costcode_type`, `costcode_number`, `pos_id`) VALUES
+(1, 'Regular', '001-23-0002', '[\"9\",\"4\"]'),
+(2, 'Regular', '002-29-0001', '[\"8\",\"6\",\"12\",\"7\",\"10\",\"11\",\"2\",\"5\"]'),
+(3, 'Regular', '002-33-0001', '[\"13\"]'),
+(4, 'OT', '001-23-0003', '[\"9\",\"4\"]'),
+(5, 'OT', '002-29-0002', '[\"8\",\"6\",\"12\",\"7\",\"10\",\"11\",\"2\",\"5\"]'),
+(6, 'OT', '002-33-0002', '[\"13\"]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_country`
+--
+
+DROP TABLE IF EXISTS `tbl_country`;
+CREATE TABLE `tbl_country` (
+  `country_id` int(10) UNSIGNED NOT NULL,
+  `country_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_country`
+--
+
+INSERT INTO `tbl_country` (`country_id`, `country_name`) VALUES
+(1, 'Philippines'),
+(2, 'Australia'),
+(3, 'Malta'),
+(4, 'United Kingdom'),
+(5, 'Jamaica');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_department`
+--
+
+DROP TABLE IF EXISTS `tbl_department`;
+CREATE TABLE `tbl_department` (
+  `dept_id` int(10) UNSIGNED NOT NULL,
+  `dept_name` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_department`
+--
+
+INSERT INTO `tbl_department` (`dept_id`, `dept_name`) VALUES
+(1, 'Human Resource'),
+(2, 'Architectural'),
+(3, 'Admin'),
+(4, 'Marketing');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_leave`
+--
+
+DROP TABLE IF EXISTS `tbl_leave`;
+CREATE TABLE `tbl_leave` (
+  `leave_id` int(5) NOT NULL,
+  `leave_series` varchar(100) NOT NULL DEFAULT '',
+  `leave_counter` varchar(10) NOT NULL DEFAULT '',
+  `leave_period_from` text NOT NULL,
+  `leave_period_to` text NOT NULL,
+  `leave_total` varchar(5) NOT NULL DEFAULT '',
+  `leave_nature` int(5) NOT NULL DEFAULT 0,
+  `leave_reason` longtext NOT NULL,
+  `leave_date` text NOT NULL,
+  `leave_docu` text NOT NULL,
+  `status` int(5) NOT NULL,
+  `emp_id` text NOT NULL,
+  `annual_id` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_leave`
+--
+
+INSERT INTO `tbl_leave` (`leave_id`, `leave_series`, `leave_counter`, `leave_period_from`, `leave_period_to`, `leave_total`, `leave_nature`, `leave_reason`, `leave_date`, `leave_docu`, `status`, `emp_id`, `annual_id`) VALUES
+(1, 'LEAVE-GOLD-19', '0001', '12/14/2019', '12/14/2019', '.5', 2, 'TO ATTEND A SCHEDULED MEETING', 'Tuesday Nov 26 2019 05:11 59 PM', 'excuse_letter/LEAVE-GOLD-19-0001 -GOLD-AR-029.pdf', 0, 'GOLD-AR-029', 16),
+(2, 'LEAVE-GOLD-19', '0002', '11/29/2019', '11/29/2019', '.5', 3, 'Assist mother to her check up.', 'Friday Nov 29 2019 12:11 10 PM', 'excuse_letter/LEAVE-GOLD-19-0002 -GOLD-AR-004.pdf', 0, 'GOLD-AR-004', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_ob`
+--
+
+DROP TABLE IF EXISTS `tbl_ob`;
+CREATE TABLE `tbl_ob` (
+  `ob_id` int(10) UNSIGNED NOT NULL,
+  `ob_series` text NOT NULL,
+  `ob_counter` varchar(10) NOT NULL DEFAULT '0',
+  `ob_dateTravel` text NOT NULL,
+  `ob_route` longtext NOT NULL,
+  `ob_from` text NOT NULL,
+  `ob_to` text NOT NULL,
+  `ob_purpose` longtext NOT NULL,
+  `ob_estimate` text NOT NULL,
+  `ob_cash` text NOT NULL,
+  `ob_project` text NOT NULL,
+  `ob_others` text NOT NULL,
+  `ob_date` text NOT NULL,
+  `emp_id` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_ob`
+--
+
+INSERT INTO `tbl_ob` (`ob_id`, `ob_series`, `ob_counter`, `ob_dateTravel`, `ob_route`, `ob_from`, `ob_to`, `ob_purpose`, `ob_estimate`, `ob_cash`, `ob_project`, `ob_others`, `ob_date`, `emp_id`) VALUES
+(1, 'OB-GOLD-19', '0001', '11/19/2019', 'November 19, 2019 - November 23, 2019\r\nAs per Ms. Diana Dabu', '06:00 AM', '06:00 PM', 'Pagbilao Site Visit', '0', '0', '063-908-390', '', 'Monday Nov 18 2019 12:11 48 PM', 'GOLD-M-015');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_position`
+--
+
+DROP TABLE IF EXISTS `tbl_position`;
+CREATE TABLE `tbl_position` (
+  `pos_id` int(10) UNSIGNED NOT NULL,
+  `pos_title` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_position`
+--
+
+INSERT INTO `tbl_position` (`pos_id`, `pos_title`) VALUES
+(1, 'Admin'),
+(2, 'Web Developer'),
+(3, 'Graphic Artist'),
+(4, 'Technical Secretary'),
+(5, 'Interior Designer'),
+(6, 'Creative Lead'),
+(7, 'Motion Graphic Designer and Editor'),
+(8, 'Architect-in-Charge'),
+(9, 'Office Assistant'),
+(10, 'Project Architect'),
+(11, 'Project Designer'),
+(12, 'Draftsman'),
+(13, 'Marketing Assistant'),
+(14, 'Acting Office Manager');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_project`
+--
+
+DROP TABLE IF EXISTS `tbl_project`;
+CREATE TABLE `tbl_project` (
+  `project_id` int(10) UNSIGNED NOT NULL,
+  `project_name` text NOT NULL,
+  `country_id` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_project`
+--
+
+INSERT INTO `tbl_project` (`project_id`, `project_name`, `country_id`) VALUES
+(1, 'Pagbilao Resort', 1),
+(2, 'Pagbilao LNG Hub Terminal', 1),
+(3, 'Pagbilao Powerstation', 1),
+(4, 'Resettlement Project', 1),
+(5, 'Ubay Village', 1),
+(6, 'Residential Houses', 1),
+(7, 'Offices', 1),
+(8, 'Commercial', 1),
+(9, 'Infrastructure World Intl.', 1),
+(10, 'Pagbilao Powerplant Animation', 1),
+(11, 'Pagbilao Development Projects', 1),
+(12, 'Eromanga Motel', 2),
+(13, 'New Chum', 2),
+(14, 'Seaforth Crescent', 2),
+(15, 'Lisarow', 2),
+(16, 'GHE Hotel - E', 3),
+(17, 'Area 1', 3),
+(18, 'GHE Hotel - R', 3),
+(19, 'Viset Terminal', 3),
+(20, 'Hampshire', 4),
+(21, 'Area 2', 3),
+(22, 'Area 3', 3),
+(23, 'Area 4', 3),
+(24, 'Area 5', 3),
+(25, 'Blundell Lane', 4),
+(26, 'Upper Swanmore, Hampshire, Winchester', 4),
+(27, 'Royal Marine Museum', 4),
+(28, 'Port Royal', 5),
+(30, 'Lugus Sulu Development', 1),
+(31, 'Operation/Admin', 1),
+(32, 'Media', 1),
+(33, 'Others', 1),
+(34, 'Cotabato Development', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_project_info`
+--
+
+DROP TABLE IF EXISTS `tbl_project_info`;
+CREATE TABLE `tbl_project_info` (
+  `proj_info_id` int(10) UNSIGNED NOT NULL,
+  `proj_info_codes` text NOT NULL,
+  `proj_info_building` text DEFAULT NULL,
+  `project_id` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_project_info`
+--
+
+INSERT INTO `tbl_project_info` (`proj_info_id`, `proj_info_codes`, `proj_info_building`, `project_id`) VALUES
+(1, '063-908-300', 'Tiki Bar', 1),
+(2, '063-904-0350', 'GHE Philippines', 1),
+(3, '063-905-0301', 'Admin. II Bldg.', 2),
+(4, '063-905-0301', 'Gatehouse', 2),
+(5, '063-905-0301', 'Maintenance Bldg.', 2),
+(6, '063-905-0301', 'Jetty Bldg.', 2),
+(7, '063-905-0301', 'LNG Jetty Sub 2', 2),
+(8, '063-905-0301', 'LNG Main Distribution Sub 1', 2),
+(9, '063-905-0301', 'LNG Fire Pump', 2),
+(10, '063-905-0306', 'Admin I Bldg.', 3),
+(11, '063-905-0306', 'Hazardous Waste Facility Bldg.', 3),
+(12, '063-905-0306', 'Material Recovery Facility Bldg.', 3),
+(13, '063-905-0306', 'Warehouses', 3),
+(14, '063-905-0306', 'Fire Pump', 3),
+(15, '063-905-0306', 'MV Room', 3),
+(16, '063-905-0306', 'PP Main Distribution Center', 3),
+(17, '063-904-0307', 'Inoc Lot', 4),
+(18, '063-908-0351', 'Ubay Housing Units', 5),
+(19, '063-908-0351', 'Staff Housing', 5),
+(20, '063-908-0351', 'Tiki Coffee Shop', 5),
+(21, '063-908-300', 'Managers House', 6),
+(22, '063-908-300', 'Executive Housing', 6),
+(23, '063-908-300', '10 Storey Corporate Bldg. (Pagbilao)', 7),
+(24, '063-908-300', 'Corporate Bldg. - Annex (Pagbilao)', 7),
+(25, '063-908-300', 'Unit 1201 Two E-com Office (Pasay, MLA)', 7),
+(26, '063-908-300', 'Shopping Center + Residential Condominium (Amandy Lot)', 8),
+(27, '063-908-300', 'International Seaport Master planned Project', 9),
+(28, '063-908-300', '', 10),
+(29, '063-908-300', 'Lot 4631-D', 11),
+(30, '063-908-0160', 'Hotel Expansion', 12),
+(31, '063-908-300', '3 Storey Hotel', 13),
+(32, '063-908-300', 'Repair/Replacement work of Jetty, Seawater Pool, Ramp, Pontoon and Four mooring piles', 14),
+(33, '063-908-300', 'Warehouse and Office', 15),
+(34, '063-908-0901', '', 16),
+(35, '063-908-0901', 'Refurbishment Project', 18),
+(36, '063-908-0902', 'Viset Office', 19),
+(37, '063-908-1106', 'Royal Swan Hotel', 20),
+(38, '063-908-0901', 'Hotel Expansion - 10 Storey', 17),
+(39, '063-908-0901', 'Blue Ocean Bar', 21),
+(40, '063-908-0901', 'Pier 188', 21),
+(41, '063-908-0901', 'Outdoor Bar', 22),
+(42, '063-908-0901', 'Pool Area', 23),
+(43, '063-908-0901', 'Lagoon', 24),
+(44, '063-908-0901', 'Olives Garden Multi-Purpose Hall', 24),
+(45, '063-908-1106', '7 Storey Hotel', 25),
+(46, '063-908-1106', 'Senior House', 26),
+(47, '063-908-1106', 'Hotel', 27),
+(48, '063-908-300', 'Port Royal Hotel', 28),
+(49, '063-908-300', '', 30),
+(50, '063-908-0390', '', 31),
+(51, '063-908-300', '', 33),
+(52, '063-908-300', '', 32),
+(53, '063-908-300', '', 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_timesheet`
+--
+
+DROP TABLE IF EXISTS `tbl_timesheet`;
+CREATE TABLE `tbl_timesheet` (
+  `ts_id` int(10) UNSIGNED NOT NULL,
+  `ts_weekstart` text NOT NULL,
+  `ts_weekend` text NOT NULL,
+  `ts_week` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `ts_sil` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `ts_ot` longtext NOT NULL,
+  `emp_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_timesheet`
+--
+
+INSERT INTO `tbl_timesheet` (`ts_id`, `ts_weekstart`, `ts_weekend`, `ts_week`, `ts_sil`, `ts_ot`, `emp_id`) VALUES
+(1, 'Nov-11-2019', 'Nov-16-2019', 46, 0, '0', 'GOLD-AR-014'),
+(2, 'Nov-11-2019', 'Nov-16-2019', 46, 0, '0', 'GOLD-AR-004'),
+(3, 'Nov-11-2019', 'Nov-16-2019', 46, 0, '0', 'GOLD-AR-025'),
+(4, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-010'),
+(5, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-004'),
+(7, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-006'),
+(10, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-014'),
+(11, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-035'),
+(12, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-M-015'),
+(13, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-029'),
+(14, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-021'),
+(15, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-040'),
+(16, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-027'),
+(17, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-025'),
+(18, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-041'),
+(19, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-024'),
+(20, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-A-034'),
+(21, 'Nov-18-2019', 'Nov-23-2019', 47, 0, '0', 'GOLD-AR-038'),
+(22, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-038'),
+(23, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-010'),
+(24, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-041'),
+(25, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-006'),
+(26, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-014'),
+(27, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-029'),
+(28, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-027'),
+(29, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-021'),
+(30, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-035'),
+(31, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-040'),
+(32, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-025'),
+(33, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-024'),
+(34, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-A-034'),
+(35, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-AR-004'),
+(36, 'Nov-25-2019', 'Nov-30-2019', 48, 0, '0', 'GOLD-M-015'),
+(37, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-041'),
+(38, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-025'),
+(39, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-A-034'),
+(40, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-038'),
+(41, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-014'),
+(42, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-006'),
+(43, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-M-015'),
+(44, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-010'),
+(45, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-027'),
+(46, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-029'),
+(47, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-040'),
+(48, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-021'),
+(49, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-004'),
+(50, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-035'),
+(51, 'Dec-02-2019', 'Dec-07-2019', 49, 0, '0', 'GOLD-AR-024'),
+(52, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-035'),
+(53, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-038'),
+(54, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-041'),
+(55, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-040'),
+(56, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-014'),
+(57, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-027'),
+(58, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-010'),
+(59, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-M-015'),
+(60, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-021'),
+(61, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-004'),
+(62, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-A-034'),
+(63, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-041'),
+(64, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-027'),
+(65, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-M-015'),
+(66, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-006'),
+(67, 'Dec-09-2019', 'Dec-14-2019', 50, 0, '0', 'GOLD-AR-025'),
+(68, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-029'),
+(69, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-021'),
+(70, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-025'),
+(71, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', ''),
+(72, 'Dec-16-2019', 'Dec-21-2019', 51, 0, '0', 'GOLD-AR-028');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_timesheetinfo`
+--
+
+DROP TABLE IF EXISTS `tbl_timesheetinfo`;
+CREATE TABLE `tbl_timesheetinfo` (
+  `tsinfo_id` int(10) UNSIGNED NOT NULL,
+  `tsinfo_desc` longtext NOT NULL,
+  `tsinfo_time` longtext NOT NULL,
+  `tsinfo_day` varchar(45) NOT NULL DEFAULT '',
+  `tsinfo_week` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `tsinfo_total` double NOT NULL,
+  `tsinfo_date` text NOT NULL,
+  `tsinfo_status` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `ts_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `project_id` longtext NOT NULL,
+  `proj_info_id` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_timesheetinfo`
+--
+
+INSERT INTO `tbl_timesheetinfo` (`tsinfo_id`, `tsinfo_desc`, `tsinfo_time`, `tsinfo_day`, `tsinfo_week`, `tsinfo_total`, `tsinfo_date`, `tsinfo_status`, `ts_id`, `project_id`, `proj_info_id`) VALUES
+(1, 'Monitor email (reply/forward).\r\n\r\nUpdate personnel movement.\r\n\r\nCollect and arrange docs for signature.\r\n\r\nPrepare summary of timesheet.\r\n\r\nPrepare Timekeeping for payroll.\r\n\r\nPrepare summary of leave/late for payroll.\r\n\r\nPrepare salary adjustment for payroll.\r\n\r\nPrepare memo for tardiness.\r\n\r\nPrepare memo for unfilled leave.\r\n\r\nInput/Encode details for GOLD website.\r\n\r\nSort files/forms for filing.', '8', 'Tue', 46, 8, 'Nov-12-2019', 0, 1, '31', '50'),
+(2, 'Supervision of proposed design study for Medical Tourism and Commercial Complex', '8', 'Tue', 46, 8, 'Nov-12-2019', 0, 2, '11', '49'),
+(3, 'Create view user to deactivate and activate user using datatable in php', '7', 'Wed', 46, 8, 'Nov-13-2019', 0, 3, '32', '49'),
+(4, 'timesheet testing and debugging', '1', 'Wed', 46, 8, 'Nov-13-2019', 0, 3, '32', '49'),
+(7, 'Proposed CLUP', '8', 'Mon', 47, 8, 'Nov-18-2019', 0, 7, '30', '49'),
+(8, 'Prepare summary of leave, salary adjustment, DTR with leave, ob and ot form for Payroll purposes.', '3', 'Mon', 47, 8, 'Nov-18-2019', 0, 10, '31', '50'),
+(9, 'Update personnel movement.', '1', 'Mon', 47, 8, 'Nov-18-2019', 0, 10, '31', '50'),
+(10, 'Monitor email.', '4', 'Mon', 47, 8, 'Nov-18-2019', 0, 10, '31', '50'),
+(11, 'Comprehensive Land Use Plan proposal', '4', 'Mon', 47, 8, 'Nov-18-2019', 0, 5, '30', '49'),
+(12, 'Site Programming and selection', '4', 'Mon', 47, 8, 'Nov-18-2019', 0, 5, '11', '28'),
+(13, 'Bar and Restaurant 3D Sketch up Model', '8', 'Mon', 47, 8, 'Nov-18-2019', 0, 11, '13', '37'),
+(14, 'Revision of GHE Malta Brochure from Mrs. Pam', '1', 'Mon', 47, 7.5, 'Nov-18-2019', 0, 12, '31', '28'),
+(15, 'Revision of GOLD Employment Agency Business Plan', '4', 'Mon', 47, 7.5, 'Nov-18-2019', 0, 12, '31', '28'),
+(16, 'Revision of Grand Excelsior Hotel Philippines Business Plan', '2.5', 'Mon', 47, 7.5, 'Nov-18-2019', 0, 12, '31', '2'),
+(17, 'sketchup site development plan', '7.9', 'Mon', 47, 7.9, 'Nov-18-2019', 0, 13, '13', '37'),
+(18, 'Studio-Type Unit Layout                                                                                       \r\nBathroom Design for Disable                                                                                         \r\nADA Standards', '8', 'Mon', 47, 8, 'Nov-18-2019', 0, 14, '11', '46'),
+(19, 'Site planning, design intent for possible road networks for guest, employees and PWD in GHE Philippines.', '8', 'Mon', 47, 8, 'Nov-18-2019', 0, 15, '1', '2'),
+(20, 'Lugus, Sulu CLUP -Central Business District (CBD) -  Research, Planning & Presentation of CBD', '7.92', 'Mon', 47, 7.92, 'Nov-18-2019', 0, 16, '30', '49'),
+(21, 'Debugging GOLD admin page and Uploading to live server in omnis hosting', '7.72', 'Mon', 47, 7.72, 'Nov-18-2019', 0, 17, '32', '49'),
+(22, '- Revision of GOLD Employment Agency Business Plan', '8', 'Tue', 47, 8, 'Nov-19-2019', 0, 12, '31', '28'),
+(23, 'SKETCH-UP GROUND CORRIDOR, TILE LAYOUT, LIGHTING FIXTURE AT ALFRESCO', '7.65', 'Tue', 47, 7.65, 'Nov-19-2019', 0, 13, '13', '37'),
+(24, 'Create Dynamic Dependent Select Box using jQuery and Ajax for project name and job code', '7', 'Tue', 47, 8, 'Nov-19-2019', 0, 17, '32', '49'),
+(25, 'Testing Dynamic Dependent Select Box for project name and job code', '1', 'Tue', 47, 8, 'Nov-19-2019', 0, 17, '32', '49'),
+(26, '*Senior Housing                                                                                                       \r\n     Studio-Type Unit Layout                                                                                        \r\n           -2010 ADA Standards for Accessible Design', '7.92', 'Tue', 47, 7.92, 'Nov-19-2019', 0, 14, '11', '29'),
+(27, 'Site Progamming and Selection', '8', 'Tue', 47, 8, 'Nov-19-2019', 0, 5, '11', '29'),
+(28, 'Revise elevations based on new motel layout.', '8', 'Tue', 47, 8, 'Nov-19-2019', 0, 4, '12', '30'),
+(29, 'Proposed ghe Guest Units building subject for presentation/ discussion ', '8', 'Tue', 47, 8, 'Nov-19-2019', 0, 7, '1', '2'),
+(30, 'Continuation of Road Network or planning in GHE site/AUTOCAD2D', '7.97', 'Tue', 47, 7.97, 'Nov-19-2019', 0, 15, '1', '2'),
+(31, 'RESEARCH', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 18, '1', '2'),
+(32, 'Monitor email, Update personnel movement, Coordinate to Mr. Albin of Trendcom for ZWCAD issues.', '7.77', 'Wed', 47, 7.77, 'Nov-20-2019', 0, 10, '31', '50'),
+(33, 'Senior Housing                                                                                                                  \r\n     - Suite Type Unit Layout                                                                                               \r\n     - ADA Standards for Accessible Design', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 14, '11', '29'),
+(34, 'Upload Dependent Select Box using jQuery and Ajax thru filezilla and testing. Fix printing bugs on auto print in weekly timesheet and summary report', '7.72', 'Wed', 47, 7.72, 'Nov-20-2019', 0, 17, '32', '49'),
+(35, 'Site Programming and Selection', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 5, '11', '29'),
+(36, 'Research on Central Business District Concepts and Principles', '5', 'Wed', 47, 8, 'Nov-20-2019', 0, 16, '30', '49'),
+(37, 'GHEMT Modeling of Glass Facade for Proposed 8-story Extension Building', '3', 'Wed', 47, 8, 'Nov-20-2019', 0, 16, '16', '34'),
+(38, 'Continuation of Road network/planning in AUTOCAD2D / Sample design of Hotel in SKETCH UP', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 15, '1', '2'),
+(39, 'FourchongLNG.net - Nav Modification', '7.93', 'Wed', 47, 7.93, 'Nov-20-2019', 0, 19, '32', '49'),
+(40, 'Prepared the Liquidation Report for the Month of October & November 2019', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 20, '31', '50'),
+(41, 'Continuation of Proposed GHE Guest building 3d Model', '8', 'Wed', 47, 8, 'Nov-20-2019', 0, 7, '1', '2'),
+(42, 'Revise elevations based on new building layout', '4', 'Wed', 47, 8, 'Nov-20-2019', 0, 4, '12', '30'),
+(43, '- Revision of GOLDEA Business Plan', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 12, '31', '50'),
+(44, 'Fix Table responsive, upload to omnis using filezilla and testing.', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 17, '32', '49'),
+(45, 'Monitor email, Update personnel movement, Coordinate to Sir Andrew for the installation of Sketchup, Coordinate to Sir Albin & Sir Javerson for ZWCAD issues.', '7.7', 'Thu', 47, 7.7, 'Nov-21-2019', 0, 10, '31', '50'),
+(46, 'Revise elevations based on new building layout', '4', 'Thu', 47, 8, 'Nov-21-2019', 0, 4, '12', '30'),
+(47, 'Meet with Trendcom staff to check the ZWCad software on my PC', '1', 'Thu', 47, 8, 'Nov-21-2019', 0, 4, '33', '51'),
+(48, 'Check my cad files to other PCs with ZWCad software for errors', '3', 'Thu', 47, 8, 'Nov-21-2019', 0, 4, '33', '51'),
+(49, 'Bar and Restaurant Sketch Up 3D Model and Rendering', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 11, '13', '31'),
+(50, 'Continuation of Road Network/planning in GHE /AUTOCAD 2D', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 15, '1', '2'),
+(51, 'SENIOR HOUSING                                                                                                               \r\n           - SUITE TYPE UNIT LAYOUT                                                                                     \r\n           - ADA STANDARDS FOR ACCESSIBLE DESIGN', '7.9', 'Thu', 47, 7.9, 'Nov-21-2019', 0, 14, '11', '29'),
+(52, 'RESEARCH', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 18, '1', '2'),
+(53, '//Answer telephone calls and transfer to the right recipient. //Prepared the Liquidation for the Month of October 2019. //Coordination with the Accounts (Mr. Jayson) //Coordinate with the Procurement (Mr. Ardel) ', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 20, '31', '50'),
+(54, 'Perspective rendering requested by Hongkong, modeling of Proposed GHEMT 8-Storey Extention Building Glass facade', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 16, '16', '34'),
+(55, 'POOL FLOOR TILES, ZWCAD TESTING', '7.4', 'Thu', 47, 7.4, 'Nov-21-2019', 0, 13, '13', '31'),
+(56, 'Continuation of Proposed GHE guest Building 3d Model.', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 7, '1', '2'),
+(57, 'SB Admin Mobile Optimization/ Modal Forms', '7.75', 'Thu', 47, 7.75, 'Nov-21-2019', 0, 19, '32', '52'),
+(58, 'Drone Videos Edit', '8', 'Thu', 47, 8, 'Nov-21-2019', 0, 21, '10', '28'),
+(59, 'Site Planning and Selection', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 5, '11', '29'),
+(60, 'Annual Physical Exam', '5.7', 'Fri', 47, 7.7, 'Nov-22-2019', 0, 10, '33', '51'),
+(61, 'Monitor Email, collect leave form for signature.', '2', 'Fri', 47, 7.7, 'Nov-22-2019', 0, 10, '31', '50'),
+(62, 'Supervision of Proposed GHE Site Plan and 3d Model of Guest building subject for presentation.', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 7, '1', '2'),
+(63, 'Site planning in AUTOCAD 2D/ SKETCHUP 3D', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 15, '1', '2'),
+(64, 'ANNUAL PHYSICAL EXAMINATION (APE)                                                                    \r\n                                                                                                                              \r\nSENIOR HOUSING                                                                                                           \r\n     - SUITE TYPE UNIT LAYOUT', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 14, '11', '29'),
+(65, 'RESEARCH', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 18, '1', '2'),
+(66, 'Medical', '7.88', 'Fri', 47, 7.88, 'Nov-22-2019', 0, 17, '33', '51'),
+(67, 'POOL LANDSCAPE, ANNUAL PHYSICAL EXAMINATION AND DRUG TESTING', '7.92', 'Fri', 47, 7.92, 'Nov-22-2019', 0, 13, '13', '31'),
+(68, 'Medical', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 21, '33', '51'),
+(69, 'GHEMT Proposed 8-Storey Extension Building Glass Facade ', '7.39', 'Fri', 47, 7.65, 'Nov-22-2019', 0, 16, '17', '38'),
+(70, 'Annual Physical Examination and Drug Testing', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 19, '33', '51'),
+(71, 'Annual physical exam', '8', 'Fri', 47, 8, 'Nov-22-2019', 0, 4, '33', '51'),
+(72, 'Monitor email. Update personnel movement.', '3.87', 'Sat', 47, 3.87, 'Nov-23-2019', 0, 10, '31', '50'),
+(73, 'Create a forgot password link and request to admin for resetting password', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 17, '32', '52'),
+(74, '- Woodcarving research for the draft book requested by Mrs. Elliott', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 12, '31', '50'),
+(75, 'Site Development and Analysis', '4', 'Sat', 47, 12, 'Nov-23-2019', 0, 5, '11', '29'),
+(76, 'Continuation of Guest Building 3d Model Subject for presentation.', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 7, '1', '2'),
+(78, 'Documentation and filing', '1', 'Sat', 47, 12, 'Nov-23-2019', 0, 5, '31', '50'),
+(79, 'Revise elevations based on new building layout', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 4, '12', '30'),
+(80, 'Architectural Research/Review', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 14, '33', '51'),
+(81, 'SKETCHUP 3D ', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 15, '1', '2'),
+(82, 'Drone Video Edit', '3.92', 'Sat', 47, 3.92, 'Nov-23-2019', 0, 21, '10', '28'),
+(83, 'Extension Building Remodeling & Perspective rendering', '4', 'Sat', 47, 4, 'Nov-23-2019', 0, 16, '17', '38'),
+(84, 'sketchup pool hardscape', '3.98', 'Sat', 47, 3.98, 'Nov-23-2019', 0, 13, '13', '31'),
+(85, 'None', '3.38', 'Sat', 47, 3.87, 'Nov-23-2019', 0, 20, '31', '50'),
+(86, 'GHE Malta A0 Print Requests', '2', 'Mon', 48, 8, 'Nov-25-2019', 0, 22, '33', '51'),
+(87, 'Check and complete the statement of intents, authorization letters, and plans needed for Seaforth PTL application online. Update both the PTL forms of 9A and 11 Seaforth Crescent online. Have both the PTL forms signed by Sir Graham Elliott online. Follow up email on RMS for the Plan requirements.', '4', 'Mon', 48, 8, 'Nov-25-2019', 0, 23, '14', '32'),
+(88, 'Pagbilao Drone Video edit', '2', 'Mon', 48, 8, 'Nov-25-2019', 0, 22, '10', '28'),
+(89, 'Meeting regarding GOLD website. Meeting regarding merging of architecture and engineering department.', '4', 'Mon', 48, 8, 'Nov-25-2019', 0, 23, '33', '51'),
+(90, 'RESEARCH- COTTAGES FLOORPLAN', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 24, '1', '2'),
+(91, 'Continuation of Guest Building 3d Model subject for presentation.', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 25, '1', '2'),
+(92, 'Monitor Email, Update personnel movement.', '4', 'Mon', 48, 8, 'Nov-25-2019', 0, 26, '31', '50'),
+(93, 'pool paving sketchup; department meeting', '7.6', 'Mon', 48, 7.6, 'Nov-25-2019', 0, 27, '13', '31'),
+(94, 'Remodeling and rendering of GHEMT Proposed 8-Storey Extension Building - Glass Facade Option', '5', 'Mon', 48, 8, 'Nov-25-2019', 0, 28, '17', '38'),
+(95, '- 2019 Files Backing-Up (4 hrs)                                                                                          \r\n- Senior Housing (Suite Type Unit Layout)', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 29, '33', '51'),
+(96, 'Bar and Restaurant Royal Swan Hotel 3D Sketch Up Model and Rendering', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 30, '13', '31'),
+(97, 'Gold Meeting - Electronic/Paperless Transaction for Gold Employees', '3', 'Mon', 48, 8, 'Nov-25-2019', 0, 28, '33', '51'),
+(98, 'Meeting with GOLD team for comments and suggestions regarding GOLD website (time sheet)', '4', 'Mon', 48, 8, 'Nov-25-2019', 0, 26, '33', '51'),
+(99, 'Meeting', '4', 'Mon', 48, 8, 'Nov-25-2019', 0, 22, '33', '51'),
+(100, 'SKETCH UP 3D OF PROPOSED HOTEL IN GHE', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 31, '1', '2'),
+(101, 'Create dashboard page for employee page to view weekly timesheet', '7.97', 'Mon', 48, 7.97, 'Nov-25-2019', 0, 32, '32', '52'),
+(102, 'FourchonLNG.net -  Flexslider/ Image Gallery Compression', '7.92', 'Mon', 48, 7.92, 'Nov-25-2019', 0, 33, '32', '52'),
+(103, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nPrepared Requisition Request\r\n', '8', 'Mon', 48, 8, 'Nov-25-2019', 0, 34, '31', '50'),
+(104, 'Site Program and Analysis', '4', 'Mon', 48, 12, 'Nov-25-2019', 0, 35, '11', '29'),
+(105, 'Administrative Meeting', '4', 'Mon', 48, 12, 'Nov-25-2019', 0, 35, '31', '50'),
+(106, 'Accompany Ms. Lita s niece at Malta Embassy', '7.7', 'Mon', 48, 7.7, 'Nov-25-2019', 0, 36, '31', '50'),
+(107, 'Revision in daily timesheet to edit past date and upload to live server for testing', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 32, '32', '52'),
+(108, '- Draft Book for Wood Statue as instructed by Mrs. Pam\r\n- Arrange files and documents', '7.8', 'Tue', 48, 7.8, 'Nov-26-2019', 0, 36, '31', '50'),
+(109, 'SKETCH UP 3D HOTEL', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 31, '1', '2'),
+(110, 'Monitor email, update personnel movement, coordinate to Ms. Napal for annual leave, collect forms for signature.', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 26, '31', '50'),
+(112, 'Pagbilao Drone Video Edit', '4', 'Tue', 48, 8, 'Nov-26-2019', 0, 22, '10', '28'),
+(113, 'RESERACH COTTAGES 3D MODEL', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 24, '1', '2'),
+(114, 'Department Organization Structure Proposal (Meeting)', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 25, '33', '51'),
+(115, 'hallways and corridors update Sketchup', '7.68', 'Tue', 48, 7.68, 'Nov-26-2019', 0, 27, '13', '31'),
+(116, 'Proposed Organization Chart', '8', 'Tue', 48, 12, 'Nov-26-2019', 0, 35, '31', '50'),
+(117, '*MEDICAL TOURISM\r\n - SENIOR HOUSING\r\n       - HOTEL/ BUILDING LAYOUT\r\n       - Y-SHAPED BUILDING\r\n       - HOTEL CORE', '7.87', 'Tue', 48, 7.87, 'Nov-26-2019', 0, 29, '11', '29'),
+(118, 'Tikiman Animation', '4', 'Tue', 48, 8, 'Nov-26-2019', 0, 22, '32', '52'),
+(119, 'Meeting for proposed new organizational chart regarding merging of engineering to GOLD', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 23, '33', '51'),
+(120, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\nCoordination meeting with the HR/ADMIN', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 34, '31', '50'),
+(121, 'MEDICAL TOURISM\r\n *Senior Housing\r\n   -Studio Type Unit Layout Revision\r\n   -Suite Type Unit Layout Revision\r\n   -Building Core', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 29, '11', '29'),
+(122, 'Fix daily time sheet calendar not showing in other pc and upload to live server for testing', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 32, '32', '52'),
+(123, 'RESEARCH- COTTAGE DESIGN', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 24, '1', '2'),
+(124, 'Coordinate to Ms. Rose for the Accomodation at UBAY.\r\nForwarding Personnel Movement (Daily).\r\nPrepared the papers (COE/Quitclaim) of the resigned employee for backpay purposes.\r\nCoordination meeting with HR/ADMIN', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 34, '31', '50'),
+(125, 'Prepare new/proposed Organizational Chart for GOLD.', '2.78', 'Wed', 48, 7.78, 'Nov-27-2019', 0, 26, '31', '50'),
+(126, 'Monitor email, update personnel movement.', '5', 'Wed', 48, 7.78, 'Nov-27-2019', 0, 26, '31', '50'),
+(127, 'SKETCHUP 3D OF HOTEL', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 31, '1', '2'),
+(128, 'Continuation of 3d Model of Guest Building', '4', 'Wed', 48, 8, 'Nov-27-2019', 0, 25, '1', '2'),
+(129, 'Meeting with the Proposed Organization Structure.', '4', 'Wed', 48, 8, 'Nov-27-2019', 0, 25, '33', '51'),
+(130, 'TWO E-COM OFFICE FURNITURE LAYOUT PLAN (EMPLOYEES WORK STATION DESIGNATION)\r\n-MEETING\r\n-AUTO CAD DRAWING', '8', 'Tue', 48, 8, 'Nov-26-2019', 0, 30, '7', '25'),
+(131, 'Tikiman Animation', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 22, '32', '52'),
+(132, 'Perspective rendering of the GHEMT Proposed 8-Storey Extension Building', '3', 'Wed', 48, 8, 'Nov-27-2019', 0, 28, '17', '38'),
+(133, 'site development for storage facility and commercial lots sketchup', '6.57', 'Wed', 48, 6.57, 'Nov-27-2019', 0, 27, '13', '31'),
+(134, 'Proposal of Cad Standards', '5', 'Wed', 48, 8, 'Nov-27-2019', 0, 28, '33', '51'),
+(135, 'Proposed Organizational Chart', '7', 'Wed', 48, 11.88, 'Nov-27-2019', 0, 35, '31', '50'),
+(136, 'Complete the required details on site plan as instructed by RMS', '3', 'Wed', 48, 8, 'Nov-27-2019', 0, 23, '14', '32'),
+(137, 'Office space planning for GOLD ', '1', 'Wed', 48, 8, 'Nov-27-2019', 0, 23, '33', '51'),
+(138, 'Meeting with slipform engineers regarding their merging with GOLD', '4', 'Wed', 48, 8, 'Nov-27-2019', 0, 23, '33', '51'),
+(139, 'Request for payment of GOLD (Pldt, Water, Load)\r\nPrepared the Purchase Requisition ', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 34, '31', '50'),
+(140, 'Tikiman Animation', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 22, '32', '52'),
+(141, 'Continue one on one interview with engineering. Compose an email regarding our observations and assessment based on the interviews with the engineer of slipform. ', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 23, '33', '51'),
+(142, 'Web Testing in live server looking for bugs and errors to fix in weekly time sheet and disable apostrophe to prevent SQL Injections', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 32, '32', '52'),
+(143, 'SKETCH UP 3D OF HOTEL', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 31, '1', '2'),
+(144, 'Monitor email, update personnel movement, sort files for filing, prepare manpower summary of expenses report.', '7.05', 'Thu', 48, 7.05, 'Nov-28-2019', 0, 26, '31', '50'),
+(145, 'Meeting for the Proposed Re Organizational Chart of Architecture & Engineering Dept Subject for presentation.', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 25, '33', '51'),
+(146, 'Coordinate with Kim of EWI regarding sir Grahams decision for merging of companies. Continue composition of email regarding our observations and assessment based on the interviews with the engineers of slipform. ', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 23, '33', '51'),
+(147, 'expanded cottages floor plan ', '7.92', 'Thu', 48, 7.92, 'Nov-28-2019', 0, 24, '1', '2'),
+(148, 'MEDICAL TOURISM\r\n     * SENIOR HOUSING\r\n          - HOTEL FLOOR PLANS (Y-SHAPED PLAN)', '7.98', 'Thu', 48, 7.98, 'Nov-28-2019', 0, 29, '11', '29'),
+(149, 'PROPOSED OFFICE LAYOUT (AUTOCAD)', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 30, '7', '25'),
+(150, 'storage facilityarea sketchup', '7.05', 'Thu', 48, 7.05, 'Nov-28-2019', 0, 27, '13', '31'),
+(151, 'DRAFT BOOK FOR MALTA (WOOD STATUES)', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 36, '33', '51'),
+(152, 'DRAFT BOOK FOR MALTA (WOOD STATUES)', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 36, '33', '51'),
+(153, 'Remodeling/Update of the GHEMT Site Development 3D model to be able to import in 3Ds max', '8', 'Thu', 48, 8, 'Nov-28-2019', 0, 28, '17', '38'),
+(154, 'GHE Malta Draft Book', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 22, '33', '51'),
+(155, 'MALTA WOOD DRAFT BOOK ', '4', 'Thu', 48, 8, 'Nov-28-2019', 0, 30, '33', '51'),
+(156, 'TWO E-COM OFFICE FURNITURE LAYOUT PLAN (EMPLOYEES WORK STATION DESIGNATION) -MEETING -AUTO CAD DRAWING', '8', 'Wed', 48, 8, 'Nov-27-2019', 0, 30, '7', '25'),
+(157, 'STUDY: BP 344 The Law to Enhance Mobility of Disabled Persons ; ADA Standards for Accessible Design', '4', 'Fri', 48, 7.8, 'Nov-29-2019', 0, 29, '33', '51'),
+(158, 'COTTAGES', '4', 'Fri', 48, 8, 'Nov-29-2019', 0, 24, '1', '2'),
+(159, 'Monitor email, update personnel movement, distribute payslip.', '3.42', 'Fri', 48, 7.42, 'Nov-29-2019', 0, 26, '31', '50'),
+(160, 'Interview with document controller ', '.5', 'Fri', 48, 8, 'Nov-29-2019', 0, 23, '33', '51'),
+(161, 'Meeting with borgi of engineering', '1', 'Fri', 48, 8, 'Nov-29-2019', 0, 23, '33', '51'),
+(162, 'Update drawings and pdf to be attached to the PTL forms online', '2', 'Fri', 48, 8, 'Nov-29-2019', 0, 23, '14', '32'),
+(163, 'Upload attachments online to PTL', '.5', 'Fri', 48, 8, 'Nov-29-2019', 0, 23, '14', '32'),
+(164, 'Interview and Assessment', '8', 'Thu', 48, 12, 'Nov-28-2019', 0, 35, '31', '50'),
+(165, 'Interview and Assessment', '6', 'Fri', 48, 11.97, 'Nov-29-2019', 0, 35, '31', '50'),
+(166, 'Meeting with the Proposed Organization Chart (Architectural + Engineering) ', '4', 'Fri', 48, 8, 'Nov-29-2019', 0, 25, '33', '51'),
+(167, 'Supervision & Checking to Draftsman of Proposed Guest Building & Villas 3d Model Subject for presentation.', '4', 'Fri', 48, 8, 'Nov-29-2019', 0, 25, '1', '2'),
+(168, 'Fix error in summary report page and summary report printing page. Update query and displaying data. Upload to live server and test', '7.8', 'Fri', 48, 7.8, 'Nov-29-2019', 0, 32, '32', '52'),
+(169, 'Revise organizational charts of architecture and engineering department', '4', 'Fri', 48, 8, 'Nov-29-2019', 0, 23, '33', '51'),
+(170, 'CONTINUATION OF BAR AND RESTAURANT 3D MODEL IN SKETCH UP', '8', 'Fri', 48, 8, 'Nov-29-2019', 0, 30, '13', '31'),
+(171, 'SKETCH UP 3D OF SITE', '8', 'Fri', 48, 8, 'Nov-29-2019', 0, 31, '1', '2'),
+(172, 'commercial/rentable areas ', '7.75', 'Fri', 48, 7.75, 'Nov-29-2019', 0, 27, '13', '31'),
+(173, 'Draft book for Malta', '8', 'Fri', 48, 8, 'Nov-29-2019', 0, 36, '33', '51'),
+(174, 'COTTAGE 1 FACADE DESIGN', '4', 'Tue', 49, 8, 'Dec-03-2019', 0, 37, '1', '2'),
+(175, 'PROPOSED SPECIAL INDUSTRIAL LOT: BUBBLE DIAGRAM FLOW', '4', 'Tue', 49, 8, 'Dec-03-2019', 0, 37, '11', '29'),
+(176, 'Search for text blast to implement for GOLD Website to send message for approval of leave', '3', 'Tue', 49, 8, 'Dec-03-2019', 0, 38, '32', '52'),
+(177, 'Suspension due to typhoon', '5', 'Tue', 49, 8, 'Dec-03-2019', 0, 38, '33', '51'),
+(178, 'Monitor mails/outlook, forwarded email/Accomodations', '8', 'Tue', 49, 8, 'Dec-03-2019', 0, 39, '31', '50'),
+(179, 'GHE Malta Tikiman Animation', '2', 'Tue', 49, 8, 'Dec-03-2019', 0, 40, '33', '51'),
+(180, 'Prepare timekeeping for payroll purposes.', '3', 'Tue', 49, 8, 'Dec-03-2019', 0, 41, '31', '50'),
+(181, 'Declared suspension', '5', 'Tue', 49, 8, 'Dec-03-2019', 0, 41, '33', '51'),
+(182, 'GHE Malta Tikiman Animation', '1', 'Tue', 49, 8, 'Dec-03-2019', 0, 40, '33', '51'),
+(183, 'Meeting & Updating of Proposed Architecture & Engineering Organizational Chart', '4', 'Tue', 49, 8, 'Dec-03-2019', 0, 42, '33', '51'),
+(184, 'Input for Draft Book for GHE Malta', '3', 'Tue', 49, 8, 'Dec-03-2019', 0, 43, '33', '51'),
+(185, 'Draft Book for GHE Malta', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 43, '33', '51'),
+(186, 'Interview engr. Anthony. Finalise the job levelling of the existing gold and slipform employees. ', '3', 'Tue', 49, 8, 'Dec-03-2019', 0, 44, '33', '51'),
+(187, 'Finalise and submit the requirements for PTL. ', '2', 'Tue', 49, 8, 'Dec-03-2019', 0, 44, '14', '32'),
+(188, 'Revise the job levelling of gold and slipform employees. ', '4', 'Wed', 49, 8, 'Dec-04-2019', 0, 44, '33', '51'),
+(189, 'Zamboanga LNG Project - Modeling of the proposed site development plan.', '3', 'Tue', 49, 7.55, 'Dec-03-2019', 0, 45, '33', '51'),
+(190, 'Over Time Work: Zamboanga LNG Project - Modeling of the proposed site development plan.', '5', 'Tue', 49, 7.55, 'Dec-03-2019', 0, 45, '33', '51'),
+(191, 'Supervision of Proposed Site Development and 3d Model of Guest Building & Villa subject for presentation.', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 42, '1', '2'),
+(192, 'COTTAGE A finished 3d model', '3', 'Wed', 49, 8, 'Dec-04-2019', 0, 37, '1', '2'),
+(193, 'proposed industrial lot schematics', '5', 'Wed', 49, 8, 'Dec-04-2019', 0, 37, '11', '29'),
+(194, 'Search for text blast to implement for GOLD Website to send message for approval of leave', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 38, '32', '52'),
+(195, 'Zamboanga LNG -  3D Modeling of the site development plan', '4', 'Wed', 49, 8, 'Dec-04-2019', 0, 45, '33', '51'),
+(196, '3D model update of GHEMT', '4', 'Wed', 49, 8, 'Dec-04-2019', 0, 45, '16', '34'),
+(197, 'Prepare leave, OT form for DTR attachments, Prepare summary of leave and lates.', '4', 'Wed', 49, 8, 'Dec-04-2019', 0, 41, '31', '50'),
+(198, 'Revised organization chart.', '1', 'Wed', 49, 8, 'Dec-04-2019', 0, 41, '31', '50'),
+(199, 'Prepare Memo for excessive tardiness, prepare summary of lates for attachment.', '2.5', 'Wed', 49, 8, 'Dec-04-2019', 0, 41, '31', '50'),
+(200, 'Meeting with Ms. Iris, Lea and Armie re suspension notice.', '.5', 'Wed', 49, 8, 'Dec-04-2019', 0, 41, '31', '50'),
+(201, 'site dev commercial area road network sketchup', '7.88', 'Wed', 49, 7.88, 'Dec-04-2019', 0, 46, '13', '31'),
+(202, 'Tikiman Animation', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 40, '33', '51'),
+(203, 'SKETCH UP 3D OF HOTEL GHE PAGBILAO', '3', 'Tue', 49, 8, 'Dec-03-2019', 0, 47, '1', '2'),
+(204, 'Holiday', '0', 'Mon', 49, 8, 'Dec-02-2019', 0, 48, '33', '51'),
+(205, 'Suspension due to typhoon', '5', 'Tue', 49, 8, 'Dec-03-2019', 0, 47, '33', '51'),
+(206, 'LEAVE', '0', 'Tue', 49, 8, 'Dec-03-2019', 0, 48, '33', '51'),
+(207, 'Sketch up 3D of Hotel GHE Pagbilao', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 47, '1', '2'),
+(208, 'PROPOSED COTABATO LNG HUB AND POWERSTATION:\r\n- 3D MODEL\r\n- LAYOUT\r\n- PERSPECTIVE', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 48, '33', '51'),
+(209, 'Review job levelling of engineering and revise the summary of proposed job title and salary adjustments', '4', 'Wed', 49, 8, 'Dec-04-2019', 0, 44, '33', '51'),
+(210, 'Draft Book for GHE Malta', '7.77', 'Thu', 49, 7.77, 'Dec-05-2019', 0, 43, '33', '51'),
+(211, 'Proposed Industrial Lot', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 37, '11', '29'),
+(212, 'Proposed Industrial Lot', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 37, '11', '29'),
+(213, 'Oversee progress of cubicle re-lay out on plan with Dudz', '4', 'Thu', 49, 8, 'Dec-05-2019', 0, 44, '7', '25'),
+(214, 'Finalise the job leveling and salary adjustment of gold and slipform employees. ', '4', 'Thu', 49, 8, 'Dec-05-2019', 0, 44, '33', '51'),
+(215, 'Oversee progress of cubicle re-lay out on plan with Dudz', '4.88', 'Fri', 49, 7.88, 'Dec-06-2019', 0, 44, '7', '25'),
+(216, 'Continue revision of cad drawings for eromanga motel', '3', 'Fri', 49, 7.88, 'Dec-06-2019', 0, 44, '12', '30'),
+(217, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 39, '31', '50'),
+(218, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation/Prepared the Liquidation Report/Papers', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 39, '31', '50'),
+(219, 'Prepare the papers for PLDT (Billing Process)\r\nAccomodations', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 39, '31', '50'),
+(220, 'Sketch up 3D of Hotel', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 47, '1', '2'),
+(221, 'Sketch up 3D of Hotel', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 47, '1', '2'),
+(222, 'Holiday', '8', 'Mon', 49, 8, 'Dec-02-2019', 0, 47, '33', '51'),
+(223, 'Cotabato Development Project Proposal', '7', 'Tue', 49, 12, 'Dec-03-2019', 0, 49, '34', '53'),
+(224, 'Cotabato Development Project Proposal', '8', 'Wed', 49, 12, 'Dec-04-2019', 0, 49, '34', '53'),
+(225, 'Conceptual design of road network', '8', 'Thu', 49, 12, 'Dec-05-2019', 0, 49, '11', '29'),
+(226, 'Conceptual Design of Road Network', '8', 'Fri', 49, 12, 'Dec-06-2019', 0, 49, '11', '29'),
+(227, 'Conceptual Design of Road Network', '5', 'Sat', 49, 12, 'Dec-07-2019', 0, 49, '11', '29'),
+(228, 'PROPOSED INDUSTRIAL LOT', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 37, '11', '29'),
+(229, 'Proposed furniture Layout (Auto cad) ', '0', 'Mon', 49, 4, 'Dec-02-2019', 0, 50, '7', '25'),
+(230, 'Proposed office furniture layout revision (Auto cad) ', '8', 'Wed', 49, 8, 'Dec-04-2019', 0, 50, '7', '25'),
+(231, 'Create php file for forgot password to update file\r\ncant upload to gold website and cant test because no internet connection.', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 38, '31', '50'),
+(232, 'OB submit stool', '4', 'Fri', 49, 8, 'Dec-06-2019', 0, 38, '31', '50'),
+(233, 'webpage to delete  project info and create a table for viewing', '4', 'Fri', 49, 8, 'Dec-06-2019', 0, 38, '31', '50'),
+(234, 'Royal swan hotel bar 3D modelling in sketch up and vray rendering ', '4', 'Tue', 49, 8, 'Dec-03-2019', 0, 50, '13', '31'),
+(235, 'Proposed office furniture layout (auto cad) ', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 50, '7', '25'),
+(236, 'Proposed office furniture layout plan', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 50, '7', '25'),
+(237, 'Fix error in updating user', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 38, '31', '50'),
+(238, 'Bar and restaurant 3d modelling and rendering', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 50, '13', '31'),
+(239, 'Site Topography 3D in Sketch up', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 47, '1', '2'),
+(240, 'MODEL REVISION\r\nMODEL TEST RENDER FOR PERSPECTIVE', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 48, '34', '53'),
+(241, 'MEDICAL TOURISM\r\nSENIOR HOUSING LAYOUT\r\nHOTEL CORE PLAN', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 48, '11', '29'),
+(242, '3D MODEL\r\nMODEL LAYERING\r\nEXPORT AS DAE FILE FOR LUMION', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 48, '34', '53'),
+(243, 'Research on Pagbilao Master Plan: Residential and Seaside Park ', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 45, '11', '29'),
+(244, 'Research on Pagbilao Master Plan: Residential and Seaside Park ', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 45, '11', '29'),
+(245, 'Research on Pagbilao Master Plan: Residential and Seaside Park ', '8', 'Thu', 49, 8, 'Dec-05-2019', 0, 45, '11', '29'),
+(246, 'Holiday', '8', 'Mon', 49, 8, 'Dec-02-2019', 0, 45, '33', '51'),
+(247, 'Follow up PLDT for internet issue, encode details from timesheet. ', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 41, '31', '50'),
+(248, 'Coordinate to PLDT re feedback from internet issue. ', '4', 'Sat', 49, 4, 'Dec-07-2019', 0, 41, '31', '50'),
+(249, 'Flexslider Image Gallery re-layout', '7.83', 'Mon', 49, 7.83, 'Dec-02-2019', 0, 51, '32', '52'),
+(250, 'Mobile Grid Layout', '7.5', 'Tue', 49, 7.5, 'Dec-03-2019', 0, 51, '32', '52'),
+(251, 'Java/CSS/ Render blocking configuration', '7.8', 'Wed', 49, 7.8, 'Dec-04-2019', 0, 51, '32', '52'),
+(252, 'Javascript pre-loader', '7.83', 'Thu', 49, 7.83, 'Dec-05-2019', 0, 51, '32', '52'),
+(253, 'Gzip Compression', '8', 'Fri', 49, 8, 'Dec-06-2019', 0, 51, '32', '52'),
+(254, 'Contact PLDT for internet issue, encode details from timesheet for Manpower summary of expenses report. ', '7.38', 'Thu', 49, 7.38, 'Dec-05-2019', 0, 41, '31', '50'),
+(255, 'CSS/Java/HTML Validations', '3.33', 'Sat', 49, 3.33, 'Dec-07-2019', 0, 51, '32', '52'),
+(256, 'ECOM OFFICE FURNITURE LAYOUT PLAN REVISION AND PRINTING (AUTOCAD)', '7.75', 'Mon', 50, 7.75, 'Dec-09-2019', 0, 52, '7', '25'),
+(257, 'Tikiman Animation', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 53, '32', '52'),
+(258, 'Proposed industrial lot', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 54, '11', '29'),
+(259, 'Topo of site in GHE Pagbilao ', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 55, '1', '2'),
+(260, 'Encode details from timesheet for Manpower summary of expenses. Turn over to Sir Andrei and Sir Andrew issue with internet connection. ', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 56, '31', '50'),
+(261, 'GHEMT Proposed Glass Facade Cadworks', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 57, '16', '34'),
+(262, 'GHEMT Proposed Glass Facade Cadworks', '4', 'Tue', 50, 7.95, 'Dec-10-2019', 0, 57, '16', '34'),
+(263, 'PROPOSED INDUSTRIAL LOT SITE ZONING', '8', 'Tue', 50, 8, 'Dec-10-2019', 0, 54, '11', '29'),
+(264, 'Revise the location of cubicles and managers table', '2', 'Sat', 50, 4, 'Dec-10-2019', 0, 44, '7', '25'),
+(265, 'Revise cad plans of existing eromanga motel', '2', 'Sat', 50, 4, 'Dec-10-2019', 0, 44, '12', '30'),
+(266, 'Tikiman Animation', '8', 'Tue', 50, 8, 'Dec-10-2019', 0, 53, '32', '52'),
+(267, 'Bar and restaurant 3D sketch up model and rendering', '4', 'Tue', 50, 7.83, 'Dec-10-2019', 0, 52, '13', '31'),
+(268, 'Ecom furniture layout plan (AUTOCAD)', '3.83', 'Tue', 50, 7.83, 'Dec-10-2019', 0, 52, '7', '25'),
+(269, 'proposed industrial lot road network', '8', 'Wed', 50, 8, 'Dec-11-2019', 0, 54, '11', '29'),
+(270, 'Tikiman Animation', '1', 'Wed', 50, 8, 'Dec-11-2019', 0, 53, '32', '52'),
+(271, 'Christmas Party Decor', '6', 'Wed', 50, 8, 'Dec-11-2019', 0, 53, '31', '50'),
+(272, 'Topo of GHE Pagbilao Sketch up 3D', '4', 'Tue', 50, 8, 'Dec-10-2019', 0, 55, '1', '2'),
+(273, 'Topo of GHE Pagbilao Sketch up 3D', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 55, '1', '2'),
+(274, 'Meeting', '1', 'Wed', 50, 8, 'Dec-11-2019', 0, 53, '31', '50'),
+(275, 'proposed industrial lot road network', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 54, '11', '29'),
+(276, 'Office design decorations for Christmas', '8', 'Wed', 50, 8, 'Dec-11-2019', 0, 52, '31', '50'),
+(277, 'DRAFT BOOK FOR MALTA', '7.25', 'Tue', 50, 7.25, 'Dec-10-2019', 0, 59, '33', '51'),
+(278, 'DRAFT BOOK FOR MALTA', '7.85', 'Wed', 50, 7.85, 'Dec-11-2019', 0, 59, '33', '51'),
+(279, 'DRAFT BOOK FOR MALTA', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 59, '33', '51'),
+(280, 'Lugus CLUP Print setup', '2', 'Thu', 50, 8, 'Dec-12-2019', 0, 53, '30', '49'),
+(281, 'Tikiman Animation', '6', 'Thu', 50, 8, 'Dec-12-2019', 0, 53, '32', '52'),
+(282, 'SITE RE-MODELING (SKETCHUP 3D)\r\n', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 60, '34', '53'),
+(283, 'LEAVE', '0', 'Tue', 50, 8, 'Dec-10-2019', 0, 60, '33', '51'),
+(284, 'PAGBILAO ACQUIRED SITE STUDY/RESEARCH', '8', 'Wed', 50, 8, 'Dec-11-2019', 0, 60, '11', '29'),
+(285, 'SENIOR HOUSING PLAN', '4', 'Thu', 50, 8, 'Dec-12-2019', 0, 60, '11', '29'),
+(286, 'LUGUS SULU CLUP', '4', 'Thu', 50, 8, 'Dec-12-2019', 0, 60, '34', '53'),
+(287, 'PAGBILAO MASTERPLAN', '3', 'Fri', 50, 7.78, 'Dec-13-2019', 0, 60, '11', '29'),
+(288, 'COMPANY CHRISTMAS PARTY', '4.78', 'Fri', 50, 7.78, 'Dec-13-2019', 0, 60, '31', '50'),
+(289, 'proposed industrial lot road network', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 54, '11', '29'),
+(290, 'proposed industrial lot road network', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 54, '11', '29'),
+(291, 'Office design decoration for christmas party', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 52, '31', '50'),
+(292, 'Office Christmas Party', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 52, '31', '50'),
+(293, 'COMPANY CHRISTMAS PARTY', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 55, '33', '51'),
+(294, 'Revise floor plans and elevations', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 58, '12', '30'),
+(295, 'Draft statement of intent for 11 and 9a seaforth crescent', '8', 'Tue', 50, 8, 'Dec-10-2019', 0, 58, '14', '32'),
+(296, 'Edit site development georeferenced in MGA', '7.93', 'Wed', 50, 7.93, 'Dec-11-2019', 0, 58, '14', '32'),
+(297, 'Revise floor plans and elevations', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 58, '12', '30'),
+(298, 'Christmas party', '7', 'Fri', 50, 8, 'Dec-13-2019', 0, 58, '31', '50'),
+(299, 'Draft incident report ', '1', 'Fri', 50, 8, 'Dec-13-2019', 0, 58, '33', '51'),
+(300, 'Christmas Party', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 53, '31', '50'),
+(301, 'Site planning and road network analysis', '6', 'Mon', 50, 12, 'Dec-09-2019', 0, 61, '11', '29'),
+(302, 'Site planning and road network analysis', '7', 'Tue', 50, 12, 'Dec-10-2019', 0, 61, '11', '29'),
+(303, 'Site planning and road network analysis', '8', 'Wed', 50, 12, 'Dec-11-2019', 0, 61, '11', '29'),
+(304, 'Site planning and road network analysis', '8', 'Thu', 50, 12, 'Dec-12-2019', 0, 61, '11', '29'),
+(305, 'Site planning and road network analysis', '6', 'Sat', 50, 12, 'Dec-14-2019', 0, 61, '11', '29'),
+(306, 'Site planning and road network analysis', '4', 'Fri', 50, 12, 'Dec-13-2019', 0, 61, '11', '29'),
+(307, 'Christmas Party', '5', 'Fri', 50, 12, 'Dec-13-2019', 0, 61, '33', '51'),
+(308, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 62, '31', '50'),
+(309, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '8', 'Tue', 50, 8, 'Dec-10-2019', 0, 62, '31', '50'),
+(310, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '8', 'Wed', 50, 8, 'Dec-11-2019', 0, 62, '31', '50'),
+(311, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 62, '31', '50'),
+(312, 'christmas party', '8', 'Fri', 50, 8, 'Dec-13-2019', 0, 62, '31', '50'),
+(313, 'Answered/Recieved phone calls.\r\nCoordinate to Ms. Rose for the Accomodation at UBAY\r\nForwarding Personnel Movement (Daily)\r\n', '4', 'Sat', 50, 4, 'Dec-14-2019', 0, 62, '31', '50'),
+(314, 'Revise name of employees on job levelling', '3.9', 'Sat', 50, 3.9, 'Dec-14-2019', 0, 58, '33', '51'),
+(315, 'proposed industrial lot road network', '8', 'Sat', 50, 4, 'Dec-14-2019', 0, 54, '11', '29'),
+(316, 'Administration Building Plan/ZWCAD', '4', 'Sat', 50, 4, 'Dec-14-2019', 0, 55, '1', '2'),
+(317, 'proposed industrial lot zoning', '8', 'Mon', 51, 8, 'Dec-16-2019', 0, 63, '11', '29'),
+(318, 'CONCEPTUALIZATION OF GHE PHILIPPINES/PAGBILAO RESTAURANT', '4', 'Mon', 51, 7.5, 'Dec-16-2019', 0, 64, '1', '2'),
+(319, 'CONCEPTUALIZATION OF GHE PHILIPPINES/PAGBILAO RESTAURANT', '4', 'Mon', 51, 7.5, 'Dec-16-2019', 0, 64, '1', '2'),
+(320, 'Draft Book for Malta', '7.87', 'Mon', 51, 7.87, 'Dec-16-2019', 0, 65, '33', '51'),
+(321, 'Continuation of site planning, 3d Model of guest building & Cottages. Supervision of Admin building space planning & Restaurant subject for presentation.', '8', 'Mon', 51, 8, 'Dec-16-2019', 0, 66, '1', '2'),
+(322, 'Test GOLD website to check bugs and errors due to no internet connection', '8', 'Mon', 50, 8, 'Dec-09-2019', 0, 67, '31', '50'),
+(323, 'Test GOLD website to check bugs and errors due to no internet connection', '7.82', 'Tue', 50, 7.82, 'Dec-10-2019', 0, 67, '31', '50'),
+(324, 'REVIEW (NEWCHUM MASTERPLAN)\r\n\r\nSEAFORTH AUSTRALIA (FOLLOW-UP AND RESPOND TO EMAILS)', '7.9', 'Mon', 51, 7.9, 'Dec-16-2019', 0, 68, '13', '31'),
+(325, 'Test GOLD website to check bugs and errors due to no internet connection', '7.93', 'Wed', 50, 7.93, 'Dec-11-2019', 0, 67, '31', '50'),
+(326, 'Test GOLD website to check bugs and errors due to no internet connection', '8', 'Thu', 50, 8, 'Dec-12-2019', 0, 67, '31', '50'),
+(327, 'Encash', '3', 'Fri', 50, 8, 'Dec-13-2019', 0, 67, '31', '50'),
+(328, 'RESIDENTIAL/SHOP, STRIP CTR. AREA STUDY', '7.4', 'Mon', 51, 7.4, 'Dec-16-2019', 0, 69, '11', '29'),
+(329, 'Christmas Pasrty', '5', 'Fri', 50, 8, 'Dec-13-2019', 0, 67, '31', '50'),
+(330, 'Test GOLD website to check bugs and errors due to no internet connection', '5.45', 'Mon', 51, 7.45, 'Dec-16-2019', 0, 70, '31', '50'),
+(331, 'Upload updated files on GOLD website using Filezilla', '2', 'Mon', 51, 7.45, 'Dec-16-2019', 0, 70, '31', '50'),
+(332, 'Tikiman Animation', '8', 'Mon', 51, 8, 'Dec-16-2019', 0, 71, '32', '52'),
+(333, 'Tikiman Animation', '1', 'Tue', 51, 8, 'Dec-17-2019', 0, 71, '32', '52'),
+(334, 'Fix error in session not working when on live server for GOLD website.\r\nUpload to omnis web hosting using file zilla and testing.', '8', 'Tue', 51, 8, 'Dec-17-2019', 0, 70, '31', '50'),
+(335, 'Tikiman Animation', '1', 'Tue', 51, 7.5, 'Dec-17-2019', 0, 72, '32', '52'),
+(336, 'Eromanga Logo', '2.5', 'Tue', 51, 7.5, 'Dec-17-2019', 0, 72, '32', '52'),
+(337, 'Research, Planning and 3D Modeling of GHE Philippines', '8', 'Tue', 51, 8, 'Dec-17-2019', 0, 64, '1', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user`
+--
+
+DROP TABLE IF EXISTS `tbl_user`;
+CREATE TABLE `tbl_user` (
+  `emp_id` varchar(100) NOT NULL DEFAULT '',
+  `password` text NOT NULL,
+  `fname` text NOT NULL,
+  `lname` text NOT NULL,
+  `mi` varchar(5) DEFAULT NULL,
+  `position` text NOT NULL,
+  `company` varchar(50) NOT NULL,
+  `department` varchar(50) NOT NULL,
+  `image` longtext DEFAULT NULL,
+  `u_type` varchar(50) NOT NULL DEFAULT '0',
+  `status` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `request` int(5) NOT NULL,
+  `is_active` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`emp_id`, `password`, `fname`, `lname`, `mi`, `position`, `company`, `department`, `image`, `u_type`, `status`, `request`, `is_active`) VALUES
+('admin', 'f53c73a352a2ca11b93e721f167b8850', 'Super', 'Admin', '', 'Web Developer', 'GOLD', 'Architectural', 'img/admin2.jpg', 'Super Admin', 1, 0, 0),
+('GOLD-A-001', '59a962f6401d24bd2cf83fb3fd71d876', 'Rose Anne', 'Dabu', 'T', 'Acting Office Manager', 'GOLD', 'Admin', 'img/GOLD-A-001.jpg', 'Employee', 0, 0, 0),
+('GOLD-A-034', 'f2b80e885b89f24782b56cb9e5d88d00', 'Lea Marie', 'Lozano', '', 'Office Assistant', 'GOLD', 'Admin', 'img/GOLD-A-034.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-004', '04e3eed024d79fc3a3981eb580c246a5', 'Jen Eunice', 'Balbas', 'V', 'Architect-in-Charge', 'GOLD', 'Architectural', 'img/GOLD-AR-004.jpg', 'Admin', 1, 0, 0),
+('GOLD-AR-006', 'e313ce8431537a55a0ebfbd4d63fedb3', 'Jay', 'Urbano', 'B', 'Project Architect', 'GOLD', 'Architectural', 'img/GOLD-AR-006.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-010', '3cb8e630859f304a842fa80ad5b70085', 'Anna Veronica', 'Lee', 'O', 'Project Designer', 'GOLD', 'Architectural', 'img/GOLD-AR-010.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-014', '2946c82ff1d6a5480c36c9a901500c6b', 'April', 'Andes', 'C', 'Technical Secretary', 'GOLD', 'Architectural', 'img/GOLD-AR-014.jpg', 'Admin', 1, 0, 0),
+('GOLD-AR-021', 'cee3749ae1f347f8307fe538b1ad332f', 'Billy-Ray', 'Bonete', 'T', 'Draftsman', 'GOLD', 'Architectural', 'img/GOLD-AR-021.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-024', 'f2ead73140ebd7b912775891846456b9', 'Carlo', 'Del Valle', 'M', 'Web Developer', 'GOLD', 'Architectural', 'img/GOLD-AR-024.jpg', 'Employee', 1, 1, 0),
+('GOLD-AR-025', 'f53c73a352a2ca11b93e721f167b8850', 'Slash', 'Delacruz', 'F', 'Web Developer', 'GOLD', 'Architectural', 'img/GOLD-AR-025.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-027', '581912c0186875f7fb96aaedc24619ce', 'Salvador Jr.', 'Ganace', 'F', 'Draftsman', 'GOLD', 'Architectural', 'img/GOLD-AR-027.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-028', '9a160a8194d536e2c2cd2534ab4b9fdd', 'Wynne Bernadette', 'Bactin', 'B', 'Creative Lead', 'GOLD', 'Architectural', 'img/GOLD-AR-028.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-029', 'd2c145511907ca9cb07c9b9a5e6e89d8', 'Arminia', 'Barredo', 'J', 'Draftsman', 'GOLD', 'Architectural', 'img/GOLD-AR-029.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-035', 'd19dd79c9bb35157a34113bc0d63f5b8', 'Jesus Rolando Jose', 'Agustin', 'M', 'Interior Designer', 'GOLD', 'Architectural', 'img/GOLD-AR-035.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-038', 'de2eb1bda269fcf63f6e4ca90af2b7c4', 'Joshua Ruiz', 'Ventura', 'L', 'Motion Graphic Designer and Editor', 'GOLD', 'Architectural', 'img/GOLD-AR-038.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-040', '620e7a13c814c9eddcbb58253be91831', 'Andy Josh', 'Agura', 'G', 'Draftsman', 'GOLD', 'Architectural', 'img/GOLD-AR-040.jpg', 'Employee', 1, 0, 0),
+('GOLD-AR-041', 'f6cf141f9d2c2d56a87a7258b8e4a9ce', 'Delmyn', 'Delmo', 'H', 'Draftsman', 'GOLD', 'Architectural', 'img/GOLD-AR-041.jpg', 'Employee', 1, 0, 0),
+('GOLD-M-015', '0cd640319b4200deac49e0285706baaf', 'Chelsy Maye', 'Cabacungan', 'D', 'Marketing Assistant', 'GOLD', 'Marketing', 'img/GOLD-M-015.jpg', 'Employee', 1, 0, 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_annual`
+--
+ALTER TABLE `tbl_annual`
+  ADD PRIMARY KEY (`annual_id`);
+
+--
+-- Indexes for table `tbl_costcode`
+--
+ALTER TABLE `tbl_costcode`
+  ADD PRIMARY KEY (`costcode_id`);
+
+--
+-- Indexes for table `tbl_country`
+--
+ALTER TABLE `tbl_country`
+  ADD PRIMARY KEY (`country_id`);
+
+--
+-- Indexes for table `tbl_department`
+--
+ALTER TABLE `tbl_department`
+  ADD PRIMARY KEY (`dept_id`);
+
+--
+-- Indexes for table `tbl_leave`
+--
+ALTER TABLE `tbl_leave`
+  ADD PRIMARY KEY (`leave_id`);
+
+--
+-- Indexes for table `tbl_ob`
+--
+ALTER TABLE `tbl_ob`
+  ADD PRIMARY KEY (`ob_id`);
+
+--
+-- Indexes for table `tbl_position`
+--
+ALTER TABLE `tbl_position`
+  ADD PRIMARY KEY (`pos_id`);
+
+--
+-- Indexes for table `tbl_project`
+--
+ALTER TABLE `tbl_project`
+  ADD PRIMARY KEY (`project_id`);
+
+--
+-- Indexes for table `tbl_project_info`
+--
+ALTER TABLE `tbl_project_info`
+  ADD PRIMARY KEY (`proj_info_id`);
+
+--
+-- Indexes for table `tbl_timesheet`
+--
+ALTER TABLE `tbl_timesheet`
+  ADD PRIMARY KEY (`ts_id`);
+
+--
+-- Indexes for table `tbl_timesheetinfo`
+--
+ALTER TABLE `tbl_timesheetinfo`
+  ADD PRIMARY KEY (`tsinfo_id`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`emp_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_annual`
+--
+ALTER TABLE `tbl_annual`
+  MODIFY `annual_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tbl_costcode`
+--
+ALTER TABLE `tbl_costcode`
+  MODIFY `costcode_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_country`
+--
+ALTER TABLE `tbl_country`
+  MODIFY `country_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_department`
+--
+ALTER TABLE `tbl_department`
+  MODIFY `dept_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_leave`
+--
+ALTER TABLE `tbl_leave`
+  MODIFY `leave_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_ob`
+--
+ALTER TABLE `tbl_ob`
+  MODIFY `ob_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_position`
+--
+ALTER TABLE `tbl_position`
+  MODIFY `pos_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tbl_project`
+--
+ALTER TABLE `tbl_project`
+  MODIFY `project_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `tbl_project_info`
+--
+ALTER TABLE `tbl_project_info`
+  MODIFY `proj_info_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `tbl_timesheet`
+--
+ALTER TABLE `tbl_timesheet`
+  MODIFY `ts_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `tbl_timesheetinfo`
+--
+ALTER TABLE `tbl_timesheetinfo`
+  MODIFY `tsinfo_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
+COMMIT;
