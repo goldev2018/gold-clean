@@ -1,5 +1,5 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script> -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
@@ -41,7 +41,7 @@
         <div class="modal-body">
             <input type="password" name="oldpass" class="form-control" placeholder="Old Password"><br>
             <input type="password" name="newpass" id="newpass" class="form-control" placeholder="New Password"><br>
-            <input type="password" name="renewpass" id="renewpass" class="form-control" placeholder="Re-type New Password" onChange="checkPasswordMatch();"><br>
+            <input type="password" name="renewpass" id="renewpass" class="form-control" placeholder="Re-type New Password" onkeyup="checkPasswordMatch();"><br>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
