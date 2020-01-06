@@ -10,7 +10,7 @@ if ($sql->execute()) { ?>
 <?php }
 
 }
-else if ($submit=="department") {
+else if ($submit=="position") {
 $position_name = $_POST['position_name'];
 
 $sql = $db->prepare("INSERT INTO tbl_position SET pos_title='$position_name'");
