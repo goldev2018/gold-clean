@@ -198,7 +198,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
     <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php 
     echo $cou_id = $rowopt['country_id'];
-    $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
+    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33')   AND country_id='$cou_id'"); $sql->execute();
      while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
       <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
      </optgroup><?php } ?></select>
