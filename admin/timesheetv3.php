@@ -57,7 +57,7 @@ $("input[placeholder]").each(function () {
                 var totalhours = 8;
             }
             var flexi = "<?php echo $sessemp_id ?>";
-            if (flexi=="GOLD-AR-004") {
+            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028") {
                 var totalhours = 12;
             }
             var lateminute = document.getElementById('late').value;
