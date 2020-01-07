@@ -20,8 +20,11 @@
     <?php include("favicon.php"); ?>
 
 	<!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet"> 
+<!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">  -->
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Serif+JP:900&display=swap" rel="stylesheet">
+
 	
     <!-- Custom & Default Styles -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -40,6 +43,7 @@
 
 }
     </style>
+
 
 </head>
 <body onload="myFunction()">  
@@ -89,7 +93,7 @@
                     </div><!-- end col -->
                     <div class="col-md-4 texthome"><br><br>
                             <p><h4>Grand Hotel Exclesior Refurbishment</h4><br>
-                                <h6 class="textcolor">Valletta, Floriana, Malta <br><br>10 – Storey extension building and  Existing building Refurbishment. On-going for permit plans in collaboration with Dhi Periti </h6></p>
+                                <p class="textcolor">Valletta, Floriana, Malta <br><br>10 – Storey extension building and  Existing building Refurbishment. On-going for permit plans in collaboration with Dhi Periti </p></p>
                     <br><br><br><br><br><br>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -107,7 +111,7 @@
                     </div><br><br><br><br><br>
                     <div class="col-md-3 texthome imgright"><br><br><br>
             <p><h4>Grand Hotel Excelsior <br>- Royal Marines Museum</h4><br>
-            <h6 class="textcolor">Portsmouth Southsea, Hampshire, England <br><br>5-star Luxury Botique Hotel </h6></p>
+            <p class="textcolor">Portsmouth Southsea, Hampshire, England <br><br>5-star Luxury Botique Hotel </p></p>
             <br><br><br><br><br><br><br><br><br>
                     </div><br><br>
             <!-- <div class="col-md-4 imgright">
@@ -129,8 +133,8 @@
             <div class="container">
                 <div class="col-md-3 texthome imgright">
             <p><h4>Eromanga Motel & <br>Caravan Park</h4><br>
-            <h6 class="textcolor">Eromanga, Southwest Queensland, Australia <br><br>
-            2-Storey Motel Redevelopment and Amusement Park</h6></p><br>
+            <p class="textcolor">Eromanga, Southwest Queensland, Australia <br><br>
+            2-Storey Motel Redevelopment and Amusement Park</p></p><br>
                     </div>
                     <img src="images/homepage/Untitled-4.jpg" alt="Paris" width="100%">
                     <br><br><p class="adjustleft"><font size="2">The project aims to provide a five star hotel resort in transition from a business hotel which is currently the hotel <br> caters. In line with the extension of the existing building, the redevelopment of the whole site.</font></p>
