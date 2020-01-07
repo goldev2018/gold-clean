@@ -57,7 +57,7 @@ $("input[placeholder]").each(function () {
                 var totalhours = 8;
             }
             var flexi = "<?php echo $sessemp_id ?>";
-            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028") {
+            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028" || flexi=="GOLD-AR-006" || flexi=="GOLD-AR-010") {
                 var totalhours = 12;
             }
             var lateminute = document.getElementById('late').value;
@@ -210,7 +210,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <textarea name='desc[]' id="desc" rows='3' cols='80' required></textarea>
 </td>
 <td style="width: 44px; height: 13px;">
-    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='12' step='.01' onblur='findTotal()' required>
 </td>
 <?php if ($showremaining==0) { ?>
 <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></td>
@@ -237,7 +237,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <textarea name='desc[]' id="desc" rows='3' cols='80' required></textarea>
 </td>
 <td style="width: 44px; height: 13px;">
-    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='12' step='.01' onblur='findTotal()' required>
 </td>
 <?php if ($showremaining==0) { ?>
 <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></td>
