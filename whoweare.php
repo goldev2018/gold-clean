@@ -23,7 +23,7 @@
 <!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">  -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Serif+JP:900&display=swap" rel="stylesheet">
-    
+
     <!-- Custom & Default Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -77,7 +77,7 @@
         <section>
             <img src="images/who/banner1.png" alt="Paris" width="100%">
             <div class="centered"><h1 style="color: #543E17;"><br>Who We Are</h1>
-                <font size="5" style="color: #705221;">Great Ocean Lake Development and Management Corporation</font><br><br>
+                <h3 style="color: #705221;">Great Ocean Lake Development and Management Corporation</h3><br><br>
                <p> <font size="2">We are committed on enhancing our Business Management accross the organization in ways people, community and <br> productivity will benefit. We are also committed in providing the best practices on General Business Consultancy backed by our wide <br>expertise on Construction Management, Project Management, Property Development, General Construction, Manufacturing and other projects.</font></p><br> <br>               
            </div>
         </section>

@@ -97,7 +97,7 @@ body,
 p,
 li,
 a {
-    font-family: 'Noto serif';
+    font-family: 'Montserrat', sans-serif;
 }
 
 .course-details h4 a,
@@ -119,6 +119,7 @@ h4,
 h5,
 h6 {
     line-height: 1.5;
+    font-family: 'Noto Serif JP', serif;
 }
 
 .cop-logo img,
