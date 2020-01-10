@@ -8,6 +8,7 @@ $hidempid = $_POST['hidempid'];
 $position = $_POST['position'];
 $company = $_POST['company'];
 $department = $_POST['department'];
+$email = $_POST['email'];
 $utype = $_POST['utype'];
 
 $sqlupdateuser = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$emp_id'");
@@ -25,7 +26,7 @@ $newName  = $newPath.$emp_id.$ext;
 
 if($_FILES['fileToUpload']['tmp_name'] == "") {
 	
-$sql = $db->prepare("UPDATE tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', u_type='$utype' WHERE emp_id='$hidempid'");
+$sql = $db->prepare("UPDATE tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', email='$email', u_type='$utype' WHERE emp_id='$hidempid'");
 if($sql->execute()) // will return true if succefull else it will return false
 {
 $sql1 = $db->prepare("UPDATE tbl_annual SET dateHired='$dateHired', emp_id='$emp_id' WHERE emp_id='$hidempid'");
@@ -43,7 +44,7 @@ window.location.href='user.php?link=viewuser';</script>
 
 
 
-$sql = $db->prepare("UPDATE tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', image='$newName', u_type='$utype' WHERE emp_id='$hidempid'");
+$sql = $db->prepare("UPDATE tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', email='$email', image='$newName', u_type='$utype' WHERE emp_id='$hidempid'");
 if($sql->execute()) // will return true if succefull else it will return false
 {
 $sql1 = $db->prepare("UPDATE tbl_annual SET dateHired='$dateHired', emp_id='$emp_id' WHERE emp_id='$hidempid'");

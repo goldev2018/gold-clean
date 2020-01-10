@@ -7,6 +7,7 @@ $emp_id = $_POST['emp_id'];
 $position = $_POST['position'];
 $company = $_POST['company'];
 $department = $_POST['department'];
+$email = $_POST['email'];
 $utype = $_POST['utype'];
 $password = md5($_POST['emp_id']);
 
@@ -18,8 +19,7 @@ $newName  = $newPath.$emp_id.$ext;
 
 
 
-
-$sql = $db->prepare("INSERT INTO tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', image='$newName', u_type='$utype', status='0', request='0', is_active='0'");
+$sql = $db->prepare("INSERT INTO tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', email='$email', image='$newName', u_type='$utype', status='0', request='0', is_active='0'");
 if($sql->execute()) // will return true if succefull else it will return false
 {
 $sql1 = $db->prepare("INSERT INTO tbl_annual SET annual_count='0', dateHired='$dateHired', if_status='0', emp_id='$emp_id'");
