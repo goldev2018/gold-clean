@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Manila");
 $date=$_GET['date'];
 // $newDate = date("d-m-Y", strtotime($date));
 $todate = date("M-d-Y", strtotime($date));
-$week = date("W");
+$week = date("W", strtotime($date));
 $sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$week' AND emp_id='$sessemp_id'");
 $sqlts->execute();
 $rowts = $sqlts->fetch(PDO::FETCH_ASSOC);
@@ -143,7 +143,7 @@ if ($numcount==0) { ?>
 
 </tr>
 
-
+<input type="hidden" name="hiddate" value="<?php echo $_GET['date']; ?>">
 
         <script type="text/javascript">
 function findTotal(){

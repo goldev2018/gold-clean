@@ -2,8 +2,15 @@
 include 'includes/config.php';
 include 'includes/sessionChk.php';
 
-$week = date("W");
-$day = date("D");
+$hiddate = $_POST['hiddate'];
+$timestamp = strtotime($hiddate);
+
+$day = date('D', $timestamp);
+
+echo $week = date("W", $timestamp);
+echo "<br>";
+echo $day = date("D", $timestamp);
+echo "<br>";
 
 
 $year = date("Y");

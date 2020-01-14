@@ -27,13 +27,13 @@ Date: <input type="text" id="datepicker" placeholder="mm/dd/Y">
             
             saturday.setDate(sunday.getDate() + n);
 
-            
-            if (date > sunday && date <= saturday) {
-              return [true, ''];
-            }
-            else {
-              return [false, ''];
-            }
+            return [true, ''];
+            // if (date > sunday && date <= saturday) {
+            //   return [true, ''];
+            // }
+            // else {
+            //   return [false, ''];
+            // }
         },
         onSelect: function(dateText, inst) { 
                 window.location = 'forms.php?id=timesheetdaily&date=' + dateText;
