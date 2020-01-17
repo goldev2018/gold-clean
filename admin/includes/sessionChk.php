@@ -10,6 +10,7 @@ $sessdepartment = $_SESSION['department'];
 $sessimage = $_SESSION['image'];
 $sessu_type = $_SESSION['u_type'];
 $sessstatus = $_SESSION['status'];
+$sessemail = $_SESSION['email'];
 
 
 $todate = date("m/d");

@@ -35,6 +35,7 @@ $_SESSION['status']=$row['status'];
 $_SESSION['is_active']=$row['is_active'];
 $_SESSION['uname']=$uname;
 $_SESSION['pass']=$pass;
+$_SESSION['email']=$email;
 
 if ($row['is_active']==0) {
 
