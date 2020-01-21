@@ -121,7 +121,7 @@ include("includes/config.php");
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Leave</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="dashboard.php?link=leave"  style="color: #35d0e8;">Leave</a></div>
                       <!-- <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -169,6 +169,9 @@ if ($form=="weeklytimesheet") {
 }
 elseif ($form=="summaryreport") {
   include 'summaryreport.php';
+}
+elseif ($form=="leave") {
+  include 'leavereport.php';
 }
 else{
 
