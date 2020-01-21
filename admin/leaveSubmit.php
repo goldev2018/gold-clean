@@ -89,7 +89,7 @@ $message = "
   <td>".$totaldays."</td>
 </tr>
 </table><br><br>
-<a href='http://goldphilippines.com/admin/leaveapproval.php?leave_series=".$series."&leave_counter=".$counter."&stat=".$status."' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+<a href='http://goldphilippines.com/admin/leaveapproval.php?leave_series=".$series."&leave_counter=".$counter."&stat=".$status."' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
 
 <a href='http://goldphilippines.com/admin/documentviewer.php?dir=".$newName."' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
 </body>
