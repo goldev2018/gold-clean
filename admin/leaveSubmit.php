@@ -14,7 +14,9 @@ if ($_POST['submitLeave']) {
 $counter = $_SESSION['leaverefnumber'];
 $series = date('\L\E\A\V\E\-\G\O\L\D\-y');
 $refnum = date('\L\E\A\V\E\-\G\O\L\D\-y\-'.$counter.' ');
-$todate = $_SESSION['todate'];
+date_default_timezone_set("Asia/Manila");
+$todate = date("l M d Y h:m s A");
+// $todate = $_SESSION['todate'];
 
 $emp_id = $_SESSION['emp_id'];
 $fullname = $_SESSION['fname']." ".$_SESSION['lname'];

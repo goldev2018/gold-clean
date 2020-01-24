@@ -92,7 +92,8 @@ $("input[placeholder]").each(function () {
 <br><br>
 <form action="timesheetchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
     <input type="hidden" name="hiddenedittimesheet" value="<?php echo $todate; ?>">
-<p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7 id="todaydate"></h7><br />Position: <?php echo $sessposition?>
+<p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7><?php date_default_timezone_set("Asia/Manila");
+echo $todate = date("l M d Y h:m s A"); ?></h7><br />Position: <?php echo $sessposition?>
 <?php 
 if ($numcount==0) { ?>
 
@@ -270,11 +271,11 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
 </center>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script>
-  $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+//  $(document).ready(function(){  
+//        setInterval(function(){   
+//            $("#todaydate").load("todate.php");
+//        }, 1000);
+//    });
 $('#desc').on('keypress', function (e) {
         var ingnore_key_codes = [34, 39];
         if ($.inArray(e.which, ingnore_key_codes) >= 0) {
