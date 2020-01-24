@@ -3,8 +3,14 @@
             <?php 
             $sessemp_id = $_SESSION['emp_id'];
 $sumnotif = 0;
-$color = "bg-warning";
-$icon = "fas fa-plane";
+$sqlmodalcountnote  = 0;
+$sqlmodalcountapproval  = 0;
+$sqlmodalcountapproved  = 0;
+$sumnotifnote = 0;
+$sumnotifapproval = 0;
+$sumnotifapproved = 0;
+// $color = "bg-warning";
+// $icon = "fas fa-plane";
 
 $sql1 = $db->prepare("SELECT * FROM tbl_leave ORDER BY leave_date ASC");
 $sql1->execute();
@@ -12,31 +18,55 @@ while ($row1 = $sql1->fetch(PDO::FETCH_ASSOC)) {
 
 
   if ($row1['status']=="Note" && $row1['noted_by']==$sessemp_id) {
-  $sql = $db->prepare("SELECT * FROM tbl_leave WHERE status='Note' AND noted_by='$sessemp_id' ORDER BY leave_date ASC");
-$sql->execute();
-$sumnotif = $sql->rowCount(); ?>
+  $sqlnote = $db->prepare("SELECT * FROM tbl_leave WHERE status='Note' AND noted_by='$sessemp_id' ORDER BY leave_date ASC");
+$sqlnote->execute();
+$sumnotifnote = $sqlnote->rowCount();
+
+// for modal
+  $sqlmodalnote = $db->prepare("SELECT * FROM tbl_leave WHERE status='Note' AND noted_by='$sessemp_id' ORDER BY leave_date ASC");
+$sqlmodalnote->execute();
+$sqlmodalcountnote = $sqlmodalnote->rowCount(); 
+ ?>
 
 
 
 <?php 
 }elseif ($row1['status']=="Approval" && $row1['approval_by']==$sessemp_id){
-  $sql = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approval' AND approval_by='$sessemp_id' ORDER BY leave_date ASC");
-$sql->execute();
-$sumnotif = $sql->rowCount(); ?>
+  $sqlapproval = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approval' AND approval_by='$sessemp_id' ORDER BY leave_date ASC");
+$sqlapproval->execute();
+$sumnotifapproval = $sqlapproval->rowCount();
+
+
+
+// for modal
+$sqlmodalapproval = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approval' AND approval_by='$sessemp_id' ORDER BY leave_date ASC");
+$sqlmodalapproval->execute();
+$sqlmodalcountapproval = $sqlmodalapproval->rowCount(); 
+ ?>
+
+
 
 <?php 
 }
 elseif($row1['status']=="Approved" && $row1['emp_id']==$sessemp_id){
-  $sql = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approved' AND emp_id='$sessemp_id' ORDER BY leave_date ASC");
-$sql->execute();
-$sumnotif = $sql->rowCount(); ?>
+  $sqlapproved = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approved' AND emp_id='$sessemp_id' ORDER BY leave_date ASC");
+$sqlapproved->execute();
+$sumnotifapproved = $sqlapproved->rowCount(); 
+
+
+
+// for modal
+  $sqlmodalapproved = $db->prepare("SELECT * FROM tbl_leave WHERE status='Approved' AND emp_id='$sessemp_id' ORDER BY leave_date ASC");
+$sqlmodalapproved->execute();
+$sqlmodalcountapproved = $sqlmodalapproved->rowCount(); 
+?>
 
 <?php 
-$color = "bg-success";
-$icon = "fas fa-check";
+// $color = "bg-success";
+// $icon = "fas fa-check";
 }
 
-
+$sumnotif = $sumnotifapproved + $sumnotifnote + $sumnotifapproval;
 
 }
 
@@ -64,14 +94,16 @@ $icon = "fas fa-check";
                   Notifications
                 </h6>
                 <?php 
-while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                if ($sumnotifnote!=0) {
+while ($row = $sqlnote->fetch(PDO::FETCH_ASSOC)) {
+                $modaltarget = "#myModal".$row['leave_id'];
                  ?>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target='<?php echo $modaltarget; ?>'>
                   <div class="mr-3">
-                    <!-- <div class="icon-circle bg-warning">
-                      <i class="fas fa-plane text-black"></i> -->
-                      <div class="icon-circle <?php echo $color; ?>">
-                      <i class="<?php echo $icon; ?> text-black"></i>
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-plane text-black"></i>
+                      <!-- <div class="icon-circle <?php echo $color; ?>">
+                      <i class="<?php echo $icon; ?> text-black"></i> -->
                     </div>
                   </div>
                   <div>
@@ -79,7 +111,47 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                     <span class="font-weight-bold"><?php echo $row['leave_reason']; ?></span>
                   </div>
                 </a>
-<?php } ?>
+<?php } }?>
+
+<?php 
+                if ($sumnotifapproval!=0) {
+while ($row = $sqlapproval->fetch(PDO::FETCH_ASSOC)) {
+                $modaltarget = "#myModal".$row['leave_id'];
+                 ?>
+                <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target='<?php echo $modaltarget; ?>'>
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-plane text-black"></i>
+                      <!-- <div class="icon-circle <?php echo $color; ?>">
+                      <i class="<?php echo $icon; ?> text-black"></i> -->
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"><?php echo $row['leave_date']; ?></div>
+                    <span class="font-weight-bold"><?php echo $row['leave_reason']; ?></span>
+                  </div>
+                </a>
+<?php } } ?>
+
+<?php 
+                if ($sumnotifapproved!=0) {
+while ($row = $sqlapproved->fetch(PDO::FETCH_ASSOC)) {
+                $modaltarget = "#myModal".$row['leave_id'];
+                 ?>
+                <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target='<?php echo $modaltarget; ?>'>
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-check text-black"></i>
+                      <!-- <div class="icon-circle <?php echo $color; ?>">
+                      <i class="<?php echo $icon; ?> text-black"></i> -->
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"><?php echo $row['leave_date']; ?></div>
+                    <span class="font-weight-bold"><?php echo $row['leave_reason']; ?></span>
+                  </div>
+                </a>
+<?php } } ?>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
               </div>
             </li>
@@ -119,3 +191,180 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
           </ul>
 
         </nav>
+
+
+
+
+
+
+
+
+
+<?php 
+if ($sqlmodalcountnote!=0) {
+while ($rowmodalnote = $sqlmodalnote->fetch(PDO::FETCH_ASSOC)) { 
+$modalid = "myModal".$rowmodalnote['leave_id'];
+
+?>
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
+  <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
+    <div class="modal-dialog">
+    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <?php echo $rowmodalnote['leave_series']."-".$rowmodalnote['leave_counter']; ?>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <?php echo "Date File: ".$rowmodalnote['leave_date']; ?><br>
+
+            <?php
+            $leaveempid = $rowmodalnote['emp_id'];
+            $sqlemp = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$leaveempid'");
+            $sqlemp->execute();
+            $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
+             echo "Name: ".$rowemp['fname']." ".$rowemp['lname']; ?>
+
+             <br>
+            <?php echo "Period: ".$rowmodalnote['leave_period_from']." - ".$rowmodalnote['leave_period_to']; ?>
+            <br>
+            <?php echo "Reason: ".$rowmodalnote['leave_reason']; ?>
+            <br>
+            <?php echo "Total: ".$rowmodalnote['leave_total']; ?>
+            <br>
+          </p>
+        </div>
+        <div class="modal-footer">
+
+
+          <a href='leaveapproval.php?leave_series=<?php echo $rowmodalnote['leave_series']; ?>&leave_counter=<?php echo $rowmodalnote['leave_counter']; ?>&stat=<?php echo $rowmodalnote['status']; ?>' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+
+<a href='documentviewer.php?dir=<?php echo $rowmodalnote['leave_docu']; ?>' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
+          
+
+
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<?php  } 
+}?>
+
+
+<?php 
+if ($sqlmodalcountapproval!=0) {
+while ($rowmodalapproval = $sqlmodalapproval->fetch(PDO::FETCH_ASSOC)) { 
+$modalid = "myModal".$rowmodalapproval['leave_id'];
+
+?>
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
+  <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
+    <div class="modal-dialog">
+    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <?php echo $rowmodalapproval['leave_series']."-".$rowmodalapproval['leave_counter']; ?>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <?php echo "Date File: ".$rowmodalapproval['leave_date']; ?><br>
+
+            <?php
+            $leaveempid = $rowmodalapproval['emp_id'];
+            $sqlemp = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$leaveempid'");
+            $sqlemp->execute();
+            $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
+             echo "Name: ".$rowemp['fname']." ".$rowemp['lname']; ?>
+
+             <br>
+            <?php echo "Period: ".$rowmodalapproval['leave_period_from']." - ".$rowmodalapproval['leave_period_to']; ?>
+            <br>
+            <?php echo "Reason: ".$rowmodalapproval['leave_reason']; ?>
+            <br>
+            <?php echo "Total: ".$rowmodalapproval['leave_total']; ?>
+            <br>
+          </p>
+        </div>
+        <div class="modal-footer">
+
+
+          <a href='leaveapproval.php?leave_series=<?php echo $rowmodalapproval['leave_series']; ?>&leave_counter=<?php echo $rowmodalapproval['leave_counter']; ?>&stat=<?php echo $rowmodalapproval['status']; ?>' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+
+<a href='documentviewer.php?dir=<?php echo $rowmodalapproval['leave_docu']; ?>' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
+
+
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<?php  } 
+}?>
+
+
+<?php 
+if ($sqlmodalcountapproved!=0) {
+while ($rowmodalapproved = $sqlmodalapproved->fetch(PDO::FETCH_ASSOC)) { 
+$modalid = "myModal".$rowmodalapproved['leave_id'];
+
+?>
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
+  <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
+    <div class="modal-dialog">
+    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <?php echo $rowmodalapproved['leave_series']."-".$rowmodalapproved['leave_counter']; ?>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <?php echo "Date File: ".$rowmodalapproved['leave_date']; ?><br>
+
+            <?php
+            $leaveempid = $rowmodalapproved['emp_id'];
+            $sqlemp = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$leaveempid'");
+            $sqlemp->execute();
+            $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
+             echo "Name: ".$rowemp['fname']." ".$rowemp['lname']; ?>
+
+             <br>
+            <?php echo "Period: ".$rowmodalapproved['leave_period_from']." - ".$rowmodalapproved['leave_period_to']; ?>
+            <br>
+            <?php echo "Reason: ".$rowmodalapproved['leave_reason']; ?>
+            <br>
+            <?php echo "Total: ".$rowmodalapproved['leave_total']; ?>
+            <br>
+          </p>
+        </div>
+        <div class="modal-footer">
+
+
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<?php  } 
+}?>

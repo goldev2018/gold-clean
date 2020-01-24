@@ -21,7 +21,7 @@ $rowemail = $sqlemail->fetch(PDO::FETCH_ASSOC);
 $approvalemail = $rowemail['email'];
 
 if ($status=="Note") {
-$sql = $db->prepare("UPDATE tbl_leave SET status='$status' WHERE leave_series='$leave_series' AND leave_counter='$leave_counter'");
+$sql = $db->prepare("UPDATE tbl_leave SET status='Approval' WHERE leave_series='$leave_series' AND leave_counter='$leave_counter'");
 $sql->execute();
 
 $sendto = $approvalemail;
@@ -70,7 +70,7 @@ $headers .= 'Cc: ghe188@seglobalph.com' . "\r\n";
 mail($sendto,$subject,$message,$headers);
  ?>
 <!-- <script>
-	alert("Leave form approved.");
+  alert("Leave form approved.");
 window.close();
 </script> -->
 
@@ -106,7 +106,7 @@ $sql->execute();
 
  ?>
 <!-- <script>
-	alert("Leave form approved.");
+  alert("Leave form approved.");
 window.close();
 </script> -->
 <p style="text-align:center"><b>Sending email.</b><br>This window will close automatically within <span id="counter">5</span> second(s).</p>
