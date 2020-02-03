@@ -84,10 +84,11 @@ include ('includes/sessionChk.php');
             </div>
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
+                <a href="dashboardemp.php?link=weeklytimesheet" style="color: #4e73df;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><a href="dashboard.php?link=weeklytimesheet" style="color: #4e73df;">Weekly Timesheet</a></div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Weekly Timesheet</div>
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">Pending</div> -->
                     </div>
                     <div class="col-auto">
@@ -95,12 +96,14 @@ include ('includes/sessionChk.php');
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
+                <a href="dashboardemp.php?link=leave" style="color: #36b9cc ;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -111,7 +114,7 @@ include ('includes/sessionChk.php');
                       <i class="fas fa-running fa-2x text-gray-300"></i>
                     </div>
                   </div>
-                </div>
+                </div></a>
               </div>
             </div>
 
@@ -171,6 +174,23 @@ include ('includes/sessionChk.php');
           </div>
 
           <!-- Content Row -->
+
+
+<?php 
+$form = $_GET['link']; 
+if ($form=="weeklytimesheet") {
+  include 'weeklytimesheetemp.php';
+}
+elseif ($form=="leave") {
+  include 'leaveemp.php';
+}
+else{
+
+}
+ ?>
+
+
+
         </div>
         <!-- /.container-fluid -->
 <?php } ?>

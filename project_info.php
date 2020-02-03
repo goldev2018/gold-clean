@@ -58,7 +58,7 @@
 
           <?php 
           $info = $_GET['info'];
-          echo $info;
+          
           if ($info==1) { ?>
 
           <!-- GHE MALTA -->

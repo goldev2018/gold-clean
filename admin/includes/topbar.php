@@ -319,6 +319,7 @@ $modalid = "myModal".$rowmodalapproval['leave_id'];
 
 <?php 
 if ($sqlmodalcountapproved!=0) {
+
 while ($rowmodalapproved = $sqlmodalapproved->fetch(PDO::FETCH_ASSOC)) { 
 $modalid = "myModal".$rowmodalapproved['leave_id'];
 

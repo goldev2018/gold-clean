@@ -61,9 +61,20 @@ $rowsqwe = $sqltscount->rowCount();
 
 
  ?>
+ <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#sampleTable').DataTable();
+} );
+</script>
+
+
  <div class="table-responsive">
-<table style="height: 126px;" width="993" border="1"  id="sampleTable">
-<tbody>
+<table style="height: 126px;" width="100%" border="1"  id="sampleTable" class="display">
+<thead>
 <tr>
 <td style="width: 30px;" rowspan="2">No.</td>
 <td style="width: 50px;" rowspan="2">Employee Code</td>
@@ -112,7 +123,8 @@ $countryarray[] = $rowts3['country_id'];
 <td style="width: 136px;">&nbsp;</td>
 <td style="width: 136px;">&nbsp;</td> -->
 </tr> 
-
+</thead>
+ <tbody>
 <?php 
 $num;
 $i=0;
@@ -174,7 +186,7 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 }
 $qty-=1;
 ?>
-
+</tbody>
 
 
 <input type="hidden" name="hidcount" value="<?php echo $qty; ?>">
@@ -216,7 +228,6 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 </td>
 
 </tr>
-</tbody>
 </table>
 </div>
 <?php }

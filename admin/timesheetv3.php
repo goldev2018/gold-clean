@@ -57,7 +57,7 @@ $("input[placeholder]").each(function () {
                 var totalhours = 8;
             }
             var flexi = "<?php echo $sessemp_id ?>";
-            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028" || flexi=="GOLD-AR-006" || flexi=="GOLD-AR-010") {
+            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028" || flexi=="GOLD-AR-006" || flexi=="GOLD-AR-010" || flexi=="GOLD-AR-027") {
                 var totalhours = 12;
             }
             var lateminute = document.getElementById('late').value;
@@ -93,7 +93,7 @@ $("input[placeholder]").each(function () {
 <form action="timesheetchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
     <input type="hidden" name="hiddenedittimesheet" value="<?php echo $todate; ?>">
 <p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7><?php date_default_timezone_set("Asia/Manila");
-echo $todate = date("l M d Y h:m s A"); ?></h7><br />Position: <?php echo $sessposition?>
+echo $todates = date("l M d Y h:m s A"); ?></h7><br />Position: <?php echo $sessposition?>
 <?php 
 if ($numcount==0) { ?>
 
@@ -199,7 +199,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
     <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php 
     echo $cou_id = $rowopt['country_id'];
-    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33')   AND country_id='$cou_id'"); $sql->execute();
+    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33') AND country_id='$cou_id'"); $sql->execute();
      while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
       <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
      </optgroup><?php } ?></select>
@@ -226,7 +226,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
     <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php 
     echo $cou_id = $rowopt['country_id'];
-    $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
+    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33') AND country_id='$cou_id'"); $sql->execute();
      while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
       <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
      </optgroup><?php } ?></select>
