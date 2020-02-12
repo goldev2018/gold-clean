@@ -24,6 +24,20 @@ $newPath = "img/";
 $ext = '.jpg';
 $newName  = $newPath.$emp_id.$ext;
 
+$newPath1 = "img/Signature/";
+$ext1 = '.png';
+$newName1  = $newPath1.$emp_id.$ext1;
+
+if ($_FILES['signature']['tmp_name'] != "") {
+	
+$sql = $db->prepare("UPDATE tbl_user SET signature='$newName1' WHERE emp_id='$hidempid'");
+if ($sql->execute()) {
+copy($_FILES['signature']['tmp_name'] , $newName1);
+}
+
+}
+
+
 if($_FILES['fileToUpload']['tmp_name'] == "") {
 	
 $sql = $db->prepare("UPDATE tbl_user SET emp_id='$emp_id', password='$password', fname='$fname', lname='$lname', mi='$mi', position='$position', company='$company', department='$department', email='$email', u_type='$utype' WHERE emp_id='$hidempid'");

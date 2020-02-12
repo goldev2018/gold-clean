@@ -35,7 +35,7 @@
       <li class="nav-item">
         <a class="nav-link" href="dashboard.php?link=home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Admin Dashboard</span></a>
       </li>
 
       <li class="nav-item">
@@ -58,6 +58,12 @@
         <a class="nav-link" href="user.php?link=user">
           <i class="fas fa-fw fa-user"></i>
           <span>User</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="dashboardemp.php?link=home">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
       </li>
 
     <?php }else{ ?>

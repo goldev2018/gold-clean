@@ -46,12 +46,24 @@ $sqlemp = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$selemployee'");
 $sqlemp->execute();
 $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
 $directory = "weeklytimesheetchk.php?weekstart=".$weekstart."&weekend=".$weekend."&empID=".$selemployee;
+
+$total = 0;
+$sql1 = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_weekstart='$weekstart' AND ts_weekend='$weekend' AND ts_week='$weeknum' AND emp_id='$selemployee'");
+$sql1->execute();
+$row1 = $sql1->fetch(PDO::FETCH_ASSOC);
+$tsid = $row1['ts_id'];
+
+if ($tsid==0) {
+  echo "Please create a weekly time sheet";
+}else{
+
+
  ?>
 
 <!-- <a href="<?php echo $directory; ?>" target="blank" class="btn btn-outline-success"  style="float: right;">Print</a> -->
 
 
-
+<form action="weeklytimesheetempsubmit.php" method="post">
 
 <p>Name: <?php echo $rowemp['fname']." ".$rowemp['lname']; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Week Start: <?php echo $weekstart; ?> <br />Position: <?php echo $rowemp['position']; ?>&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Week End: <?php echo $weekend; ?></p>
 <p>&nbsp;</p>
@@ -91,11 +103,6 @@ $directory = "weeklytimesheetchk.php?weekstart=".$weekstart."&weekend=".$weekend
 
 
 <?php
-$total = 0;
-$sql1 = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_weekstart='$weekstart' AND ts_weekend='$weekend' AND ts_week='$weeknum' AND emp_id='$selemployee'");
-$sql1->execute();
-$row1 = $sql1->fetch(PDO::FETCH_ASSOC);
-$tsid = $row1['ts_id'];
 
 $sql2 = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE ts_id='$tsid' ORDER BY tsinfo_id ASC");
 $sql2->execute();
@@ -188,7 +195,7 @@ $sqlcost = $db->prepare("SELECT * FROM tbl_costcode WHERE costcode_type='Regular
           $rowcost = $sqlcost->fetch(PDO::FETCH_ASSOC);
            ?>
 
-
+<input type="hidden" name="hidtsid" value="<?php echo $tsid ?>">
 
 <tr>
 <td>Code: </td>
@@ -211,13 +218,52 @@ $sqlcost = $db->prepare("SELECT * FROM tbl_costcode WHERE costcode_type='Regular
 </table>
 </div>
 
-<?php }
+ <br /> <br />
+
+
+<?php 
+
+if ($row1['status']!=0) {
+
+}else{
+ ?>
+
+  NOTED BY: 
+  <select id="inputGroupSelect04" name="selnoted">
+    <option selected value="">--Choose employee--</option>
+    <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id IN ('GOLD-AR-004','GOLD-AR-006','GOLD-AR-010','GOLD-AR-028') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?>
+    <option value="<?php echo $row['emp_id'] ?>"><?php echo $row['fname']." ".$row['lname'] ?></option>
+    <?php } ?>
+  </select>
+
+ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+ APPROVED BY: 
+  <select id="inputGroupSelect04" name="selapproval">
+    <option selected value="">--Choose employee--</option>
+    <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id IN ('GOLD-AR-004','GOLD-AR-006','GOLD-AR-010','GOLD-AR-028') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?>
+    <option value="<?php echo $row['emp_id'] ?>"><?php echo $row['fname']." ".$row['lname'] ?></option>
+    <?php } ?>
+  </select>
+<br><br>
+<input type="submit" name="submitwts" value="Submit" class="btn btn-outline-success">
+
+<?php } }
 
  ?>
 
-  <form>
+  </form>
+<?php } ?>
 
-
+ <br /> <br />
+ <br /> <br />
         <script type="text/javascript">
 function findSILTotal(){
     var arr = document.getElementsByClassName('sil');

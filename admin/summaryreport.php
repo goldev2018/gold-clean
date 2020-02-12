@@ -42,11 +42,20 @@ echo $weekend = $_POST['weekend'];
 echo "<br><br><br>";
 $weeknum = date("W", strtotime($weekstart));
 $directory = "summaryreportchk.php?weekstart=".$weekstart."&weekend=".$weekend;
+
+
+$qty=1;
+$sqltscount = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum'");
+$sqltscount->execute();
+$printcounts = $sqltscount->rowCount();
+if ($qty==$printcounts) {
+
 ?>
 <form action="<?php echo $directory; ?>" method="post">
 <!-- <a href="<?php echo $directory; ?>" target="_blank" class="btn btn-outline-success"  style="float: right;">Save & Print</a> -->
 <input type="submit" name="subprint" value="Save & Print" class="btn btn-outline-success"  style="float: right;">
 <br><br>
+<?php } ?>
 <style type="text/css">
   td{
     text-align: center;
@@ -133,7 +142,9 @@ $sqluser = $db->prepare("SELECT * FROM tbl_user ORDER BY department ASC");
 $sqluser->execute();
 while ($rowuser = $sqluser->fetch(PDO::FETCH_ASSOC)) {
   $empid1 = $rowuser['emp_id'];
-$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum' AND emp_id='$empid1'");
+
+
+$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum' AND emp_id='$empid1' AND status='3'");
 $sqlts->execute();
 $counts = $sqlts->rowCount();
 $qty += $counts;
@@ -172,7 +183,6 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 <?php $totperprojemp=0; 
 
 } 
-
 ?>
 <td style="width: 30px;">
   <input type='number' class='sil' name='sil[]' id='sumSIL' size='3'  min='1' max='50' onblur='findSILTotal()'>
@@ -203,7 +213,7 @@ for ($a=0; $a < $num; $a++) {
 // $in_str = "'".implode("', '", $count_id)."'"; 
   // tsinfo_id, tsinfo_desc, tsinfo_time, tsinfo_day, tsinfo_week, tsinfo_total, tsinfo_date, tsinfo_status, ts_id, project_id, proj_info_id
   $proj = $pro_idtime[$a];
-$sqltime = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE tsinfo_week='$weeknum' AND  project_id='$proj'  ");
+$sqltime = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE tsinfo_week='$weeknum' AND  project_id='$proj'");
 $sqltime->execute();
 while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
   $totperproj += $rowtime['tsinfo_time'];

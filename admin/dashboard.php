@@ -81,12 +81,13 @@ include("includes/config.php");
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
+                <a href="dashboard.php?link=weeklytimesheet" style="color: #4e73df;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><a href="dashboard.php?link=weeklytimesheet" style="color: #4e73df;">Weekly Timesheet</a></div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Weekly Timesheet</div>
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">Pending</div> -->
                     </div>
                     <div class="col-auto">
@@ -94,17 +95,19 @@ include("includes/config.php");
                     </div>
                   </div>
                 </div>
+                </a>
               </div>
             </div>
 
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
+                <a href="dashboard.php?link=summaryreport"  style="color: #1cc88a;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="dashboard.php?link=summaryreport"  style="color: #1cc88a;">Summary Report</a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Summary Report</div>
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
                     </div>
                     <div class="col-auto">
@@ -112,16 +115,18 @@ include("includes/config.php");
                     </div>
                   </div>
                 </div>
+                </a>
               </div>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
+                <a href="dashboard.php?link=leave"  style="color: #35d0e8;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="dashboard.php?link=leave"  style="color: #35d0e8;">Leave</a></div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Leave</div>
                       <!-- <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -134,20 +139,61 @@ include("includes/config.php");
                       </div> -->
                     </div>
                     <div class="col-auto">
+                      <i class="fas fa-running fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <a href="dashboard.php?link=ob"  style="color: #e74a3b;">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">OB</div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> -->
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-plane-departure fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+               </a>
+              </div>
+            </div>
+
+
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <a href="dashboard.php?link=pa"  style="color: #f0ad4e;">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Personnel Action</div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> -->
+                    </div>
+                    <div class="col-auto">
                       <i class="fas fa-user-shield fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
+               </a>
               </div>
             </div>
 
+
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-dark shadow h-100 py-2">
+                <a href="dashboard.php?link=rtw"  style="color: #858796;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">RTW & OT Slip</div>
+                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">RTW & OT Slip</div>
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> -->
                     </div>
                     <div class="col-auto">
@@ -155,6 +201,7 @@ include("includes/config.php");
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
             </div>
           </div>
@@ -172,6 +219,8 @@ elseif ($form=="summaryreport") {
 }
 elseif ($form=="leave") {
   include 'leavereport.php';
+}elseif ($form=="ob") {
+  include 'obreport.php';
 }
 else{
 

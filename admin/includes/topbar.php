@@ -322,7 +322,8 @@ if ($sqlmodalcountapproved!=0) {
 
 while ($rowmodalapproved = $sqlmodalapproved->fetch(PDO::FETCH_ASSOC)) { 
 $modalid = "myModal".$rowmodalapproved['leave_id'];
-
+$modalid1 = "#myModal".$rowmodalapproved['leave_id'];
+$modalids = $rowmodalapproved['leave_id'];
 ?>
   <!-- Modal -->
   <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
@@ -367,5 +368,39 @@ $modalid = "myModal".$rowmodalapproved['leave_id'];
       
     </div>
   </div>
-<?php  } 
+<?php  
+echo "<script>
+  $('".$modalid1."').on('show.bs.modal', function(){
+
+   $.ajax({
+                url: 'includes/updatenotif.php',
+                type: 'POST',
+                data: 'id='+".$modalids."
+            });
+
+
+
+});
+</script>";
+
+
+} 
 }?>
+
+<!-- <script>
+  $('".$modalid1."').on('show.bs.modal', function(){
+   alert('Hello World!');
+
+   $.ajax({
+                url: 'includes/updatenotif.php',
+                type: 'POST',
+                data: 'id='+".$modalids.",
+                success: function (result) {
+                    alert('success'+result);
+                }
+            });
+
+
+
+});
+</script> -->

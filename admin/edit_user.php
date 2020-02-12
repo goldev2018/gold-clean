@@ -215,6 +215,10 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 
           </div>
 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-folder-open"></span>
+                        <!-- <span class="image-preview-input-title">Browse</span> -->
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="signature"/> <!-- rename it -->
+Upload Signature <br><br><br>
 
 
         </div>

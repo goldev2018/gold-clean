@@ -72,7 +72,9 @@ include ('includes/sessionChk.php');
         <!-- Topbar Navbar -->
         <?php include 'includes/topbar.php'; ?>
         <!-- End of Topbar -->
-      <?php if ($sessu_type=="Employee") { ?>
+     <?php 
+     // if ($sessu_type=="Employee") { 
+      ?> 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -123,6 +125,7 @@ include ('includes/sessionChk.php');
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
+                <a href="dashboardemp.php?link=ob" style="color: #36b9cc ;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -133,7 +136,7 @@ include ('includes/sessionChk.php');
                       <i class="fas fa-plane-departure fa-2x text-gray-300"></i>
                     </div>
                   </div>
-                </div>
+                </div></a>
               </div>
             </div>
 
@@ -177,6 +180,42 @@ include ('includes/sessionChk.php');
 
 
 <?php 
+if ($sessemp_id=='GOLD-AR-004' || $sessemp_id=='GOLD-AR-006' || $sessemp_id=='GOLD-AR-010' || $sessemp_id=='GOLD-AR-028') {
+
+$form = $_GET['link']; 
+if ($form=="weeklytimesheet") { ?>
+<center><a class="btn btn-outline-primary" href="dashboardemp.php?link=submit">Submit</a>
+<a class="btn btn-outline-primary" href="dashboardemp.php?link=approval">Approval</a></center>
+
+<?php 
+}
+elseif ($form=="ob") { ?>
+<center><a class="btn btn-outline-success" href="dashboardemp.php?link=obcheck">View</a>
+<a class="btn btn-outline-success" href="dashboardemp.php?link=obapproval">Approval</a></center>
+  <?php 
+  // include 'weeklytimesheetempapproval.php';
+}
+elseif ($form=="leave") {
+  include 'leaveemp.php';
+}
+elseif ($form=="submit") {
+  include 'weeklytimesheetemp.php';
+}
+elseif ($form=="approval") {
+  include 'weeklytimesheetempapproval.php';
+}
+elseif ($form=="obcheck") {
+  include 'obemp.php';
+}
+elseif ($form=="obapproval") {
+  include 'obapproval.php';
+}
+else{
+
+}
+}else{
+
+
 $form = $_GET['link']; 
 if ($form=="weeklytimesheet") {
   include 'weeklytimesheetemp.php';
@@ -184,7 +223,12 @@ if ($form=="weeklytimesheet") {
 elseif ($form=="leave") {
   include 'leaveemp.php';
 }
+elseif ($form=="ob") {
+  include 'obemp.php';
+}
 else{
+
+}
 
 }
  ?>
@@ -193,7 +237,10 @@ else{
 
         </div>
         <!-- /.container-fluid -->
-<?php } ?>
+
+<?php
+ // } 
+?>
       </div>
       <!-- End of Main Content -->
 

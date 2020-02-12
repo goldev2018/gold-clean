@@ -12,26 +12,10 @@
 } );
 </script>
 <!-- <form action="summaryreportchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}" target="_blank"> -->
-
-<form action="" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
-<h1 style="margin-top:50px;"></h1>
-    <div class="week-picker"></div>
-    <div id="start"></div>
-
-  <span class="input-group-btn">
-      <!-- <input type="text" class="form-control" name="weekpicks" id="weekpicks" size="40" required data-readonly > -->
-
-      <input type="hidden" name="weekstart" id="weekstart" size="40" required data-readonly >
-      <input type="hidden" name="weekend" id="weekend" size="40" required data-readonly >
-      <!-- <input type="text" class="form-control" name="weeknum" id="weeknum" size="40" required data-readonly > -->
-
-      <input type="submit" name="submit" id="submit" style="display: none;">
-
-
-  </span>
-
-</form>
+<button type="button" onclick="window.open('forms/Liquidation - New 2020.xlsx')" class="btn btn-info btn-lg" style="float: right;">Liquidation Form</button>
+<br><br>
 <br>
+
 
 
  <link href="css/sb-admin-2.css" rel="stylesheet">
@@ -43,26 +27,16 @@
 <?php 
 include('includes/config.php'); 
 
-if (isset($_POST['submit'])) {
-echo "<center><h5>";
-echo $weekstart = $_POST['weekstart'];
-echo " to ";
-echo $weekend = $_POST['weekend'];
 
-echo "</h5></center>";
 $selemployee = $_SESSION['emp_id'];
-// $selemployee = $_POST['selemployee'];
-$weeknum = date("W", strtotime($weekstart));
 
-
-echo "<br><br>";
 // $directory = "weeklytimesheetchk.php?weekstart=".$weekstart."&weekend=".$weekend."&empID=".$selemployee;
-
-$total = 0;
+// ob_id, ob_series, ob_counter, ob_dateTravel, ob_route, ob_from, ob_to, ob_purpose, ob_estimate, ob_cash, ob_project, ob_others, ob_date, emp_id, status, requested_by, approved_by
 $count=1;
-$sql1 = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_weekstart='$weekstart' AND ts_weekend='$weekend' AND ts_week='$weeknum' AND status='3'");
+$series = date("y");
+$seriess = "OB-GOLD-".$series;
+$sql1 = $db->prepare("SELECT * FROM tbl_ob WHERE ob_series='$seriess' AND emp_id='$selemployee'");
 $sql1->execute();
-
 
  ?>
 <!-- <a href="<?php echo $directory; ?>" target="blank" class="btn btn-outline-success"  style="float: right;">Print</a> -->
@@ -72,8 +46,10 @@ $sql1->execute();
     <thead>
         <tr>
             <th width="20px">#</th>
+            <th>Ref #</th>
             <th>Employee ID</th>
             <th>Name</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -81,6 +57,7 @@ $sql1->execute();
       <?php while ($row1 = $sql1->fetch(PDO::FETCH_ASSOC)) {?>
         <tr>
             <td><?php echo $count; ?></td>
+            <td><?php echo $row1['ob_series']." - ".$row1['ob_counter']; ?></td>
             <td><?php echo $row1['emp_id']; ?></td>
             <?php 
             $emp = $row1['emp_id'];
@@ -88,55 +65,25 @@ $sql1->execute();
             $sql2->execute();
             $row2 = $sql2->fetch(PDO::FETCH_ASSOC); ?>
             <td><?php echo $row2['fname']." ".$row2['lname']; ?></td>
-            <td><a href="wtsprint.php?weekstart=<?php echo $weekstart?>&weekend=<?php echo $weekend?>&empID=<?php echo $row1['emp_id'] ?>" target="_blank" class="btn btn-outline-primary">Print</a></td>
-            <?php ?>
+            <?php 
+            if ($row1['status']=="1") { ?>
+              <td>Pending</a></td>
+              <td>Please wait for approval</td>
+            <?php }else{ ?>
+              <td>Approved</td>
+              <?php if ($row1['ob_liquidation']=="") {?>
+                <td><a href="obliquidate.php?id=<?php echo $row1['ob_id']; ?>" target="_blank" class="btn btn-outline-primary">Liquidatation</a></td>
+              <?php }else{ ?>
+
+              <?php } ?>
+            
+            <?php } ?>
             
         </tr>
       <?php
       $count++;
-       }  ?>
+        } ?>
 
     </tbody>
 </table>
-
-
-
-<?php 
-
-
-}?>
-
- <br /> <br />
- <br /> <br />
-        <script type="text/javascript">
-function findSILTotal(){
-    var arr = document.getElementsByClassName('sil');
-    var tot=0;
-    var qwe=0;
-    for(var i=0;i<arr.length;i++){
-        if(parseFloat(arr[i].value))
-            tot += parseFloat(arr[i].value);
-
-    }
-
-    document.getElementById('siltotal').value = tot;
-    var x = document.getElementById("hidtotal2").value;
-    var y = document.getElementById("siltotal").value;
-    qwe = parseFloat(tot, 10) + parseFloat(x, 10);
-    document.getElementById('hidtotal').value = qwe;
-}
-
-
-  $(document).ready(function() {
-  $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-});
-
-
-</script>
-
 
