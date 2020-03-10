@@ -87,6 +87,16 @@
   color: #C7902B;
 
 }
+
+
+.centered3 {
+        /* width: 1429.59px */
+        background-color: white;
+        position: relative;
+        padding: 20px;
+
+
+}
     </style>
 <!-- /*projects overlay*/ -->
 
@@ -94,23 +104,25 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- Site Meta -->
     <title>Projects | Great Ocean Lake Development</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <!-- Site Icons -->
     <?php include("favicon.php"); ?>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet"> 
-    
+<!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">  -->
+
+      <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Serif+JP:900&display=swap" rel="stylesheet">
+
     <!-- Custom & Default Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -124,25 +136,26 @@
     <![endif]-->
 
 </head>
-<body>  
+<body>
 
     <!-- LOADER -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <img class="preloader" src="images/loader.gif" alt="">
-    </div><!-- end loader -->
+    </div> -->
+    <!-- end loader -->
     <!-- END LOADER -->
 
     <br><br><br><br>
 
     <div id="wrapper">
-       
 
-        <?php include("header.php"); ?>   
+
+        <?php include("header.php"); ?>
 
 
         <section class="section gb nopadtop">
             <div class="container">
-                <center><h4 style="color: #543E17; font-size: 30px;">Projects</h4></center><br><br>
+                <center><h1 style="">PROJECTS</h1></center><br><br>
                 <div class="row">
 
                     <div class="col-md-6 proj1">
@@ -165,10 +178,10 @@
 
 
                     <div class="col-md-6 proj3">
-                        <div class="box">
+                        <div class="box ">
                             <img src="images/project/Royal Marines Museum.jpg" alt="Avatar" class="image" style="width:100%">
                             <div class="middle">
-                              <div class="text"><a href="project_info.php?info=3">Royal Swan Hotel Royal Marines Museum Eastney Esplanade</a></div>
+                              <div class="text"><a href="project_info.php?info=3">Grand Hotel Excelsior Portsmouth United Kingdom</a></div>
                             </div>
                         </div>
                     </div><!-- end col -->
@@ -192,14 +205,24 @@
                         </div>
                     </div><!-- end col -->
 
-                    <div class="col-md-6 proj6">
+                    <!-- <div class="col-md-6 proj6">
                         <div class="box">
                             <img src="images/project/Royal Swan Hotel Ipswich.jpg" alt="Avatar" class="image" style="width:100%">
                             <div class="middle">
                               <div class="text"><a href="project_info.php?info=6">Royal Swan Hotel Ipswich</a></div>
                             </div>
                         </div>
-                    </div><!-- end col -->
+                    </div> -->
+
+                    <div class="col-md-6 proj6">
+                        <div class="box">
+                            <img src="images/project/port_royal.jpg" alt="Avatar" class="image" style="width:100%;">
+                            <div class="middle">
+                              <div class="text"><a href="project_info.php?info=7">Grand Hotel Excelsior Port Royal Jamaica</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
 
 
                 </div><!-- end row -->
@@ -207,12 +230,12 @@
         </section>
 
 
-       
 
 
-  
+
+
 <?php include("footer.php"); ?>
- 
+
     </div><!-- end wrapper -->
 
     <!-- jQuery Files -->

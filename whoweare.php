@@ -6,23 +6,24 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- Site Meta -->
     <title>Who We Are | Great Ocean Lake Development</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <!-- Site Icons -->
     <?php include("favicon.php"); ?>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet"> 
-    
+<!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">  -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Serif+JP:900&display=swap" rel="stylesheet">
+
     <!-- Custom & Default Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -33,8 +34,8 @@
     <!--[if lt IE 9]>
         <script src="js/vendor/html5shiv.min.js"></script>
         <script src="js/vendor/respond.min.js"></script>
-    <![endif]-->
-<!-- 
+    <![endif] yeah it would be cool but not in a com-->
+<!--
         <style type="text/css">
         .bottom-right {
         position: absolute;
@@ -47,80 +48,126 @@
     </style> -->
 
     <style type="text/css">
-.centered {
-    width: 1150px;
-    padding-right:200px;
-    padding-left:40px;
-  position: absolute;
-  /*top: 100%;*/
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.centered{
+        /* width: 1429.59px */
+        padding-left: 40px;
+        /* padding-right: 115px; */
+        /* transform: translate(0, -50%); */
         background-color: white;
+        position: relative;
 }
+
+
+/* .col-sm-12  .centered {
+  padding-left: 15px;
+  padding-right: 15px;
+
+} */
+
+.centered2 {
+        /* width: 1429.59px */
+
+        /* transform: translate(0, -19%); */
+
+}
+
+
+
+
+p {
+  font-size: 16px;
+  line-height: 25px;
+}
+
+h1{
+  margin-bottom:71.392px;
+}
+
+h2{
+  margin-bottom: 40.819px;
+}
+
+
+/* .col-xs-12 {
+  transform: translate(0,50%);
+
+} */
+
+
+/* @media (min-width:375px) {
+  .col-xs-12 {
+    transform: translate(0,50%);
+  }
+} */
+
+
+/*
+.baba {
+  transform: translate(0,50%);
+} */
+
+
+/* .col-xs-12{
+transform: translate(0,+50%);
+} */
+
+
     </style>
 
 </head>
-<body>  
+<body>
 
     <!-- LOADER -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <img class="preloader" src="images/loader.gif" alt="">
-    </div><!-- end loader -->
+    </div> ->
+    <!-- end loader -->
     <!-- END LOADER -->
-
-    <div id="wrapper">
-       
 
         <?php include("header.php"); ?>
 
         <section>
-            <img src="images/who/banner1.png" alt="Paris" width="100%">
-            <div class="centered"><h1 style="color: #543E17;"><br>Who We Are</h1>
-                <font size="5" style="color: #705221;">Great Ocean Lake Development and Management Corporation</font><br><br>
-               <p> <font size="2">We are committed on enhancing our Business Management accross the organization in ways people, community and <br> productivity will benefit. We are also committed in providing the best practices on General Business Consultancy backed by our wide <br>expertise on Construction Management, Project Management, Property Development, General Construction, Manufacturing and other projects.</font></p><br> <br>               
-           </div>
-        </section>
-<br><br><br><br><br><br><br><br><br><br>
-<!--         <section class="section">
+          <img src="images/who/banner1.jpg" alt="Paris" width="100%" style="transform: translate(0, 11%);">
             <div class="container">
-                <div class="col-md-8 hidden-sm hidden-xs">
-                <p style="position: absolute;top: 0;"><font size="2">We are committed on enhancing our Business Management accross the organization in ways people, community and productivity will benefit. We are also committed in providing <br>the best practices on General Business  Consultancy backed by our wide expertise on Construction Management, Project Management, Property Development, General Construction,<br> Manufacturing and other projects. </font></p>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block">
+                  <div class="centered"><h1><br>WHO WE ARE</h1>
+                    <!-- <h3 style="color: #705221;">Great Ocean Lake Development and Management Corporation</h3><br><br> -->
+                   <p style="">We are committed on enhancing our Business Management accross the organization in ways people, community and productivity will benefit.<br> We are also committed in providing the best practices on General Business Consultancy backed by our wide expertise on Construction Management, Project Management, Property Development, General Construction, Manufacturing and other projects. </p><br> <br>
+                  </div>
                 </div>
-            </div>
-        </section> -->
-        <section class="section gb nopadtop">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="box">
-                            <h4 style="color: #543E17; font-size: 15px;">Vision</h4>
-                            <p> <font size="2">We envision the society to continuously improve with better architectural developments and management strategies.<br><br><br><br></font> </p>
-                        </div>
-                    </div><!-- end col -->
 
-                    <div class="col-md-6">
-                        <div class="box">
-                            <h4 style="color: #543E17; font-size: 15px;">Mission</h4>
-                            <p> <font size="2">It is our mission to provide wide range of world-class well-designed development and management services across the globe. <br><br>
+                <div class="col-xs-12 col-lg-6">
+                  <div class="centered" style="min-height:312.916px;">
+                    <h2><br>Vision</h2>
+                    <p>We envision the s ociety to continuously improve with better architectural developments and management strategies.</p><br><br>
+                  </div>
+                </div>
 
-                            Our organization introduce and integrate equality and diversity into practice to have the dignity of our team protected and respected.</font> </p>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div>
-        </section>
+                <div class="col-xs-12 col-lg-6">
+                  <div class="centered" style="min-height:312.916px;">
+                    <h2><br>Mission</h2>
+                    <p>It is our mission to provide wide range of world-class well-designed development and management services across the globe.</p>
+                    <p>Our organization introduce and integrate equality and diversity into practice to have the dignity of our team protected and respected.</p><br><br>
+                  </div>
+                </div>
 
-        <section class="section">
-            <div class="container">
-                <img src="images/who/Untitled-1.jpg" alt="Paris" width="100%" height="500px">
-            </div>
+                <div class="col-xs-12 col-lg-12 ">
+                  <div class="centered2" style="padding-top:30px; padding-bottom:30px">
+                    <img src="images/who/Untitled-1.jpg" class="img-responsive" >
+                  </div>
+                </div>
+
+              </div><!--END ROW-->
+            </div><!--END CONTAINER-->
+
         </section>
 
 
-  
 <?php include("footer.php"); ?>
- 
-    </div><!-- end wrapper -->
+
+
 
     <!-- jQuery Files -->
     <script src="js/jquery.min.js"></script>
@@ -128,7 +175,8 @@
     <script src="js/carousel.js"></script>
     <script src="js/animate.js"></script>
     <script src="js/custom.js"></script>
-    <!-- VIDEO BG PLUGINS -->
+    <!-- VIDEO BG PLUGINS Im excited for anchor A.gohan.
+  how u guys like clint capella for trez?  -->
     <script src="js/videobg.js"></script>
 
 </body>
