@@ -42,11 +42,20 @@ echo $weekend = $_POST['weekend'];
 echo "<br><br><br>";
 $weeknum = date("W", strtotime($weekstart));
 $directory = "summaryreportchk.php?weekstart=".$weekstart."&weekend=".$weekend;
+
+
+$qty=1;
+$sqltscount = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum'");
+$sqltscount->execute();
+$printcounts = $sqltscount->rowCount();
+
+
 ?>
 <form action="<?php echo $directory; ?>" method="post">
 <!-- <a href="<?php echo $directory; ?>" target="_blank" class="btn btn-outline-success"  style="float: right;">Save & Print</a> -->
 <input type="submit" name="subprint" value="Save & Print" class="btn btn-outline-success"  style="float: right;">
 <br><br>
+
 <style type="text/css">
   td{
     text-align: center;
@@ -61,9 +70,22 @@ $rowsqwe = $sqltscount->rowCount();
 
 
  ?>
+ <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#sampleTable').DataTable({
+      "pageLength": 25
+    });
+} );
+</script>
+
+
  <div class="table-responsive">
-<table style="height: 126px;" width="993" border="1"  id="sampleTable">
-<tbody>
+<table style="height: 126px;" width="100%" border="1"  id="sampleTable" class="display">
+<thead>
 <tr>
 <td style="width: 30px;" rowspan="2">No.</td>
 <td style="width: 50px;" rowspan="2">Employee Code</td>
@@ -112,7 +134,8 @@ $countryarray[] = $rowts3['country_id'];
 <td style="width: 136px;">&nbsp;</td>
 <td style="width: 136px;">&nbsp;</td> -->
 </tr> 
-
+</thead>
+ <tbody>
 <?php 
 $num;
 $i=0;
@@ -121,13 +144,16 @@ $sqluser = $db->prepare("SELECT * FROM tbl_user ORDER BY department ASC");
 $sqluser->execute();
 while ($rowuser = $sqluser->fetch(PDO::FETCH_ASSOC)) {
   $empid1 = $rowuser['emp_id'];
-$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum' AND emp_id='$empid1'");
+
+
+$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum' AND emp_id='$empid1' AND status='3'");
 $sqlts->execute();
 $counts = $sqlts->rowCount();
 $qty += $counts;
 while ($rowts = $sqlts->fetch(PDO::FETCH_ASSOC)) {
-$empid = $rowts['emp_id'];
-echo "<input type='hidden' class='hidid' name='hidid[]' id='hidid' value=".$empid.">";
+$empid = $rowts['emp_id']; ?>
+<input type='text' class='hidid' name='hidid[]'  value="<?php echo $empid; ?>" style="display: none;  ">
+<?php 
 $ts_idtime = $rowts['ts_id'];
 
 $i++;
@@ -160,21 +186,25 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 <?php $totperprojemp=0; 
 
 } 
-
 ?>
 <td style="width: 30px;">
-  <input type='number' class='sil' name='sil[]' id='sumSIL' size='3'  min='1' max='50' onblur='findSILTotal()'>
+  <input type='text' class='sil' name='sil[]' size='3' value="<?php echo $rowts['ts_sil']; ?>"  onblur='findSILTotal()'>
 </td>
 <td style="width: 30px;">
-<textarea name='otremarks[]' rows='1' cols='40'></textarea>
+<textarea name='otremarks[]' rows='1' cols='40'><?php echo $rowts['ts_ot']; ?></textarea>
 </td>
+<?php if ($rowts['ts_sil']==null) { ?>
 <td style="width: 30px;"><?php echo $totperemp; ?></td>
+<?php }else{ ?>
+<td style="width: 30px;"><?php echo $rowts['ts_sil']+$totperemp; ?></td>
+<?php } ?>
+
 </tr>
 <?php } 
 }
 $qty-=1;
 ?>
-
+</tbody>
 
 
 <input type="hidden" name="hidcount" value="<?php echo $qty; ?>">
@@ -191,7 +221,7 @@ for ($a=0; $a < $num; $a++) {
 // $in_str = "'".implode("', '", $count_id)."'"; 
   // tsinfo_id, tsinfo_desc, tsinfo_time, tsinfo_day, tsinfo_week, tsinfo_total, tsinfo_date, tsinfo_status, ts_id, project_id, proj_info_id
   $proj = $pro_idtime[$a];
-$sqltime = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE tsinfo_week='$weeknum' AND  project_id='$proj'  ");
+$sqltime = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE tsinfo_week='$weeknum' AND  project_id='$proj'");
 $sqltime->execute();
 while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
   $totperproj += $rowtime['tsinfo_time'];
@@ -216,7 +246,6 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 </td>
 
 </tr>
-</tbody>
 </table>
 </div>
 <?php }
@@ -246,6 +275,7 @@ function findSILTotal(){
 
 
   $(document).ready(function() {
+    findSILTotal();
   $(window).keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();

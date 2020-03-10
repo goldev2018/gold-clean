@@ -2,7 +2,7 @@
     range: true,
     min: 0,
     max: 1440,
-    step: 01,
+    step: 5,
     values: [600, 720],
     slide: function (e, ui) {
         var hours1 = Math.floor(ui.values[0] / 60);

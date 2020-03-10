@@ -17,7 +17,7 @@ Period Covered:
 <?php 
 include('includes/config.php'); 
 
-
+$hidcount = 0;
 echo $weekstart = $_GET['weekstart'];
 echo " - ";
 echo $weekend = $_GET['weekend'];
@@ -28,16 +28,23 @@ $sil = $_POST['sil'];
 $otremarks = $_POST['otremarks'];
 $hidid = $_POST['hidid'];
 $hidcount = $_POST['hidcount'];
-
+// $hidcount+=5;
 for ($count=0; $count <= $hidcount ; $count++) { 
 $sils  = $sil[$count];
 if ($sils=="") {
-	$sils=0;
+	$sils=null;
 }
+
+
+
+
+
+
 $otremarkss = $otremarks[$count];
 if ($otremarkss=="") {
-	$otremarkss=0;
+	$otremarkss=null;
 }
+error_reporting( error_reporting() & ~E_NOTICE );
 $hidids = $hidid[$count];
 
      $sql = $db->prepare("UPDATE tbl_timesheet SET ts_sil='$sils', ts_ot='$otremarkss' WHERE ts_weekstart='$weekstart' AND ts_weekend='$weekend' AND ts_week='$weeknum' AND emp_id='$hidids'");
@@ -113,7 +120,7 @@ $num;
 $i=0;
 $c=0;
 
-$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum'");
+$sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum' ORDER BY ts_id ASC");
 $sqlts->execute();
 while ($rowts = $sqlts->fetch(PDO::FETCH_ASSOC)) {
 $empid = $rowts['emp_id'];
@@ -155,7 +162,11 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 
 <td style="width: 30px;"><?php echo $rowts['ts_sil']; ?></td>
 <td style="width: 30px;"><?php echo $rowts['ts_ot']; ?></td>
+<?php if ($rowts['ts_sil']==null) { ?>
 <td style="width: 30px;"><?php echo $totperemp; ?></td>
+<?php }else{ ?>
+<td style="width: 30px;"><?php echo $rowts['ts_sil']+$totperemp; ?></td>
+<?php } ?>
 </tr>
 <?php 
 $c++;
@@ -199,9 +210,9 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 </tbody>
 </table>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 window.print();
 window.onmousemove = function() {
   window.location.href = "dashboard.php?link=summaryreport";
 }
-  </script>
+  </script> -->

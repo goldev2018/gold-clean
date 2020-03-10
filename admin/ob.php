@@ -1,6 +1,10 @@
 <link rel="stylesheet" type="text/css" href="css/timepicker.css" />
 <form action="obSubmit.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
-<p>Date: &nbsp;&nbsp;<h7 id="todaydate"></h7><br /> Ref. No: <h7 id="todayrefnum"></h7></p>
+<p>
+  <!-- Date: &nbsp;&nbsp;<h7 id="todaydate"></h7> -->
+    DATE: &emsp;&emsp; <?php echo $todate = date("l M d Y h:m s A"); ?>
+  <br /> Ref. No: <h7 id="todayrefnum"></h7>
+</p>
 <p>REQUISITION FOR LOCAL BUSINESS TRAVEL</p>
 <p>&nbsp;</p>
 <table style="height: 299px; width: 603px;" border="1">
@@ -19,7 +23,13 @@
 <td style="width: 176px; height: 28px;">
 <p>DATE OF TRAVEL &amp;</p>
 </td>
-<td style="width: 419px; height: 28px;"><input id="noSunday" type="text" name="dot"></td>
+<td style="width: 419px; height: 28px;">
+  <!-- <input id="noSunday" type="text" name="dot"><input id="noSunday2" type="text" name="dot2"> -->
+ <input type="text" id="fromdate" name="fromdate" class="selector" required autocomplete="off"/> 
+
+<label for="to">to</label> 
+<input type="text" id="ftodate" name="ftodate" required autocomplete="off"/>
+</td>
 </tr>
 <tr style="height: 44px;">
 <td style="width: 176px; height: 44px;">
@@ -75,8 +85,26 @@
 <td style="width: 213px;">OTHER/CODE:</td>
 <td style="width: 296px;"><input type="text" name="others" size="30"></td>
 </tr>
+<tr>
+  <td> REQUESTED BY: </td>
+  <td><input type="text" name="selnoted" size="30"></td></tr>
 </tbody>
 </table>
+<br>
+
+
+ APPROVED BY: 
+  <select id="inputGroupSelect04" name="selapproval">
+    <option selected value="">--Choose employee--</option>
+    <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id IN ('GOLD-AR-004','GOLD-AR-006','GOLD-AR-010','GOLD-AR-028') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?>
+    <option value="<?php echo $row['emp_id'] ?>"><?php echo $row['fname']." ".$row['lname'] ?></option>
+    <?php } ?>
+  </select>
+<br><br>
 
 <input class="btn btn-success" type="submit" name="submitOB" value="Submit">
 </form>
@@ -89,8 +117,8 @@
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js">
 </script>
 
 <script src="js/timepicker.js"></script>
@@ -99,7 +127,7 @@
 
 
 <script type="text/javascript">
-	$( "#noSunday" ).datepicker({ 
+  $( "#noSunday" ).datepicker({ 
         beforeShowDay: noSunday,
         minDate: 0
 });
@@ -111,11 +139,11 @@ function noSunday(date){
       }; 
 
 
-        $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+    //     $(document).ready(function(){  
+    //     setInterval(function(){   
+    //         $("#todaydate").load("todate.php");
+    //     }, 1000);
+    // });
 
 
          $(document).ready(function(){  
@@ -124,3 +152,6 @@ function noSunday(date){
         }, 1000);
     });
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="js/obdatepicker.js"></script>

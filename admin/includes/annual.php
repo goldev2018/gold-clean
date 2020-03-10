@@ -23,11 +23,13 @@ if ($row['if_status']==0 && $datehire==$todate) {
 	$total = $row['annual_count']+5;
 $sql1 = $db->prepare("UPDATE tbl_annual SET annual_count='$total', if_status='1' WHERE emp_id='$employee_id'");
 $sql1->execute();
+$sql1->fetchAll(PDO::FETCH_ASSOC);
 }
 
 else if($row['if_status']==1 && $datehire!=$todate){
 $sql1 = $db->prepare("UPDATE tbl_annual SET if_status='0' WHERE emp_id='$employee_id'");
 $sql1->execute();
+$sql1->fetchAll(PDO::FETCH_ASSOC);
 }
 
 

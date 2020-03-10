@@ -16,6 +16,7 @@
                       <th>Fullname</th>
                       <th>Department</th>
                       <th>Position</th>
+                      <th>Signature</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -27,6 +28,7 @@
                       <th>Fullname</th>
                       <th>Department</th>
                       <th>Position</th>
+                      <th>Signature</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -47,6 +49,7 @@
                 <td><?php echo $row['fname']." ".$row['mi'].". ".$row['lname']; ?></td>
                 <td><?php echo $row['department']; ?></td>
                 <td><?php echo $row['position']; ?></td>
+                <td><img src="<?php echo $row['signature']; ?>" style="max-height: 100px"></td>
                 
                   <?php if ($row['is_active']==0) { ?>
                   	<td class='text-success'>Active</td><td><a href='active.php?num=0&id=<?php echo $row['emp_id']; ?>' onclick = "if (! confirm('Continue?')) { return false; }" class="btn btn-outline-danger">Deactivate</a> <a href='edit_user.php?id=<?php echo $row['emp_id']; ?>' class="btn btn-outline-warning">Edit</a></td>

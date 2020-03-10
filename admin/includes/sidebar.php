@@ -1,3 +1,7 @@
+<!-- <link rel="stylesheet" type="text/css" href="include/jquery-ui.css"/> 
+<script src="include/jquery.min.js"></script>
+<script src="include/jquery-ui.min.js"></script> -->
+
 <ul class="navbar-nav bg-gradient-light sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
@@ -19,7 +23,8 @@
             $util = "show";
             $page = "";
           }
-          elseif($qwe=="id=leave" || $qwe=="id=ob" || $qwe=="id=personnel" || $qwe=="id=rtw" || $qwe=="id=timesheet" ){
+          // elseif($qwe=="id=leave" || $qwe=="id=ob" || $qwe=="id=personnel" || $qwe=="id=rtw" || $qwe=="id=timesheet" ){
+          elseif($qwe=="id=leave" || $qwe=="id=ob" || $qwe=="id=rtw" || $qwe=="id=timesheet" ){
             $page = "show";
             $util = "";
           }
@@ -35,7 +40,7 @@
       <li class="nav-item">
         <a class="nav-link" href="dashboard.php?link=home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Admin Dashboard</span></a>
       </li>
 
       <li class="nav-item">
@@ -60,8 +65,52 @@
           <span>User</span></a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="dashboardemp.php?link=home">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+    <?php }elseif($sessu_type=="HR"){ ?>
+
+      <li class="nav-item">
+        <a class="nav-link" href="HRview.php?link=leave">
+          <i class="fas fa-running"></i>
+          <span>Leave</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="HRview.php?link=annual">
+          <i class="fas fa-calendar-check"></i>
+          <span>Annual</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="HRview.php?link=ob">
+          <i class="fas fa-plane-departure"></i>
+          <span>OB</span></a>
+      </li>
+
+
+    <?php }elseif($sessu_type=="HR-2"){ ?>
+
+      <li class="nav-item">
+        <a class="nav-link" href="HRview-2.php?link=ts">
+          <i class="fas fa-calendar-check"></i>
+          <span>Timesheet</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="HRview-2.php?link=Leave">
+          <i class="fas fa-running"></i>
+          <span>Leave</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="HRview-2.php?link=ob">
+          <i class="fas fa-plane-departure"></i>
+          <span>OB</span></a>
+      </li>
+
+
     <?php }else{ ?>
-        <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" href="dashboardemp.php?link=home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -72,12 +121,14 @@
       <hr class="sidebar-divider">
 
       <!-- Heading -->
-      <div class="sidebar-heading">
-        <span>Forms</span>
-      </div>
+      
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <?php if ($sessu_type!="HR" && $sessu_type!="HR-2") {?>
+        <div class="sidebar-heading">
+        <span>Forms</span>
+      </div>
+<li class="nav-item active">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pages</span>
@@ -87,7 +138,7 @@
             <h6 class="collapse-header">Forms:</h6>
             <a class="collapse-item" href="forms.php?id=leave">Leave Form</a>
             <a class="collapse-item" href="forms.php?id=ob">OB Form</a>
-            <a class="collapse-item" href="forms.php?id=personnel">Personnel Action Form</a>
+            <!-- <a class="collapse-item" href="forms.php?id=personnel">Personnel Action Form</a> -->
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Other Forms:</h6>
             <a class="collapse-item" href="forms.php?id=rtw">RTW & OT Slip</a>
@@ -95,7 +146,7 @@
           </div>
         </div>
       </li>
-
+    <?php } ?>
       <!-- Nav Item - Charts -->
       <!-- <li class="nav-item">
         <a class="nav-link" href="charts.html">

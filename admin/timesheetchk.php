@@ -2,8 +2,15 @@
 include 'includes/config.php';
 include 'includes/sessionChk.php';
 
-$week = date("W");
-$day = date("D");
+$hiddate = $_POST['hiddate'];
+$timestamp = strtotime($hiddate);
+
+$day = date('D', $timestamp);
+
+echo $week = date("W", $timestamp);
+echo "<br>";
+echo $day = date("D", $timestamp);
+echo "<br>";
 
 
 $year = date("Y");
@@ -46,7 +53,7 @@ $id = $row['ts_id'];
 if ($num==0) {
 
 
-    $sqlts = $db->prepare("INSERT INTO tbl_timesheet SET ts_weekstart='$weekstart', ts_weekend='$weekend', ts_week='$week', ts_sil=0, ts_ot=0, emp_id='$sessemp_id'");
+    $sqlts = $db->prepare("INSERT INTO tbl_timesheet SET ts_weekstart='$weekstart', ts_weekend='$weekend', ts_week='$week', ts_sil=0, ts_ot=0, emp_id='$sessemp_id', status='0', noted_by='', approved_by=''");
     // use exec() because no results are returned
     $sqlts->execute();
     $last_id = $db->lastInsertId();

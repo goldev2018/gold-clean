@@ -83,19 +83,40 @@
             <div class="container">
                 <br><br><h1>PROJECTS</h1><br><br>
                 <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8" style="padding:0 0 0 15px">
-    										<a href="project_info.php?info=1"><img src="images/project/ghe_malta.jpg" class="img-responsive" style="margin-right:29.295px"/></a>
-    							</div>
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 bgcolor" style="float:right; min-height:558px; width: 380.454px;padding: 44.399px 44.399px 44.399px 44.399px;">
-                    <a href="project_info.php?info=1"><h2 style="margin: 0;text-decoration:0">Grand Hotel Excelsior</h2></a>
-                    <h3>Malta</h3>
-                    <p><br>10 - Storey extension building and Existing building Refurbishment. On-going for permit plans in collaboration with Dhi Periti</p>
-                        <div class="solidline"></div>
-                    <p>The project aims to provide a five star hotel resort in transition from a business hotel which is currently the hotel caters. In line with the extension of the existing building, the redevelopment of the whole site.</p>
-                    <a href="project_info.php?info=1"><strong><p style="float:right; position:absolute; bottom:0; margin: 0 0 31.522px;">>> LEARN MORE</p></strong></a>
-                  </div>
-                  </div>
+                    <div class="col-md-8">
+                            <img src="images/homepage/Untitled-3.jpg" alt="Paris" width="100%"><br><br>
+                            <p class="adjustleft"><font size="2">The project aims to provide a five star hotel resort in transition from a business hotel which is currently the hotel <br> caters. In line with the extension of the existing building, the redevelopment of the whole site.</font></p>
+                    </div><!-- end col -->
+                    <div class="col-md-4 texthome"><br><br>
+                            <p><h4>Grand Hotel Exclesior Refurbishment</h4><br>
+                                <p class="textcolor">Valletta, Floriana, Malta <br><br>10 – Storey extension building and  Existing building Refurbishment. On-going for permit plans in collaboration with Dhi Periti </p></p>
+                    <br><br><br><br><br><br>
+                    </div><!-- end col -->
                 </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 imgright">
+            <img src="images/homepage/Untitled-2.jpg" style="height: 500px;width: 100%;"><br><br>
+            <p class="adjustleft"><font size="2">In line with our hope to acquire the historic former Royal Marines Museum Eastney
+            Esplanade, Portsmouth Southsea, the Grand Hotel Excelsior Ltd. has a strong desire to convert said property in a 5-star Luxury Boutique Hotel that would cater weddings, conferences and various events.</font></p>
+                    </div><br><br><br><br><br>
+                    <div class="col-md-3 texthome imgright"><br><br><br>
+            <p><h4>Grand Hotel Excelsior <br>- Royal Marines Museum</h4><br>
+            <p class="textcolor">Portsmouth Southsea, Hampshire, England <br><br>5-star Luxury Botique Hotel </p></p>
+            <br><br><br><br><br><br><br><br><br>
+                    </div><br><br>
+            <!-- <div class="col-md-4 imgright">
+            <img src="images/homepage/Untitled-2.jpg" style="height: 100%;width: 100%;">
+            </div><br><br> -->
+                    <div class="col-md-3 imgright">
+            <img src="images/homepage/Untitled-1.jpg" style="height: 600px;width: 100%;">
+                    </div><br><br>
+                </div>
             </div>
         </section>
 
@@ -106,15 +127,23 @@
     <div class="container">
         <div class="row">
 
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-8 bgcolor" style=" height:769.734px; width: 380.454px;padding: 44.399px 44.399px 44.399px 44.399px;">
-            <a href="project_info.php?info=3"><h2 style="margin: 0">Grand Hotel Excelsior</h2></a>
-            <h3>United Kingdom</h3>
-            <p>Royal Marines Museum</p>
-            <p>Portsmouth Southsea, Hampshire, England</p>
-            <p>5-star Luxury Botique Hotel</p>
-                <div class="solidline"></div>
-                <p>In line with our hope to acquire the historic former Royal Marines Museum Eastney Esplanade, Portsmouth Southsea, the Grand Hotel Excelsior Ltd. has a strong desire to convert said property in a 5-star Luxury Boutique Hotel that would cater weddings, conferences and various events.</p>
-                <a href="project_info.php?info=3"><strong><p style="float:left; position:absolute; bottom:0; margin: 0 0 31.522px">>> LEARN MORE</div></strong></a>
+        
+
+        <section class="section">
+            <div class="container">
+                <div class="col-md-3 texthome imgright">
+            <p><h4>Eromanga Motel & <br>Caravan Park</h4><br>
+            <p class="textcolor">Eromanga, Southwest Queensland, Australia <br><br>
+            2-Storey Motel Redevelopment and Amusement Park</p></p><br>
+                    </div>
+                    <img src="images/homepage/Untitled-4.jpg" alt="Paris" width="100%">
+                    <br><br><p class="adjustleft"><font size="2">The project aims to provide a five star hotel resort in transition from a business hotel which is currently the hotel <br> caters. In line with the extension of the existing building, the redevelopment of the whole site.</font></p>
+            </div><br><br><br>
+            <center>
+            <input id="btnSend" class="btnsubmit success1" type="button" value="Learn More" onclick="location.href='project.php'" />
+        </center>
+        </section>
+
 
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding:0 0 0 15px">
                   <a href="project_info.php?info=3"><img src="images/project/ghe_uk.jpg" class="img-responsive img-fluid" style="max-height:769.734px; max-width: 1000.579px;"/></a>

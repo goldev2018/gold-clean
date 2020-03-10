@@ -1,0 +1,2 @@
+<?php $location = $_GET['dir']; ?>
+<iframe src='https://docs.google.com/viewer?url=http://goldphilippines.com/admin/<?php echo $location; ?>&embedded=true' frameborder='0' height="100%" width="100%"></iframe>

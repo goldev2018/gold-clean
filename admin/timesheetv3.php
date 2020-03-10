@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Manila");
 $date=$_GET['date'];
 // $newDate = date("d-m-Y", strtotime($date));
 $todate = date("M-d-Y", strtotime($date));
-$week = date("W");
+$week = date("W", strtotime($date));
 $sqlts = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$week' AND emp_id='$sessemp_id'");
 $sqlts->execute();
 $rowts = $sqlts->fetch(PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@ $("input[placeholder]").each(function () {
                 var totalhours = 8;
             }
             var flexi = "<?php echo $sessemp_id ?>";
-            if (flexi=="GOLD-AR-004") {
+            if (flexi=="GOLD-AR-004" || flexi=="GOLD-AR-028" || flexi=="GOLD-AR-006" || flexi=="GOLD-AR-010" || flexi=="GOLD-AR-027") {
                 var totalhours = 12;
             }
             var lateminute = document.getElementById('late').value;
@@ -92,7 +92,8 @@ $("input[placeholder]").each(function () {
 <br><br>
 <form action="timesheetchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
     <input type="hidden" name="hiddenedittimesheet" value="<?php echo $todate; ?>">
-<p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7 id="todaydate"></h7><br />Position: <?php echo $sessposition?>
+<p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7><?php date_default_timezone_set("Asia/Manila");
+echo $todates = date("l M d Y h:m s A"); ?></h7><br />Position: <?php echo $sessposition?>
 <?php 
 if ($numcount==0) { ?>
 
@@ -143,7 +144,7 @@ if ($numcount==0) { ?>
 
 </tr>
 
-
+<input type="hidden" name="hiddate" value="<?php echo $_GET['date']; ?>">
 
         <script type="text/javascript">
 function findTotal(){
@@ -198,7 +199,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
     <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php 
     echo $cou_id = $rowopt['country_id'];
-    $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
+    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33') AND country_id='$cou_id'"); $sql->execute();
      while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
       <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
      </optgroup><?php } ?></select>
@@ -210,7 +211,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <textarea name='desc[]' id="desc" rows='3' cols='80' required></textarea>
 </td>
 <td style="width: 44px; height: 13px;">
-    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='12' step='.01' onblur='findTotal()' required>
 </td>
 <?php if ($showremaining==0) { ?>
 <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></td>
@@ -225,7 +226,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
     <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php 
     echo $cou_id = $rowopt['country_id'];
-    $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
+    $sql = $db->prepare("SELECT * FROM tbl_project WHERE project_id NOT IN ('32','33') AND country_id='$cou_id'"); $sql->execute();
      while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
       <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
      </optgroup><?php } ?></select>
@@ -237,7 +238,7 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
     <textarea name='desc[]' id="desc" rows='3' cols='80' required></textarea>
 </td>
 <td style="width: 44px; height: 13px;">
-    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+    <input type='number' class='num' name='num[]' id='tsMon' size='3'  min='0' max='12' step='.01' onblur='findTotal()' required>
 </td>
 <?php if ($showremaining==0) { ?>
 <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></td>
@@ -270,11 +271,11 @@ $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
 </center>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script>
-  $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+//  $(document).ready(function(){  
+//        setInterval(function(){   
+//            $("#todaydate").load("todate.php");
+//        }, 1000);
+//    });
 $('#desc').on('keypress', function (e) {
         var ingnore_key_codes = [34, 39];
         if ($.inArray(e.which, ingnore_key_codes) >= 0) {

@@ -1,6 +1,24 @@
 <?php 
 include ('includes/sessionChk.php');
  include ('includes/config.php');
+
+$sessemp_id = $_SESSION['emp_id'];
+
+$sqlob = $db->prepare("SELECT * FROM tbl_ob WHERE status='1' AND approved_by='$sessemp_id'");
+$sqlob->execute();
+$obcount = $sqlob->rowCount();
+
+
+$sqltsn = $db->prepare("SELECT * FROM tbl_timesheet WHERE status='1' AND noted_by='$sessemp_id'");
+$sqltsn->execute();
+$tscountn = $sqltsn->rowCount();
+
+
+
+$sqltsa = $db->prepare("SELECT * FROM tbl_timesheet WHERE status='2' AND approved_by='$sessemp_id'");
+$sqltsa->execute();
+$tscounta = $sqltsa->rowCount();
+
 ?>       
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +42,13 @@ include ('includes/sessionChk.php');
   <link href="css/sb-admin-2.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 
+  <!-- <link href="include/jquery.dataTables.min.css" rel="stylesheet"> -->
+
 
 <!-- for datepicker -->
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
 
 
 
@@ -72,7 +92,9 @@ include ('includes/sessionChk.php');
         <!-- Topbar Navbar -->
         <?php include 'includes/topbar.php'; ?>
         <!-- End of Topbar -->
-      <?php if ($sessu_type=="Employee") { ?>
+     <?php 
+     // if ($sessu_type=="Employee") { 
+      ?> 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -80,27 +102,36 @@ include ('includes/sessionChk.php');
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-1 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-4">
             </div>
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
+                <a href="dashboardemp.php?link=weeklytimesheet" style="color: #4e73df;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><a href="dashboard.php?link=weeklytimesheet" style="color: #4e73df;">Weekly Timesheet</a></div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Weekly Timesheet</div>
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">Pending</div> -->
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
+                      <?php if ($tscountn!=0) { ?>
+                        <span class="badge badge-danger badge-counter"><?php echo $tscountn; ?></span>
+                      <?php } ?>
+                      <?php if ($tscounta!=0) { ?>
+                        <span class="badge badge-danger badge-counter"><?php echo $tscounta; ?></span>
+                      <?php } ?>
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
+                <a href="dashboardemp.php?link=leave" style="color: #36b9cc ;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -111,7 +142,7 @@ include ('includes/sessionChk.php');
                       <i class="fas fa-running fa-2x text-gray-300"></i>
                     </div>
                   </div>
-                </div>
+                </div></a>
               </div>
             </div>
 
@@ -120,6 +151,7 @@ include ('includes/sessionChk.php');
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
+                <a href="dashboardemp.php?link=ob" style="color: #36b9cc ;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -128,9 +160,12 @@ include ('includes/sessionChk.php');
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-plane-departure fa-2x text-gray-300"></i>
+                      <?php if ($obcount!=0) { ?>
+                        <span class="badge badge-danger badge-counter"><?php echo $obcount; ?></span>
+                      <?php } ?>
                     </div>
                   </div>
-                </div>
+                </div></a>
               </div>
             </div>
 
@@ -151,29 +186,91 @@ include ('includes/sessionChk.php');
               </div>
             </div>
 
-            <div class="col-xl-2 col-md-6 mb-4">
+            <!-- <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Personnel Action</div>
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Personnel Action</div> -->
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> -->
-                    </div>
+                    <!-- </div>
                     <div class="col-auto">
                       <i class="fas fa-user-shield fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-1 col-md-6 mb-4">
+            </div> -->
+
+            <div class="col-xl-2 col-md-6 mb-4">
             </div>
           </div>
 
           <!-- Content Row -->
+
+
+<?php 
+if ($sessemp_id=='GOLD-AR-004' || $sessemp_id=='GOLD-AR-006' || $sessemp_id=='GOLD-AR-010' || $sessemp_id=='GOLD-AR-028' || $sessemp_id=='admin' || $sessemp_id=='GOLD-AR-014') {
+
+$form = $_GET['link']; 
+if ($form=="weeklytimesheet") { ?>
+<center><a class="btn btn-outline-primary" href="dashboardemp.php?link=submit">Submit</a>
+<a class="btn btn-outline-primary" href="dashboardemp.php?link=approval">Approval</a></center>
+
+<?php 
+}
+elseif ($form=="ob") { ?>
+<center><a class="btn btn-outline-success" href="dashboardemp.php?link=obcheck">View</a>
+<a class="btn btn-outline-success" href="dashboardemp.php?link=obapproval">Approval</a></center>
+  <?php 
+  // include 'weeklytimesheetempapproval.php';
+}
+elseif ($form=="leave") {
+  include 'leaveemp.php';
+}
+elseif ($form=="submit") {
+  include 'weeklytimesheetemp.php';
+}
+elseif ($form=="approval") {
+  include 'weeklytimesheetempapproval.php';
+}
+elseif ($form=="obcheck") {
+  include 'obemp.php';
+}
+elseif ($form=="obapproval") {
+  include 'obapproval.php';
+}
+else{
+
+}
+}else{
+
+
+$form = $_GET['link']; 
+if ($form=="weeklytimesheet") {
+  include 'weeklytimesheetemp.php';
+}
+elseif ($form=="leave") {
+  include 'leaveemp.php';
+}
+elseif ($form=="ob") {
+  include 'obemp.php';
+}
+else{
+
+}
+
+}
+ ?>
+
+
+
         </div>
         <!-- /.container-fluid -->
-<?php } ?>
+
+<?php
+ // } 
+?>
       </div>
       <!-- End of Main Content -->
 

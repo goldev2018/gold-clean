@@ -172,6 +172,9 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                 </div>
 
                 <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                  <p>Email: <input type="email" name="email" id="email" class="form-control form-control-user" autocomplete="off" required="" value="<?php echo $editrow['email']; ?>"></p>
+                </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   <p>Date: <input type="text" name="dateHired" id="datepicker" class="form-control form-control-user" autocomplete="off" required="" value="<?php echo $daterow['dateHired']; ?>"></p>
                 </div>
@@ -212,6 +215,10 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 
           </div>
 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-folder-open"></span>
+                        <!-- <span class="image-preview-input-title">Browse</span> -->
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="signature"/> <!-- rename it -->
+Upload Signature <br><br><br>
 
 
         </div>

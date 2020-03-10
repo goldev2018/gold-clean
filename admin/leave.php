@@ -22,10 +22,11 @@ $row = $sql->fetch(PDO::FETCH_ASSOC);
   <br /><br />
   APPLICATION FOR LEAVE<br/>
   <!-- REF. NO: LEAVE-GOLD-<?php echo date("y"); ?> -->
-  <label class="radio-inline">REF. NO:</label>
-  <label class="radio-inline"> <h7 id="todayrefnum"></h7></label>  <br/>
+<!--   <label class="radio-inline">REF. NO:</label>
+  <label class="radio-inline"> <h7 id="todayrefnum"></h7></label>  --> <br/>
   COMPANY/DEPARTMENT: <?php echo $sesscompany."/".$sessdepartment; ?>&emsp;&emsp;
-  DATE: <!-- &emsp;&emsp; <?php echo $todate = date("m/d/Y"); ?>--> <h7 id="todaydate"></h7></p>
+  DATE: &emsp;&emsp; <?php echo $todate = date("l M d Y h:m s A"); ?>
+   <!-- <h7 id="todaydate"></h7></p> -->
 <p>NAME: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;POSITION: <?php echo $sessposition?>
  <br /> <br /> 
  PERIOD: 
@@ -70,8 +71,8 @@ if ($row['annual_count']!=0) {
 
 <input type="file" name="app_cvupload" class="btn btn-file" style="color: transparent;" accept=".doc, .docx,.pdf" required>
 
-<input class="btn btn-success" type="submit" name="submitLeave" value="Submit">
-</form>
+<!-- <input class="btn btn-success" type="submit" name="submitLeave" value="Submit">
+</form> -->
 <br /> <br /> PERSONNEL DEPARTMENT VERIFICATION</p>
 <table style="height: 113px;" width="889" border="1">
 <tbody>
@@ -109,10 +110,37 @@ if ($row['annual_count']!=0) {
 </tr>
 </tbody>
 </table>
-<p><br /> FULL PAY <br /> <br /> NO PAY <br /> <br /> OTHERS __________________________________ CHECKED BY: _________________________________ <br /> <br /> APPROVED BY: _________________________________ <br /> <br /> REMARKS: ___________________________________________________________________________________________ <br /> ___________________________________________________________________________________________ <br /> </p>
+<p><br /> FULL PAY <br /> <br /> NO PAY <br /> <br /> OTHERS __________________________________ &emsp;
+  NOTED BY: 
+  <select id="inputGroupSelect04" name="selnoted">
+    <option selected value="">--Choose employee--</option>
+    <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id IN ('GOLD-AR-004','GOLD-AR-006','GOLD-AR-010','GOLD-AR-028') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?>
+    <option value="<?php echo $row['emp_id'] ?>"><?php echo $row['fname']." ".$row['lname'] ?></option>
+    <?php } ?>
+  </select>
+
+ <br /> <br />
+ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+ APPROVED BY: 
+  <select id="inputGroupSelect04" name="selapproval">
+    <option selected value="">--Choose employee--</option>
+    <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id IN ('GOLD-AR-004','GOLD-AR-006','GOLD-AR-010','GOLD-AR-028') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?>
+    <option value="<?php echo $row['emp_id'] ?>"><?php echo $row['fname']." ".$row['lname'] ?></option>
+    <?php } ?>
+  </select>
+  <br /> <br /> REMARKS: ___________________________________________________________________________________________ <br /> ___________________________________________________________________________________________ <br /> </p>
 
 
-
+<input class="btn btn-success" type="submit" name="submitLeave" value="Submit">
+</form>
 
 
 
@@ -157,10 +185,12 @@ $(function () {
         }, 1000);
     });
 
-        $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+    //     $(document).ready(function(){  
+    //     setInterval(function(){   
+    //         $("#todaydate").load("todate.php");
+    //     }, 1000);
+    // });
 </script>
+
+
 
