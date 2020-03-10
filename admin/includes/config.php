@@ -2,9 +2,15 @@
 
 // localhost credentials
 $host = "localhost";
-$db_name = "gold";
+$db_name = "ewiln001_gold";
 $username = "root";
 $password = "";
+
+// localhost credentials
+// $host = "localhost";
+// $db_name = "gold";
+// $username = "root";
+// $password = "";
 
 
 // hosting credentials

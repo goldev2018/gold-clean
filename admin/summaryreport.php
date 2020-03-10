@@ -48,14 +48,14 @@ $qty=1;
 $sqltscount = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_week='$weeknum'");
 $sqltscount->execute();
 $printcounts = $sqltscount->rowCount();
-if ($qty==$printcounts) {
+
 
 ?>
 <form action="<?php echo $directory; ?>" method="post">
 <!-- <a href="<?php echo $directory; ?>" target="_blank" class="btn btn-outline-success"  style="float: right;">Save & Print</a> -->
 <input type="submit" name="subprint" value="Save & Print" class="btn btn-outline-success"  style="float: right;">
 <br><br>
-<?php } ?>
+
 <style type="text/css">
   td{
     text-align: center;
@@ -76,7 +76,9 @@ $rowsqwe = $sqltscount->rowCount();
 
 <script>
   $(document).ready( function () {
-    $('#sampleTable').DataTable();
+    $('#sampleTable').DataTable({
+      "pageLength": 25
+    });
 } );
 </script>
 
@@ -149,8 +151,9 @@ $sqlts->execute();
 $counts = $sqlts->rowCount();
 $qty += $counts;
 while ($rowts = $sqlts->fetch(PDO::FETCH_ASSOC)) {
-$empid = $rowts['emp_id'];
-echo "<input type='hidden' class='hidid' name='hidid[]' id='hidid' value=".$empid.">";
+$empid = $rowts['emp_id']; ?>
+<input type='text' class='hidid' name='hidid[]'  value="<?php echo $empid; ?>" style="display: none;  ">
+<?php 
 $ts_idtime = $rowts['ts_id'];
 
 $i++;
@@ -185,12 +188,17 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 } 
 ?>
 <td style="width: 30px;">
-  <input type='number' class='sil' name='sil[]' id='sumSIL' size='3'  min='1' max='50' onblur='findSILTotal()'>
+  <input type='text' class='sil' name='sil[]' size='3' value="<?php echo $rowts['ts_sil']; ?>"  onblur='findSILTotal()'>
 </td>
 <td style="width: 30px;">
-<textarea name='otremarks[]' rows='1' cols='40'></textarea>
+<textarea name='otremarks[]' rows='1' cols='40'><?php echo $rowts['ts_ot']; ?></textarea>
 </td>
+<?php if ($rowts['ts_sil']==null) { ?>
 <td style="width: 30px;"><?php echo $totperemp; ?></td>
+<?php }else{ ?>
+<td style="width: 30px;"><?php echo $rowts['ts_sil']+$totperemp; ?></td>
+<?php } ?>
+
 </tr>
 <?php } 
 }
@@ -267,6 +275,7 @@ function findSILTotal(){
 
 
   $(document).ready(function() {
+    findSILTotal();
   $(window).keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();

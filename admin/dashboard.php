@@ -2,6 +2,31 @@
 include("includes/sessionChk.php");
 include("includes/config.php");
 
+
+$sessemp_id = $_SESSION['emp_id'];
+
+$sqlob = $db->prepare("SELECT * FROM tbl_ob WHERE status='1' AND approved_by='$sessemp_id'");
+$sqlob->execute();
+$obcount = $sqlob->rowCount();
+
+
+$sqltsn = $db->prepare("SELECT * FROM tbl_timesheet WHERE status='1' AND noted_by='$sessemp_id'");
+$sqltsn->execute();
+$tscountn = $sqltsn->rowCount();
+
+
+
+$sqltsa = $db->prepare("SELECT * FROM tbl_timesheet WHERE status='2' AND approved_by='$sessemp_id'");
+$sqltsa->execute();
+$tscounta = $sqltsa->rowCount();
+
+
+if ($obcount!=0 || $tscountn!=0 || $tscounta!=0) {
+echo "<script>
+  if(confirm('Please click OK to check all pending forms.')) document.location = 'dashboardemp.php?link=home';
+</script>";
+}
+
 ?>       
 <!DOCTYPE html>
 <html lang="en">
@@ -23,13 +48,18 @@ include("includes/config.php");
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 
+
+  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- <link href="include/jquery.dataTables.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" type="text/css" href="">
 
 <!-- for datepicker -->
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
+
+
 
 
 
@@ -79,6 +109,8 @@ include("includes/config.php");
 
           <!-- Content Row -->
           <div class="row">
+            <div class="col-xl-1 col-md-6 mb-4">
+            </div>
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
@@ -167,15 +199,15 @@ include("includes/config.php");
             </div>
 
 
-            <div class="col-xl-2 col-md-6 mb-4">
+           <!--  <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
                 <a href="dashboard.php?link=pa"  style="color: #f0ad4e;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Personnel Action</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Personnel Action</div> -->
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> -->
-                    </div>
+                    <!-- </div>
                     <div class="col-auto">
                       <i class="fas fa-user-shield fa-2x text-gray-300"></i>
                     </div>
@@ -183,7 +215,7 @@ include("includes/config.php");
                 </div>
                </a>
               </div>
-            </div>
+            </div> -->
 
 
             <!-- Pending Requests Card Example -->
@@ -204,6 +236,10 @@ include("includes/config.php");
               </a>
               </div>
             </div>
+
+            <div class="col-xl-1 col-md-6 mb-4">
+            </div>
+            
           </div>
 
           <!-- Content Row -->

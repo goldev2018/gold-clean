@@ -22,10 +22,11 @@ $row = $sql->fetch(PDO::FETCH_ASSOC);
   <br /><br />
   APPLICATION FOR LEAVE<br/>
   <!-- REF. NO: LEAVE-GOLD-<?php echo date("y"); ?> -->
-  <label class="radio-inline">REF. NO:</label>
-  <label class="radio-inline"> <h7 id="todayrefnum"></h7></label>  <br/>
+<!--   <label class="radio-inline">REF. NO:</label>
+  <label class="radio-inline"> <h7 id="todayrefnum"></h7></label>  --> <br/>
   COMPANY/DEPARTMENT: <?php echo $sesscompany."/".$sessdepartment; ?>&emsp;&emsp;
-  DATE: <!-- &emsp;&emsp; <?php echo $todate = date("m/d/Y"); ?>--> <h7 id="todaydate"></h7></p>
+  DATE: &emsp;&emsp; <?php echo $todate = date("l M d Y h:m s A"); ?>
+   <!-- <h7 id="todaydate"></h7></p> -->
 <p>NAME: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;POSITION: <?php echo $sessposition?>
  <br /> <br /> 
  PERIOD: 
@@ -184,11 +185,11 @@ $(function () {
         }, 1000);
     });
 
-        $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+    //     $(document).ready(function(){  
+    //     setInterval(function(){   
+    //         $("#todaydate").load("todate.php");
+    //     }, 1000);
+    // });
 </script>
 
 

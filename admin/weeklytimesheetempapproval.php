@@ -1,4 +1,33 @@
-<?php set_time_limit(0); ?>
+<?php set_time_limit(0); 
+
+
+$sqltsn = $db->prepare("SELECT DISTINCT ts_weekstart, ts_weekend  FROM tbl_timesheet WHERE status='1' AND noted_by='$sessemp_id'");
+$sqltsn->execute();
+$tscountn = $sqltsn->rowCount();
+if ($tscountn!=0) {
+    echo "Pending Date:<br>";
+}
+while ($rowtsn = $sqltsn->fetch(PDO::FETCH_ASSOC)) {
+
+echo $rowtsn['ts_weekstart']." - ".$rowtsn['ts_weekend'];
+echo "<br>";
+}
+
+
+
+$sqltsa = $db->prepare("SELECT DISTINCT ts_weekstart, ts_weekend FROM tbl_timesheet WHERE status='2' AND approved_by='$sessemp_id'");
+$sqltsa->execute();
+$tscounta = $sqltsa->rowCount();
+if ($tscounta!=0) {
+    echo "Pending Date:<br>";
+}
+while ($rowtsa = $sqltsa->fetch(PDO::FETCH_ASSOC)) {
+echo $rowtsa['ts_weekstart']." - ".$rowtsa['ts_weekend'];
+echo "<br>";
+}
+
+
+?>
 <script src="js/jquery.summarypicker.js" ></script>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
 
@@ -8,7 +37,9 @@
 
 <script>
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+      "pageLength": 25
+    });
 } );
 </script>
 <!-- <form action="summaryreportchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}" target="_blank"> -->
@@ -66,6 +97,7 @@ $count=1;
 <!-- <a href="<?php echo $directory; ?>" target="blank" class="btn btn-outline-success"  style="float: right;">Print</a> -->
 <!-- ts_id, ts_weekstart, ts_weekend, ts_week, ts_sil, ts_ot, emp_id, status, noted_by, approved_by -->
 <!-- emp_id, password, fname, lname, mi, position, company, department, email, image, u_type, status, request, is_active, signature -->
+ <div class="table-responsive">
 <table id="myTable" class="display">
     <thead>
         <tr>
@@ -80,47 +112,61 @@ $count=1;
       $sql12 = $db->prepare("SELECT * FROM tbl_timesheet WHERE ts_weekstart='$weekstart' AND ts_weekend='$weekend' AND ts_week='$weeknum'");
 $sql12->execute();
 while ($row12 = $sql12->fetch(PDO::FETCH_ASSOC)) {
-  $check = $row12['ts_id'];
-$sql1 = $db->prepare("SELECT * FROM tbl_timesheet WHERE noted_by='$selemployee' OR approved_by='$selemployee' AND ts_id='$check'");
-$sql1->execute();
-      while ($row1 = $sql1->fetch(PDO::FETCH_ASSOC)) {?>
+  $check = $row12['ts_id']; ?>
+
         <tr>
             <td><?php echo $count; ?></td>
-            <td><?php echo $row1['emp_id']; ?></td>
+            <td><?php echo $row12['emp_id']; ?></td>
             <?php 
-            $emp = $row1['emp_id'];
+            $emp = $row12['emp_id'];
             $sql2 = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$emp'");
             $sql2->execute();
             $row2 = $sql2->fetch(PDO::FETCH_ASSOC); ?>
             <td><?php echo $row2['fname']." ".$row2['lname']; ?></td>
-            <?php if ($selemployee==$row1['noted_by']) { ?>
+            <?php if ($selemployee==$row12['noted_by']) { ?>
 
            <?php 
-           if ($row1['status']=="2") { ?>
+           if ($row12['status']=="1") { ?>
+            <td><a href="viewweeklytimesheet.php?weekstart=<?php echo $weekstart?>&weekend=<?php echo $weekend?>&empID=<?php echo $row12['emp_id'] ?>" target="_blank" class="btn btn-outline-primary">View</a>  <a href="weeklytimesheetempapprovalChk.php?id=<?php echo $row12['ts_id']?>&stat=2" target="_blank" class="btn btn-outline-success">Note</a></td>
+            <?php }elseif($row12['status']=="2"){ ?>
             <td>For Approval</td>
+            <?php }elseif($row12['status']=="0"){ ?>
+              <td>Pending</td>
             <?php }else{ ?>
-              <td><a href="viewweeklytimesheet.php?weekstart=<?php echo $weekstart?>&weekend=<?php echo $weekend?>&empID=<?php echo $row1['emp_id'] ?>" target="_blank" class="btn btn-outline-primary">View</a>  <a href="weeklytimesheetempapprovalChk.php?id=<?php echo $row1['ts_id']?>&stat=2" target="_blank" class="btn btn-outline-success">Note</a></td>
+            <td>Approved</td>
             <?php }
-         }elseif($selemployee==$row1['approved_by']){ ?>
+         }elseif($selemployee==$row12['approved_by']){ ?>
             <?php 
-            if ($row1['status']=="1") { ?>
+            if ($row12['status']=="1") { ?>
             <td>For Note</td>
-            <?php }elseif($row1['status']=="2"){ ?>
-              <td><a href="viewweeklytimesheet.php?weekstart=<?php echo $weekstart?>&weekend=<?php echo $weekend?>&empID=<?php echo $row1['emp_id'] ?>" target="_blank" class="btn btn-outline-primary">View</a>  <a href="weeklytimesheetempapprovalChk.php?id=<?php echo $row1['ts_id']?>&stat=3" target="_blank" class="btn btn-outline-success">Approve</a></td>
+            <?php }elseif($row12['status']=="2"){ ?>
+              <td><a href="viewweeklytimesheet.php?weekstart=<?php echo $weekstart?>&weekend=<?php echo $weekend?>&empID=<?php echo $row12['emp_id'] ?>" target="_blank" class="btn btn-outline-primary">View</a>  <a href="weeklytimesheetempapprovalChk.php?id=<?php echo $row12['ts_id']?>&stat=3" target="_blank" class="btn btn-outline-success">Approve</a></td>
+            <?php }elseif($row12['status']=="0"){ ?>
+              <td>Pending</td>
             <?php }else{ ?>
               <td>Approved</td>
             <?php }
-           }
-             ?>
+           }else{
+            if ($row12['status']=="1") {
+            echo "<td>Note</td>";
+            }elseif ($row12['status']=="2") {
+            echo "<td>For Approval</td>";
+            }elseif ($row12['status']=="0") {
+            echo "<td>Pending</td>";
+            }else{
+            echo "<td>Approved</td>";
+            }
+             
+           }?>
             
         </tr>
       <?php
       $count++;
-       } } ?>
+        } ?>
 
     </tbody>
 </table>
-
+</div>
 
 
 <?php 

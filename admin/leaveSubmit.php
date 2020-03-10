@@ -11,9 +11,9 @@ if ($_POST['submitLeave']) {
 // $ordernumber = "LEAVE-GOLD".$date."-".$num;
 // // $str = "ABC000001";
 
-$counter = $_SESSION['leaverefnumber'];
-$series = date('\L\E\A\V\E\-\G\O\L\D\-y');
-$refnum = date('\L\E\A\V\E\-\G\O\L\D\-y\-'.$counter.' ');
+// $counter = $_SESSION['leaverefnumber'];
+// $series = date('\L\E\A\V\E\-\G\O\L\D\-y');
+// $refnum = date('\L\E\A\V\E\-\G\O\L\D\-y\-'.$counter.' ');
 date_default_timezone_set("Asia/Manila");
 $todate = date("l M d Y h:m s A");
 // $todate = $_SESSION['todate'];
@@ -31,11 +31,20 @@ $selnoted = $_POST['selnoted'];
 $selapproval = $_POST['selapproval'];
 $app_cvupload = $_FILES['app_cvupload']['tmp_name'];
 
+
+
+$sqllastid = $db->prepare("SELECT * FROM tbl_leave ORDER BY leave_id DESC LIMIT 1");
+$sqllastid->execute();
+$row = $sqllastid->fetch(PDO::FETCH_ASSOC);
+$last_id =  $row['leave_id']+1;
+
+
+
 $path = $_FILES['app_cvupload']['name'];
 $ext = pathinfo($path, PATHINFO_EXTENSION);
 $ext = ".".$ext;
 $newPath = "excuse_letter/";
-$newName  = $newPath.$refnum."-".$emp_id.$ext;
+$newName  = $newPath.$last_id."-".$emp_id.$ext;
 
 
 $sql1 = $db->prepare("SELECT * FROM tbl_annual WHERE emp_id='$emp_id'");
@@ -54,7 +63,7 @@ $rowemail = $sqlemail->fetch(PDO::FETCH_ASSOC);
 $email = $rowemail['email'];
 $status = "Note";
 }
-else{
+elseif ($selapproval!=""){
 $sqlemail = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$selapproval'");
 $sqlemail->execute();
 $rowemail = $sqlemail->fetch(PDO::FETCH_ASSOC);
@@ -62,6 +71,16 @@ $email = $rowemail['email'];
 $status = "Approval";
 
 }
+else{
+
+$status = "Approved";
+
+}
+
+
+
+
+
 
 
 $sendto = $email;
@@ -91,7 +110,7 @@ $message = "
   <td>".$totaldays."</td>
 </tr>
 </table><br><br>
-<a href='http://goldphilippines.com/admin/leaveapproval.php?leave_series=".$series."&leave_counter=".$counter."&stat=".$status."' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+<a href='http://goldphilippines.com/admin/leaveapproval.php?leave_id=".$last_id."&stat=".$status."' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
 
 <a href='http://goldphilippines.com/admin/documentviewer.php?dir=".$newName."' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
 </body>
@@ -115,9 +134,8 @@ mail($sendto,$subject,$message,$headers);
 if ($annual_count!=0) {
 echo $annual_count = $annual_count-$totaldays;
 
-$sql = $db->prepare("INSERT INTO tbl_leave SET leave_series='$series', leave_counter='$counter', leave_period_from='$from', leave_period_to='$to', leave_total='$totaldays', leave_nature='$optradio', leave_reason='$leavereason', leave_date='$todate', leave_docu='$newName', status='$status', emp_id='$emp_id', annual_id='$annual_id', noted_by='$selnoted', approval_by='$selapproval'");
+$sql = $db->prepare("INSERT INTO tbl_leave SET leave_period_from='$from', leave_period_to='$to', leave_total='$totaldays', leave_nature='$optradio', leave_reason='$leavereason', leave_date='$todate', leave_docu='$newName', status='$status', emp_id='$emp_id', annual_id='$annual_id', noted_by='$selnoted', approval_by='$selapproval', remarks=''");
 if ($sql->execute()) {
-
 $sql2 = $db->prepare("UPDATE tbl_annual SET annual_count='$annual_count' WHERE emp_id='$emp_id'");
 if ($sql2->execute()) {
 
@@ -133,9 +151,8 @@ window.location.href='forms.php?id=leave';</script>
 }
 }
 else{
-$sql = $db->prepare("INSERT INTO tbl_leave SET leave_series='$series', leave_counter='$counter', leave_period_from='$from', leave_period_to='$to', leave_total='$totaldays', leave_nature='$optradio', leave_reason='$leavereason', leave_date='$todate', leave_docu='$newName', status='$status', emp_id='$emp_id', annual_id='$annual_id', noted_by='$selnoted', approval_by='$selapproval'");
+$sql = $db->prepare("INSERT INTO tbl_leave SET leave_period_from='$from', leave_period_to='$to', leave_total='$totaldays', leave_nature='$optradio', leave_reason='$leavereason', leave_date='$todate', leave_docu='$newName', status='$status', emp_id='$emp_id', annual_id='$annual_id', noted_by='$selnoted', approval_by='$selapproval', remarks=''");
 $sql->execute();
-
 copy($_FILES['app_cvupload']['tmp_name'] , $newName);
 ?>
 <script>alert("Leave Submitted. Please wait for approval");
@@ -143,6 +160,7 @@ window.location.href='forms.php?id=leave';</script>
 
 <?php
 }
+
 
 
 }

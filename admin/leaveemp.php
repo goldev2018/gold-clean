@@ -14,7 +14,6 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Ref No.</th>
             <th>Date of Leave</th>
             <th>Total Days</th>
             <th>Reason</th>
@@ -33,7 +32,6 @@
          ?>
         <tr>
             <td><?php echo $count; ?></td>
-            <td><?php echo $row['leave_series']." - ".$row['leave_counter']; ?></td>
             <td><?php echo $row['leave_period_from']." - ".$row['leave_period_to']; ?></td>
             <td><?php echo $row['leave_total'] ?></td>
             <td><?php echo $row['leave_reason'] ?></td>

@@ -8,7 +8,7 @@ if ($_POST['submitOB']) {
 $counter = $_SESSION['obrefnumber'];
 $series = date('\O\B\-\G\O\L\D\-y');
 $refnum = date('\O\B\-\G\O\L\D\-y\-'.$counter.' ');
-$todate = $_SESSION['todate'];
+$todate = date('M-d-Y');
 
 $emp_id = $_SESSION['emp_id'];
 

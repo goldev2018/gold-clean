@@ -28,7 +28,6 @@
             <th>Time</th>
             <th>Purpose</th>
             <th>Status</th>
-            <th>Print</th>
         </tr>
     </thead>
     <tbody>
@@ -60,16 +59,9 @@
                 <?php 
                 if ($row['status']=="1") {
                     echo "<td>Pending</td>";
-                    echo "<td>Please wait for approval</td><td></td>";
                 }
                 else{
                     echo "<td>Approved</td>";
-                    if ($row['ob_liquidation']!="") { 
-                    echo "<td><a href='viewobadmin.php?id=".$row['ob_id']."' target='_blank' class='btn btn-outline-success'>OB</a> <a href='obviewer.php?dir=".$row['ob_liquidation']."' target='_blank' class='btn btn-outline-primary'>Liquidation</a></td>";
-                     }else{
-                      echo "<td><a href='viewobadmin.php?id=".$row['ob_id']."' target='_blank' class='btn btn-outline-success'>OB</a></td>";  
-                     }
-                    
                 }
                 ?>
            

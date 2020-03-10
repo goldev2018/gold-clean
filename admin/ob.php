@@ -1,6 +1,10 @@
 <link rel="stylesheet" type="text/css" href="css/timepicker.css" />
 <form action="obSubmit.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
-<p>Date: &nbsp;&nbsp;<h7 id="todaydate"></h7><br /> Ref. No: <h7 id="todayrefnum"></h7></p>
+<p>
+  <!-- Date: &nbsp;&nbsp;<h7 id="todaydate"></h7> -->
+    DATE: &emsp;&emsp; <?php echo $todate = date("l M d Y h:m s A"); ?>
+  <br /> Ref. No: <h7 id="todayrefnum"></h7>
+</p>
 <p>REQUISITION FOR LOCAL BUSINESS TRAVEL</p>
 <p>&nbsp;</p>
 <table style="height: 299px; width: 603px;" border="1">
@@ -113,8 +117,8 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js">
 </script>
 
 <script src="js/timepicker.js"></script>
@@ -135,11 +139,11 @@ function noSunday(date){
       }; 
 
 
-        $(document).ready(function(){  
-        setInterval(function(){   
-            $("#todaydate").load("todate.php");
-        }, 1000);
-    });
+    //     $(document).ready(function(){  
+    //     setInterval(function(){   
+    //         $("#todaydate").load("todate.php");
+    //     }, 1000);
+    // });
 
 
          $(document).ready(function(){  

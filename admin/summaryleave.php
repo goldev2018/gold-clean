@@ -55,8 +55,8 @@ $rowhired = $sqlhired->fetch(PDO::FETCH_ASSOC);
 
 <?php
 $total=0;
-$series = "LEAVE-GOLD-".date("y");
-$sqlleave = $db->prepare("SELECT * FROM tbl_leave WHERE leave_series='$series' AND emp_id='$id' AND status IN ('Checked', 'Approved')");
+$series = date("Y");
+$sqlleave = $db->prepare("SELECT * FROM tbl_leave WHERE leave_period_from LIKE '%$series%' AND emp_id='$id' AND status IN ('Checked', 'Approved')");
 $sqlleave->execute();
 $counter = $sqlleave->rowCount();
 while ($rowleave = $sqlleave->fetch(PDO::FETCH_ASSOC)) {

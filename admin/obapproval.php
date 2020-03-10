@@ -38,6 +38,7 @@ $sql1->execute();
 <!-- <a href="<?php echo $directory; ?>" target="blank" class="btn btn-outline-success"  style="float: right;">Print</a> -->
 <!-- ts_id, ts_weekstart, ts_weekend, ts_week, ts_sil, ts_ot, emp_id, status, noted_by, approved_by -->
 <!-- emp_id, password, fname, lname, mi, position, company, department, email, image, u_type, status, request, is_active, signature -->
+ <div class="table-responsive">
 <table id="myTable" class="display">
     <thead>
         <tr>
@@ -73,6 +74,6 @@ $sql1->execute();
 
     </tbody>
 </table>
-
+</div>
 
 

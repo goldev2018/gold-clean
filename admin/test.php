@@ -185,3 +185,15 @@ input:checked + .slider .off
 }
 </script>
 
+<?php echo $todate = date('M-d-Y'); ?>
+
+
+
+<?php 
+
+$sqllastid = $db->prepare("SELECT * FROM tbl_leave ORDER BY leave_id DESC LIMIT 1");
+$sqllastid->execute();
+$row = $sqllastid->fetch(PDO::FETCH_ASSOC);
+$last_id =  $row['leave_id']+1;
+echo $last_id;
+ ?>

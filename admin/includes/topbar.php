@@ -210,12 +210,10 @@ $modalid = "myModal".$rowmodalnote['leave_id'];
   <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
   <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
     <div class="modal-dialog">
-    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">
-            <?php echo $rowmodalnote['leave_series']."-".$rowmodalnote['leave_counter']; ?>
           </h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -237,19 +235,39 @@ $modalid = "myModal".$rowmodalnote['leave_id'];
             <br>
             <?php echo "Total: ".$rowmodalnote['leave_total']; ?>
             <br>
+            <br>
+            <br>
+
+            <form action="leaveapproval.php" method="post" target="_blank">
+
+            <textarea cols="55" rows="5" placeholder="Remarks" name="remarknote"></textarea>
+
+            <br>
           </p>
         </div>
         <div class="modal-footer">
 
 
-          <a href='leaveapproval.php?leave_series=<?php echo $rowmodalnote['leave_series']; ?>&leave_counter=<?php echo $rowmodalnote['leave_counter']; ?>&stat=<?php echo $rowmodalnote['status']; ?>' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+            <input type="hidden" name="noteid" value="<?php echo $rowmodalnote['leave_id']; ?>">
+            <input type="hidden" name="notestat" value="<?php echo $rowmodalnote['status']; ?>">
+            <input type="hidden" name="noteby" value="<?php echo $rowmodalnote['noted_by']; ?>">
+          <!-- <a href='leaveapproval.php?leave_id=<?php echo $rowmodalnote['leave_id']; ?>&stat=<?php echo $rowmodalnote['status']; ?>' target='blank' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a> -->
 
-<a href='documentviewer.php?dir=<?php echo $rowmodalnote['leave_docu']; ?>' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
+            <input type="submit" name="btnapprovenote" value="Approve" width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;'>
+
+
+            <input type="submit" name="btnapprovenote" value="Decline" width='786' height='786' style='background-color: #e74a3b;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;'>
+           <!-- <a href='leaveapproval.php?leave_id=<?php echo $rowmodalnote['leave_id']; ?>&stat=Decline' target='blank' width='786' height='786' style='background-color: #e74a3b;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Decline</a> -->
+
+
+           </form>
+
+<a href='documentviewer.php?dir=<?php echo $rowmodalnote['leave_docu']; ?>' style='background-color: #1cc88a;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
           
 
 
 
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -269,12 +287,10 @@ $modalid = "myModal".$rowmodalapproval['leave_id'];
   <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
   <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
     <div class="modal-dialog">
-    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
-      <!-- Modal content-->
+
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">
-            <?php echo $rowmodalapproval['leave_series']."-".$rowmodalapproval['leave_counter']; ?>
           </h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -296,18 +312,37 @@ $modalid = "myModal".$rowmodalapproval['leave_id'];
             <br>
             <?php echo "Total: ".$rowmodalapproval['leave_total']; ?>
             <br>
+            <br>
+            <br>
+
+            <form action="leaveapproval.php" method="post" target="_blank">
+
+            <textarea cols="55" rows="5" placeholder="Remarks" name="remarkapprove"><?php echo $rowmodalapproval['remarks']; ?></textarea>
+            <br>
           </p>
         </div>
         <div class="modal-footer">
 
-
-          <a href='leaveapproval.php?leave_series=<?php echo $rowmodalapproval['leave_series']; ?>&leave_counter=<?php echo $rowmodalapproval['leave_counter']; ?>&stat=<?php echo $rowmodalapproval['status']; ?>' target='balnk' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
-
-<a href='documentviewer.php?dir=<?php echo $rowmodalapproval['leave_docu']; ?>' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
-
+           <input type="hidden" name="approveid" value="<?php echo $rowmodalapproval['leave_id']; ?>">
+            <input type="hidden" name="approvestat" value="<?php echo $rowmodalapproval['status']; ?>">
+            <input type="hidden" name="approveby" value="<?php echo $rowmodalapproval['approval_by']; ?>">
 
 
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" name="btnapproveapproval" value="Approve" width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;'>
+
+
+            <input type="submit" name="btnapproveapproval" value="Decline" width='786' height='786' style='background-color: #e74a3b;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;'>
+
+          </form>
+          <!-- <a href='leaveapproval.php?leave_id=<?php echo $rowmodalapproval['leave_id']; ?>&stat=<?php echo $rowmodalapproval['status']; ?>' target='blank' width='786' height='786' style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Approve</a>
+
+          <a href='leaveapproval.php?leave_id=<?php echo $rowmodalapproval['leave_id']; ?>&stat=Decline' target='blank' width='786' height='786' style='background-color: #e74a3b;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Decline</a> -->
+
+<a href='documentviewer.php?dir=<?php echo $rowmodalapproval['leave_docu']; ?>' style='background-color: #1cc88a;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>View Document</a>
+
+
+
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -329,12 +364,10 @@ $modalids = $rowmodalapproved['leave_id'];
   <!-- <div class="modal fade" id="myModal3" role="dialog"> -->
   <div class="modal fade" id='<?php echo $modalid; ?>' role="dialog">
     <div class="modal-dialog">
-    <!-- leave_id, leave_series, leave_counter, leave_period_from, leave_period_to, leave_total, leave_nature, leave_reason, leave_date, leave_docu, status, emp_id, annual_id, noted_by, approval_by -->
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">
-            <?php echo $rowmodalapproved['leave_series']."-".$rowmodalapproved['leave_counter']; ?>
           </h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>

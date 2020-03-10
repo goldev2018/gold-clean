@@ -15,7 +15,6 @@
 
 
 <br><br><br>
- <div class="table-responsive">
 <table id="myTable" class="display">
     <thead>
         <tr>
@@ -52,7 +51,7 @@
                 echo $rowemp['fname']." ".$rowemp['lname'];
                  ?>
             </td>
-            <td><?php echo $row['leave_period_from']." - ".$row['leave_period_to']; ?></td>
+            <td><?php echo date("M/d/Y", strtotime($row['leave_period_from']))." - ".date("M/d/Y", strtotime($row['leave_period_to'])); ?></td>
             <td><?php echo $row['leave_total'] ?></td>
             <td><?php echo $row['leave_reason'] ?></td>
             <td>
@@ -83,7 +82,7 @@
         <?php $count++; } ?>
     </tbody>
 </table>
-</div>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

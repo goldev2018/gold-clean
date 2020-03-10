@@ -15,7 +15,6 @@
 
 
 <br><br><br>
- <div class="table-responsive">
 <table id="myTable" class="display">
     <thead>
         <tr>
@@ -28,7 +27,6 @@
             <th>Reason</th>
             <th>Leave Nature</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -52,7 +50,7 @@
                 echo $rowemp['fname']." ".$rowemp['lname'];
                  ?>
             </td>
-            <td><?php echo $row['leave_period_from']." - ".$row['leave_period_to']; ?></td>
+            <td><?php echo date("M/d/Y", strtotime($row['leave_period_from']))." - ".date("M/d/Y", strtotime($row['leave_period_to'])); ?></td>
             <td><?php echo $row['leave_total'] ?></td>
             <td><?php echo $row['leave_reason'] ?></td>
             <td>
@@ -70,11 +68,11 @@
            
                 <?php 
                 if ($row['status']=="Approved" || $row['status']=="Checked") {
-                    echo " <td>Approved</td><td><a href='leaveprint.php?id=".$row['leave_id']."' target='_blank' class='btn btn-outline-success'>Print</a></td>";
+                    echo " <td>Approved</td>";
                 }elseif ($row['status']=="Decline") {
-                    echo "<td>Decline</td><td></td>";
+                    echo "<td>Decline</td>";
                 }else{
-                    echo "<td>Pending</td><td></td>";
+                    echo "<td>Pending</td>";
                 }
                 ?>
             
@@ -83,7 +81,7 @@
         <?php $count++; } ?>
     </tbody>
 </table>
-</div>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

@@ -1,38 +1,41 @@
-<?php
-include("includes/config.php");
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
-
-if(isset($_GET['option']))
-{
-    $option = $_GET['option'];
-$data = Array();
-    $sql = $db->prepare("SELECT * FROM tbl_project");
-    $sql->execute();
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $proj = $row['project_id'];
-    if($option == $proj)
-    {
-        $sql1 = $db->prepare("SELECT * FROM tbl_project_info WHERE project_id='$proj'");
-    $sql1->execute();
-    while ($row1 = $sql1->fetch(PDO::FETCH_ASSOC)) {
-            $qwe[] = $row1['proj_info_codes']; 
-    }
-
-        $data = array('Arsenal', 'Chelsea', 'Liverpool');
-
-    }
-
-    }
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 
-    $reply = array('data' => $qwe, 'error' => false);
+<input type="time" name="start" id="start" onchange="calculateTime()">
+<input type="time" name="stop" id="stop" onchange="calculateTime()">
+<input type="text" name="estimate" id="estimate" disabled="">
+
+<script>
+  function calculateTime() {
+  // Declare the variables
+var valuestart = document.getElementById("start").value,
+    valuestop = document.getElementById("stop").value;
+
+/* I left it the same as you had it */
+var timeStart = new Date("01/01/2010 " + valuestart),
+    timeEnd = new Date("01/01/2010 " + valuestop);
+
+
+/* Determine the value of the variable via a conditional ternary operator */
+var hourDiff = (((timeEnd.getHours() - timeStart.getHours()) > 0) ?
+               (timeEnd - timeStart) / 3600000 + " Hours" :
+               (((timeEnd.getMinutes() - timeStart.getMinutes()) > 0) ?
+               (timeEnd.getMinutes() - timeStart.getMinutes()) + " Minutes" :
+               (timeEnd.getSeconds() - timeStart.getSeconds()) + " Seconds"));
+
+/* Alternatively, you can do this with an If/Else if/Else statement */
+if ((timeEnd.getHours() - timeStart.getHours()) > 0) {
+    hourDiff = (timeEnd - timeStart) / 3600000 + " Hours";  // 1 Hour = 3.6 * 10^6 ms
 }
-else
-{
-    $reply = array('error' => true);
+else if ((timeEnd.getMinutes() - timeStart.getMinutes()) > 0) {
+    hourDiff = (timeEnd.getMinutes() - timeStart.getMinutes()) + " Minutes";
+}
+else {
+    hourDiff = (timeEnd.getSeconds() - timeStart.getSeconds()) + " Seconds";
 }
 
-$json = json_encode($reply);    
-echo $json; 
-?>
+
+// Output the result
+document.getElementById("estimate").value = hourDiff; /* I left the ID the same */
+}
+</script>
