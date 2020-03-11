@@ -255,8 +255,12 @@ elseif ($form=="summaryreport") {
 }
 elseif ($form=="leave") {
   include 'leavereport.php';
-}elseif ($form=="ob") {
+}
+elseif ($form=="ob") {
   include 'obreport.php';
+}
+elseif ($form=="ob") {
+  include 'rtwreport.php';
 }
 else{
 

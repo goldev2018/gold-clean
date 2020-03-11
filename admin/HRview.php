@@ -93,6 +93,12 @@ elseif ($form=="annual") {
 elseif ($form=="ob") {
   include 'HRobview.php';
 }
+elseif ($form=="rtw") {
+  include 'HRrtwview.php';
+}
+elseif ($form=="ots") {
+  include 'HRotsview.php';
+}
 else{
 
 }

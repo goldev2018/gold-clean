@@ -19,6 +19,11 @@ $sqltsa = $db->prepare("SELECT * FROM tbl_timesheet WHERE status='2' AND approve
 $sqltsa->execute();
 $tscounta = $sqltsa->rowCount();
 
+
+$sqlrtw = $db->prepare("SELECT * FROM tbl_ot WHERE if_noted='0' AND ot_noted='$sessemp_id'");
+$sqlrtw->execute();
+$rtwcount = $sqlrtw->rowCount();
+
 ?>       
 <!DOCTYPE html>
 <html lang="en">
@@ -169,9 +174,12 @@ $tscounta = $sqltsa->rowCount();
               </div>
             </div>
 
+<?php if ($sessemp_id=='GOLD-AR-004' || $sessemp_id=='GOLD-AR-006' || $sessemp_id=='admin' || $sessemp_id=='GOLD-AR-014') {
+ ?>
             <!-- Pending Requests Card Example -->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
+                <a href="dashboardemp.php?link=rtw" style="color: #f6c23e  ;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -180,11 +188,16 @@ $tscounta = $sqltsa->rowCount();
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clock fa-2x text-gray-300"></i>
+                      <?php if ($rtwcount!=0) { ?>
+                        <span class="badge badge-danger badge-counter"><?php echo $rtwcount; ?></span>
+                      <?php } ?>
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
             </div>
+          <?php } ?>
 
             <!-- <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-danger shadow h-100 py-2">
@@ -240,10 +253,14 @@ elseif ($form=="obcheck") {
 elseif ($form=="obapproval") {
   include 'obapproval.php';
 }
+elseif ($form=="rtw") {
+  include 'rtwapproval.php';
+}
 else{
 
 }
-}else{
+}
+else{
 
 
 $form = $_GET['link']; 
