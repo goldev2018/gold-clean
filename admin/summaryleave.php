@@ -4,7 +4,8 @@
 	<title></title>
 </head>
 <body onload="window.print()" onblur="window.close()">
-<center><img src="img/gold.png" width="80%"></center>
+<!-- <center><img src="img/gold.png" width="80%"></center> -->
+<center><img src="<?php echo $row2['com_flogo']; ?>" width="80%"></center>
 <?php 
 include("includes/config.php");
 $id = $_GET['id'];

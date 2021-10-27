@@ -197,3 +197,20 @@ $row = $sqllastid->fetch(PDO::FETCH_ASSOC);
 $last_id =  $row['leave_id']+1;
 echo $last_id;
  ?>
+<br><br><br><br><br><br><br><br>
+
+ <?php 
+
+ $s = 'Stack-Overflow Questions Tags Users';
+
+if(preg_match_all('/\b(\w)/',strtoupper($s),$m)) {
+    $v = implode('',$m[1]); // $v is now SOQTU
+}
+echo $v;
+
+
+$s = 'Stack-Overflow Questions Tags Users';
+echo preg_replace('/\b(\w)|./', '$1', $s)
+ ?>
+
+

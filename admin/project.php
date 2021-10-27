@@ -271,7 +271,31 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
            ?>
             <tr>
                 <td><?php echo $count ?></td>
-                <td><?php echo $row['project_name']; ?></td>
+
+                <!-- <td><?php echo $row['project_name']; ?></td> -->
+
+                 <td>
+                  <?php 
+                  $s = $row['project_name']; 
+                  if (strlen($s)<=9) {
+                    echo $s;
+                  }else{
+
+                  // if(preg_match_all('/\b(\w)/',strtoupper($s),$m)) {
+                  // $abbre = implode('',$m[1]); // $v is now SOQTU
+                  // }
+                  // echo $abbre; 
+                    ?>
+                  <a title="<?php echo $s ?>" disabled="disabled">
+                    <?php echo preg_replace('/\b(\w)|./', '$1', $s); ?>
+                      
+                    </a>
+                  
+                  <?php 
+                  }
+                  ?>
+                 </td>
+
                 <td><?php echo $rowcountry['country_name']; ?></td>
                 <td>
               <a href='deleteproject.php?type=project&id=<?php echo $row['project_id']; ?>' onclick = "if (! confirm('Continue?')) { return false; }" class="btn btn-outline-danger">Delete</a>  
@@ -354,7 +378,28 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                 <td><?php echo $count ?></td>
                 <td><?php echo $row['proj_info_codes']; ?></td>
                 <td><?php echo $row['proj_info_building']; ?></td>
-                <td><?php echo $rowproj['project_name']; ?></td>
+                <!-- <td><?php echo $rowproj['project_name']; ?></td> -->
+                <td>
+                <?php 
+                  $s = $rowproj['project_name']; 
+                  if (strlen($s)<=9) {
+                    echo $s;
+                  }else{
+
+                  // if(preg_match_all('/\b(\w)/',strtoupper($s),$m)) {
+                  // $abbre = implode('',$m[1]); // $v is now SOQTU
+                  // }
+                  // echo $abbre; 
+                    ?>
+                  <a title="<?php echo $s ?>" disabled="disabled">
+                    <?php echo preg_replace('/\b(\w)|./', '$1', $s); ?>
+                      
+                    </a>
+                  
+                  <?php 
+                  }
+                  ?>
+                  </td>
                 <td>
               <a href='deleteproject.php?type=projinfo&id=<?php echo $row['proj_info_id']; ?>' onclick = "if (! confirm('Continue?')) { return false; }" class="btn btn-outline-danger">Delete</a>  
               <!-- <a href='edit_user.php?type=project&id=<?php echo $row['project_id']; ?>' class="btn btn-outline-warning">Edit</a> -->

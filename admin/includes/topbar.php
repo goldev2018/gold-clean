@@ -176,9 +176,17 @@ while ($row = $sqlapproved->fetch(PDO::FETCH_ASSOC)) {
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Change Password
                 </a>
-                <a class="dropdown-item" href="#">
+                <!-- <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
+                </a> -->
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#backupModal">
+                  <i class="fas fa-window-restore fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Backup
+                </a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#restoreModal">
+                  <i class="fas fa-window-restore fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Restore
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

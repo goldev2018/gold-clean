@@ -11,13 +11,15 @@
        and prevent image from overflowing page... */
 }
  </style>
-<center><img src="img/footer-logo1.png"></center><br>
+<!-- <center><img src="img/footer-logo1.png"></center><br> -->
+<center><img src="<?php echo $row2['com_flogo']; ?>" width="80%"></center><br>
 <h6>Manpower Summary of Expenses Report</h6>
 Period Covered: 
 <?php 
 include('includes/config.php'); 
 
 $hidcount = 0;
+$siltot = 0;
 echo $weekstart = $_GET['weekstart'];
 echo " - ";
 echo $weekend = $_GET['weekend'];
@@ -169,6 +171,7 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 <?php } ?>
 </tr>
 <?php 
+$siltot+=$rowts['ts_sil'];
 $c++;
 	} 
 }
@@ -202,9 +205,9 @@ while ($rowtime = $sqltime->fetch(PDO::FETCH_ASSOC)) {
 
 ?>
 
-<td style="width: 30px;">&nbsp;</td>
+<td style="width: 30px;"><?php echo $siltot; ?></td>
 <td style="width: 50px;">&nbsp;</td>
-<td style="width: 50px;"><?php echo $overalltotal; ?></td>
+<td style="width: 50px;"><?php echo $overalltotal+$siltot; ?></td>
 
 </tr>
 </tbody>

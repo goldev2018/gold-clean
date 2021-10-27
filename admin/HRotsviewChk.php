@@ -15,7 +15,7 @@ $id = $_GET['id'];
 $date_from = $_GET['date_from'];
 $date_to = $_GET['date_to'];
 
-$directory = "HRrtwprint.php?weekstart=".$date_from."&weekend=".$date_to."&id=".$id;
+$directory = "HRotsprint.php?weekstart=".$date_from."&weekend=".$date_to."&id=".$id;
  ?>
 
 <form action="<?php echo $directory; ?>" method="post">
@@ -37,28 +37,28 @@ $directory = "HRrtwprint.php?weekstart=".$date_from."&weekend=".$date_to."&id=".
     </thead>
     <tbody>
         <?php 
-        // rtw_id, rtw_date, rtw_from, rtw_to, rtw_reason, rtw_attachment, rtw_datefiled, emp_id, if_filed
+        // ot_id, ot_date, ot_from, ot_to, ot_reason, ot_hours, ot_attachment, ot_noted, ot_datefiled, emp_id, rtw_id, if_noted
           $count=1;
-          $sqlrtw = $db->prepare("SELECT * FROM tbl_rtw WHERE rtw_date >= '" . $date_from . "' AND rtw_date <= '" . $date_to . "' AND emp_id='$id' AND if_filed='1' ORDER by rtw_date ASC");
-          $sqlrtw->execute();
-          while ($row = $sqlrtw->fetch(PDO::FETCH_ASSOC)) {
+          $sqlots = $db->prepare("SELECT * FROM tbl_ot WHERE ot_date >= '" . $date_from . "' AND ot_date <= '" . $date_to . "' AND emp_id='$id' AND if_noted='1' ORDER by ot_date ASC");
+          $sqlots->execute();
+          while ($row = $sqlots->fetch(PDO::FETCH_ASSOC)) {
             $empid = $row['emp_id'];
             $sqlemp = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$empid'");
           $sqlemp->execute();
           $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
-            $start = date("g:i A", strtotime($row['rtw_from']));
-            $stop = date("g:i A", strtotime($row['rtw_to']));
+            $start = date("g:i A", strtotime($row['ot_from']));
+            $stop = date("g:i A", strtotime($row['ot_to']));
          ?>
         <tr>
             <td><?php echo $count; ?></td>
-             <td><?php echo $row['rtw_date']; ?></td>
+             <td><?php echo $row['ot_date']; ?></td>
             <td><?php echo $rowemp['fname']." ".$rowemp['lname']; ?></td>
             <td><?php echo $start." - ".$stop; ?></td>
-            <td><?php echo $row['rtw_reason'] ?></td>
-            <td><?php echo $row['rtw_datefiled'] ?></td>
+            <td><?php echo $row['ot_reason'] ?></td>
+            <td><?php echo $row['ot_datefiled'] ?></td>
             <td>
-              <?php if ($row['rtw_attachment']!="") {?>
-              <a href='documentviewer.php?dir=<?php echo $row['rtw_attachment']; ?>' style='background-color: #1cc88a;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;' target="blank">Print Attachment</a>
+              <?php if ($row['ot_attachment']!="") {?>
+              <a href='documentviewer.php?dir=<?php echo $row['ot_attachment']; ?>' style='background-color: #1cc88a;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;' target="blank">Print Attachment</a>
             <?php } ?>
             </td>
         </tr>

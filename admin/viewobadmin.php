@@ -19,7 +19,8 @@ $row2 = $sql2->fetch(PDO::FETCH_ASSOC); ?>
  </head>
  <body onload="window.print()" onblur="window.close();">
  
-<center><img src="img/gold.png" width="80%"><br><br>
+<!-- <center><img src="img/gold.png" width="80%"><br><br> -->
+  <center><img src="<?php echo $row2['com_flogo']; ?>" width="80%"><br><br>
 <!-- <link rel="stylesheet" type="text/css" href="css/timepicker.css" /> -->
 <p>Date: &nbsp;&nbsp;<!-- <h7 id="todaydate"></h7> --><?php echo $rowob['ob_date']; ?><br />
  Ref. No: <h7><?php echo $rowob['ob_series']." - ".$rowob['ob_counter']; ?></h7></p>

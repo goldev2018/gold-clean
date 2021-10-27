@@ -74,7 +74,7 @@ $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
  ?>
  <center><img src="img/gold.png" width="80%"><br>
  <font style="font-family: arial;font-size: 26px">(PHILIPPINES OFFICE – MANILA)<br>
-  <b><u>REQUEST TO WORK OVERTIME (RWO)</u></b></font></center>
+  <b><u>OVERTIME SLIP (OTS)</u></b></font></center>
 <br><br><br><br>
  
 <div class="container-fluid">
@@ -95,14 +95,16 @@ $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
 <p><strong>DATE OF OT </strong></p>
 </td>
 <td colspan="2" width="20%">
-<p><strong>ESTIMATED TIME</strong></p>
+<p><strong>ACTUAL TIME</strong></p>
 </td>
 <td rowspan="2" width="20%">
-<p><strong>NAME </strong></p>
-<p><strong>(EMPLOYEE CODE)</strong></p>
+<p><strong>NAME (EMPLOYEE CODE)</strong></p>
 </td>
 <td rowspan="2" width="40%">
 <p><strong>REASON </strong></p>
+</td>
+<td rowspan="2" width="40%">
+<p><strong>TOTAL HRS OF OT </strong></p>
 </td>
 </tr>
 <tr>
@@ -115,26 +117,27 @@ $rowemp = $sqlemp->fetch(PDO::FETCH_ASSOC);
 </tr>
 
 <?php 
-        // rtw_id, rtw_date, rtw_from, rtw_to, rtw_reason, rtw_attachment, rtw_datefiled, emp_id, if_filed
 $counter=0;
-          $sqlrtw = $db->prepare("SELECT * FROM tbl_rtw WHERE rtw_date >= '" . $from . "' AND rtw_date <= '" . $to . "' AND emp_id='$id' AND if_filed='1' ORDER by rtw_date ASC");
-          $sqlrtw->execute();
-          while ($row = $sqlrtw->fetch(PDO::FETCH_ASSOC)) {
+          $sqlot = $db->prepare("SELECT * FROM tbl_ot WHERE ot_date >= '" . $from . "' AND ot_date <= '" . $to . "' AND emp_id='$id' AND if_noted='1' ORDER by ot_date ASC");
+          $sqlot->execute();
+          while ($row = $sqlot->fetch(PDO::FETCH_ASSOC)) {
             
-            $start = date("g:i A", strtotime($row['rtw_from']));
-            $stop = date("g:i A", strtotime($row['rtw_to']));
+            $start = date("g:i A", strtotime($row['ot_from']));
+            $stop = date("g:i A", strtotime($row['ot_to']));
          ?>
         <tr>
-            <td><?php echo $row['rtw_date']; ?></td> 
+            <td><?php echo $row['ot_date']; ?></td> 
             <td><?php echo $start; ?></td>
             <td><?php echo $stop; ?></td>
             <td><?php echo $rowemp['fname']." ".$rowemp['lname']; ?></td>
-            <td><?php echo $row['rtw_reason'] ?></td>         
+            <td><?php echo $row['ot_reason'] ?></td>
+            <td><?php echo $row['ot_hours'] ?></td>         
         </tr>
         <?php  $counter++;}
         $num=20;
         for ($i=$counter; $i <= $num ; $i++) {  ?>
           <tr>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>

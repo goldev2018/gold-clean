@@ -93,7 +93,7 @@
                       <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+                      <i class="fas fa-server fa-2x text-gray-300"></i>
                     </div>
                   </div>
 
@@ -231,3 +231,144 @@ $sql = $db->prepare("SELECT * FROM tbl_position WHERE pos_id NOT IN ($trimposche
     init();
 })();
 </script> 
+
+
+
+
+
+                    <!-- Content Row -->
+          <div class="row">
+
+            <!-- Department -->
+            <div class="col-xl-4 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Department</div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">Pending</div> -->
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-university fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Department</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>#</th>
+                      <th>Department</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+
+                          <tbody>
+
+          <?php
+          // dept_id, dept_name
+          $count=1;
+          $sql = $db->prepare("SELECT * FROM tbl_department ORDER BY dept_id ASC");
+          $sql->execute();
+          while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+           ?>
+            <tr>
+                <td><?php echo $count ?></td> 
+                <td><?php echo $row['dept_name']; ?></td>
+                <td>
+              <a href='deletedepartment.php?id=<?php echo $row['dept_id']; ?>' onclick = "if (! confirm('Continue?')) { return false; }" class="btn btn-outline-danger">Delete</a> 
+               <!-- <a href='edit_user.php?type=country&id=<?php echo $row['country_id']; ?>' class="btn btn-outline-warning">Edit</a> -->
+             </td>
+     
+                
+            </tr>
+            <?php 
+            $count++;
+          } 
+          ?>
+        </tbody>
+
+                  
+                </table>
+
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- Position -->
+            <div class="col-xl-8 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Position</div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+
+
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Position Title</th>
+                      <th width="156px">Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>#</th>
+                      <th>Position Title</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+
+                                                   <tbody>
+
+          <?php
+          // pos_id, pos_title
+          $count=1;
+          $sql = $db->prepare("SELECT * FROM tbl_position ORDER BY pos_id ASC");
+          $sql->execute();
+          while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+           ?>
+            <tr>
+                <td><?php echo $count ?></td> 
+                <td><?php echo $row['pos_title']; ?></td>
+                <td>
+              <a href='deleteposition.php?id=<?php echo $row['pos_id']; ?>' onclick = "if (! confirm('Continue?')) { return false; }" class="btn btn-outline-danger">Delete</a> 
+               <!-- <a href='edit_user.php?type=country&id=<?php echo $row['country_id']; ?>' class="btn btn-outline-warning">Edit</a> -->
+             </td>
+     
+                
+            </tr>
+            <?php 
+            $count++;
+          } 
+          ?>
+        </tbody>
+
+                  
+                </table>
+
+
+                </div>
+              </div>
+            </div>

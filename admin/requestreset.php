@@ -29,8 +29,37 @@
     		if ($sql1->execute()) {
 
 
+$sendto = $row['email'];
+$subject = "Reset Password";
+
+$message = "
+<html>
+<head>
+<title>Leave Form</title>
+</head>
+<body>
+<b>Click the button below to confirm reset password.</b>
+<br><b>After clicking the button below,</b>
+<br><b>Use your Employee ID Number as a default password.</b>
+<br><br><br>
+<a href='http://goldphilippines.com/admin/resetconfirmation.php?resetid=".$empID."&stat=Approval' target='balnk' width='786' height='786'  style='background-color: #1c87c9;border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 4px 2px;cursor: pointer;'>Confirm</a>
+</body>
+</html>
+";
+
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <Gold-Admin@goldphilippines.com>' . "\r\n";
+$headers .= 'Cc: ghe188@seglobalph.com' . "\r\n";
+
+mail($sendto,$subject,$message,$headers);
+
+
     			?><script>
-				alert('Reset request sent.');
+				alert('Check your email for confirmation.');
 				history.back();
 				</script>
 			<?php 

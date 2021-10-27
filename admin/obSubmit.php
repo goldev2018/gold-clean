@@ -12,8 +12,10 @@ $todate = date('M-d-Y');
 
 $emp_id = $_SESSION['emp_id'];
 
-$from = $_POST['from'];
-$to = $_POST['to'];
+$from1 = $_POST['from'];
+$from = date('h:i A', strtotime($from1));
+$to1 = $_POST['to'];
+$to = date('h:i A', strtotime($to1));
 $fromdate = $_POST['fromdate'];
 $ftodate = $_POST['ftodate'];
 $dot = $fromdate." - ".$ftodate;

@@ -259,7 +259,7 @@ elseif ($form=="leave") {
 elseif ($form=="ob") {
   include 'obreport.php';
 }
-elseif ($form=="ob") {
+elseif ($form=="rtw") {
   include 'rtwreport.php';
 }
 else{

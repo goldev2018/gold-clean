@@ -58,7 +58,10 @@
           		include 'project.php';
           }
           else if ($form=="position") {
-          		include 'position.php';
+              include 'position.php';
+          }
+          else if ($form=="company") {
+              include 'company.php';
           }
           else{
           	include '404.html';

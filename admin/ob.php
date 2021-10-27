@@ -42,14 +42,19 @@
 <td style="width: 419px; height: 25px;">
 <!-- <p>Time Range: <span class="slider-time">10:00 AM</span> - <span class="slider-time2">12:00 PM</span> -->
 
-	From:<input type="text" id="from" name="from" value="10:00 AM" size="10">
-	To:<input type="text" id="to" name="to" value="12:00 PM" size="10">
+<!-- 	From:<input type="text" id="from" name="from" value="10:00 AM" size="10">
+	To:<input type="text" id="to" name="to" value="12:00 PM" size="10"> -->
+
+
+  From:<input type="time" name="from" id="from" required>
+  To:<input type="time" name="to" id="to" required>
 
     </p>
 
-	<div class="sliders_step1">
+<!-- 	<div class="sliders_step1">
         <div id="slider-range"></div>
-    </div></td>
+    </div> -->
+  </td>
 </tr>
 <tr style="height: 14px;">
 <td style="width: 176px; height: 14px;">

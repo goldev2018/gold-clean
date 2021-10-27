@@ -77,7 +77,8 @@ $rowapprove = $sqlapprove->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<center><img src="img/gold.png" width="80%"></center><br>
+<!-- <center><img src="img/gold.png" width="80%"></center><br> -->
+<center><img src="<?php echo $row2['com_flogo']; ?>" width="80%"></center><br>
 <center><font style="font-family:Cambria; font-size: 30px">(PHILIPPINES OFFICE &ndash; MANILA)
   <br />
   <b style="font-size: 30px"><u>APPLICATION FOR LEAVE</u></b><br/></font></center><br/>

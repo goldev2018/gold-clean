@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="include/jquery-ui.css"/> 
 <script src="include/jquery.min.js"></script>
 <script src="include/jquery-ui.min.js"></script> -->
-
+<meta http-equiv="refresh" content="900;url=logout.php" />
 <ul class="navbar-nav bg-gradient-light sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
@@ -19,7 +19,7 @@
 
 
           <?php $qwe = $_SERVER['QUERY_STRING']; 
-          if ($qwe=="id=project" || $qwe=="id=position") {
+          if ($qwe=="id=project" || $qwe=="id=position" || $qwe=="id=company") {
             $util = "show";
             $page = "";
           }
@@ -52,6 +52,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="utilities.php?id=project">Projects</a>
+            <a class="collapse-item" href="utilities.php?id=company">Company</a>
             <a class="collapse-item" href="utilities.php?id=position">Position / Department</a>
           </div>
         </div>
@@ -99,7 +100,7 @@
         <div id="collapseUtilities" class="collapse <?php echo $util ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Forms:</h6>
-            <a class="collapse-item" href="HRview.php?link=rtw">RTW</a>
+            <a class="collapse-item" href="HRview.php?link=rtw">RWO</a>
             <a class="collapse-item" href="HRview.php?link=ots">OTS</a>
           </div>
         </div>

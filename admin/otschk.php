@@ -12,13 +12,15 @@ if ($_POST['submitots']) {
 	$selnoted = $_POST['selnoted'];
 	$hidrtwid = $_POST['hidrtwid'];
 	$todate = date("F d Y l");
+	$estimate = preg_replace('/[^0-9]/', '', $estimate1);
+
 
 
 // ot_id, ot_date, ot_from, ot_to, ot_reason, ot_hours, ot_attachment, ot_noted, ot_datefiled, emp_id, rtw_id, if_noted
 
 
 
-$sqlrtw = $db->prepare("INSERT INTO tbl_ot SET ot_date='$datepicker', ot_from='$start', ot_to='$stop', ot_reason='$ots_reason', ot_hours='$estimate1', ot_attachment='', ot_noted='$selnoted', ot_datefiled='$todate', emp_id='$sessemp_id', rtw_id='$hidrtwid', if_noted='0'");
+$sqlrtw = $db->prepare("INSERT INTO tbl_ot SET ot_date='$datepicker', ot_from='$start', ot_to='$stop', ot_reason='$ots_reason', ot_hours='$estimate', ot_attachment='', ot_noted='$selnoted', ot_datefiled='$todate', emp_id='$sessemp_id', rtw_id='$hidrtwid', if_noted='0'");
 $sqlrtw->execute();
 $last_id = $db->lastInsertId();
 

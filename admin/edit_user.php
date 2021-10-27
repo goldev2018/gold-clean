@@ -142,9 +142,29 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   </div>
                 </div>
                 <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
+<!--                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="form-control form-control-user" id="company" name="company" placeholder="Company" required="" value="<?php echo $editrow['company']; ?>">
+                  </div> -->
+
+<?php $selected_comp = $editrow['company']; ?>
+              <div class="col-sm-6 mb-3 mb-sm-0">
+<div class="col-sm-12 selectWrapper">
+    <select class="custom-select form-control selectBox2" id="inputGroupSelect04" name="company" required="">
+    <option selected value="<?php echo $selected_comp ?>"><?php echo $selected_comp ?></option>
+    <?php
+    $sql = $db->prepare("SELECT * FROM tbl_company WHERE com_abbre NOT IN ('".$selected_comp."') ");
+$sql->execute();
+while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+     ?> 
+    <option value="<?php echo $row['com_abbre'] ?>"><?php echo $row['com_abbre'] ?></option>
+    <?php } ?>
+  </select>
+</div>
                   </div>
+
+
+
+
                   <div class="col-sm-6 mb-3 mb-sm-0 selectWrapper">
                     <!-- <input type="text" class="form-control form-control-user" id="department" name="department" placeholder="Department" required=""> -->
 

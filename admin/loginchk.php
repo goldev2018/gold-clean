@@ -17,6 +17,8 @@ $pass = md5($_POST['pass']);
 // }
 // echo "Please wait...";
 
+// $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id=? AND password=?");
+// $sql->execute(array($uname, $pass));
 $sql = $db->prepare("SELECT * FROM tbl_user WHERE emp_id='$uname' AND password='$pass'");
 $sql->execute();
 $num = $sql->rowCount();
@@ -35,7 +37,7 @@ $_SESSION['status']=$row['status'];
 $_SESSION['is_active']=$row['is_active'];
 $_SESSION['uname']=$uname;
 $_SESSION['pass']=$pass;
-$_SESSION['email']=$email;
+$_SESSION['email']=$row['email'];
 
 if ($row['is_active']==0) {
 
