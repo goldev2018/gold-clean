@@ -2682,9 +2682,14 @@ a.btn.btn-wide {
 }
 
 
-/*p{
+p{
     font-family: 'Montserrat', sans-serif;
 }
 h1, h2, h3, h4, h5, h6{
 font-family: 'Noto Serif JP', serif;
-}*/
+}
+
+.solidline {
+	border-top:3px solid #231F20;
+	margin:0 0 30px;
+}

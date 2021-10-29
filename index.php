@@ -6,26 +6,26 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Mobile Meta -->
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=5">
+
     <!-- Site Meta -->
     <title>Home | Great Ocean Lake Development</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <!-- Site Icons -->
     <?php include("favicon.php"); ?>
 
 	<!-- Google Fonts -->
-<!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
+<!--     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">  -->
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Serif+JP:900&display=swap" rel="stylesheet">
 
-	
+
     <!-- Custom & Default Styles -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -46,12 +46,13 @@
 
 
 </head>
-<body onload="myFunction()">  
+<body onload="myFunction()">
 
     <!-- LOADER -->
     <div id="preloader">
         <img class="preloader" src="images/loader.gif" alt="">
-    </div><!-- end loader -->
+    </div>
+    <!-- end loader -->
     <!-- END LOADER -->
 
     <div id="wrapper">
@@ -65,7 +66,7 @@
                     <small></small>
                     <div class="btn-wrapper">
                         <div class="text-center">
-                            
+
                         </div>
                     </div><!-- end row -->
                 </div>
@@ -78,14 +79,9 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section gb nopadtop">
             <div class="container">
-                <h1>Our Projects</h1>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
+                <br><br><h1>PROJECTS</h1><br><br>
                 <div class="row">
                     <div class="col-md-8">
                             <img src="images/homepage/Untitled-3.jpg" alt="Paris" width="100%"><br><br>
@@ -106,7 +102,7 @@
                 <div class="row">
                     <div class="col-md-6 imgright">
             <img src="images/homepage/Untitled-2.jpg" style="height: 500px;width: 100%;"><br><br>
-            <p class="adjustleft"><font size="2">In line with our hope to acquire the historic former Royal Marines Museum Eastney 
+            <p class="adjustleft"><font size="2">In line with our hope to acquire the historic former Royal Marines Museum Eastney
             Esplanade, Portsmouth Southsea, the Grand Hotel Excelsior Ltd. has a strong desire to convert said property in a 5-star Luxury Boutique Hotel that would cater weddings, conferences and various events.</font></p>
                     </div><br><br><br><br><br>
                     <div class="col-md-3 texthome imgright"><br><br><br>
@@ -124,8 +120,12 @@
             </div>
         </section>
 
+<center><div class="solidline" style="margin: 0 0 140.776px 0;"></div></center>
 
 
+<section class="section gb nopadtop">
+    <div class="container">
+        <div class="row">
 
         
 
@@ -143,12 +143,49 @@
             <input id="btnSend" class="btnsubmit success1" type="button" value="Learn More" onclick="location.href='project.php'" />
         </center>
         </section>
-        
 
 
-  
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding:0 0 0 15px">
+                  <a href="project_info.php?info=3"><img src="images/project/ghe_uk.jpg" class="img-responsive img-fluid" style="max-height:769.734px; max-width: 1000.579px;"/></a>
+            </div>
+          </div>
+          </div>
+</section>
+
+<center><div class="solidline" style="margin: 0 0 140.776px 0;"></div></center>
+
+<section class="section gb nopadtop">
+    <div class="container">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-8" style="padding:0 0 0 15px">
+                <a href="project_info.php?info=5"><img src="images/project/ero_aus.jpg" class="img-responsive img-fluid" style="max-height:707.442px; max-width: 992px;"/></a>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 bgcolor" style="float:right; height:707.442px; width: 380.454px;padding: 44.399px 44.399px 44.399px 44.399px;">
+            <a href="project_info.php?info=5"><h2 style="margin: 0">Eromanga Motel</h2></a>
+            <h3>Australia</h3>
+            <p><br>Eromanga, Southwest Queensland, Australia</p>
+            <p>2-Storey Motel Redevelopment and Caravan Park</p>
+                <div class="solidline"></div>
+            <p>The Eromanga Motel and Caravan Park redevelopment project will be comprised of additional 50 guest rooms, many of which will offer outback-views, 2 restaurants, an outdoor bar, a new pool, and a new caravan park with landscape and amenities.</p>
+            <a href="project_info.php?info=5"><strong><p style="float:right; position:absolute; bottom:0; margin: 0 0 31.522px;">>> LEARN MORE</p></strong></a>
+          </div>
+          </div>
+        </div><!-- end row -->
+    </div>
+</section>
+
+<section class="section gb nopadtop">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-auto">
+            <center><a href="project.php"><button type="button" class="btn btn-outline-primary" style="font-size:18.89px; ">MORE PROJECTS</button></a></center>
+          </div>
+        </div>
+    </div>
+</section>
+
 <?php include("footer.php"); ?>
- 
+
     </div><!-- end wrapper -->
 
     <!-- jQuery Files -->

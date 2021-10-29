@@ -90,79 +90,80 @@
                 // }
             }
     </script>
-      <div class="col-lg-12">
-        <p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7 id="todaydate"></h7><br />Position: <?php echo $sessposition?>
-      </div>
 
-      <div class="col-lg-12"><!--START minutes late-->
-        <form class="form-inline" action="timesheetchk.php" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
-            <input type="hidden" name="hiddenedittimesheet" value="<?php echo $todate; ?>">
-        <?php
-        if ($numcount==0) { ?>
-        <input type="text" name="late" id="late" class="form-control mb-2 mr-sm-2" placeholder="Enter minutes late (1-59)     " onchange="getlate();">
-        <button type="fakesubmit" class="btn btn-success mb-2">Submit</button>
-      </div>
-         <div class="col-lg-12">
-          <p id="total_minute"></p>
-         <input type="hidden" name="totaltime" id="totaltime">
-         <input type="hidden" name="total_minutes" id="total_minutes">
-        <?php }else{ ?>
-         <input type="number" name="late" id="late" placeholder="Enter minutes late (1-59)     " style="visibility: hidden;" onchange="getlate();">
-           <p>Remaining hours: <?php echo $showremaining; ?>  hour(s)</p>
-           <p id="total_minute"></p>
-           <input type="hidden" name="totaltime" id="totaltime" value="<?php echo $info_total ?>">
-           <input type="hidden" name="total_minutes" id="total_minutes" value="<?php echo $info_total ?>">
-          <?php } ?>
-         </div>
-       <!--END minutes late-->
+    <br><br>
+    <div class="col-lg-12">
+      <p>Name: <?php echo $sessfname." ".$sesslname; ?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Date: <h7 id="todaydate"></h7><br />Position: <?php echo $sessposition?>
+    </div>
+    <!-- <div class="col-lg-12">
+
+    </div> -->
+    <div class="col-lg-12">
+      <form action="timesheetchk.php" class="form-inline" method="post" onSubmit="if(!confirm('Are you sure?')){return false;}">
+          <input type="hidden" name="hiddenedittimesheet" value="<?php echo $todate; ?>">
+
+      <?php
+      if ($numcount==0) { ?>
+      <input type="text" class="form-control mb-2 mr-sm-2" name="late" id="late" placeholder="Enter minutes late (1-59)     " style="float: right;" onchange="getlate();" width="148px"><br>
+      <button type="fakesubmit" class="btn btn-success mb-2">Submit</button>
+    </div>
+
+    <div class="col-lg-12">
+      <p id="total_minute"></p>
+      <input type="hidden" name="totaltime" id="totaltime">
+      <input type="hidden" name="total_minutes" id="total_minutes">
+      <?php }else{ ?>
+
+      <input type="number" name="late" id="late" placeholder="Enter minutes late (1-59)     " style="float: right; visibility: hidden;" onchange="getlate();" width="148px">
+      <p>Remaining hours: <?php echo $showremaining; ?>  hour(s)</p>
+      <p id="total_minute"></p>
+      <input type="hidden" name="totaltime" id="totaltime" value="<?php echo $info_total ?>">
+      <input type="hidden" name="total_minutes" id="total_minutes" value="<?php echo $info_total ?>">
+      <?php } ?>
+    </div>
+     <br><br>
 
 
-<div class="col-lg-6">
+
+    <!-- input details -->
+
+
+
     <?php if ($numcount==0) { ?>
-      <form>
     <div id="addedrow" style="visibility: hidden;">
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Project Name</label>
-        <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
-        <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php
-        echo $cou_id = $rowopt['country_id'];
-        $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
-         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
-          <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
-         </optgroup><?php } ?></select>
-       </div>
-        <div class="form-group col-md-6">
-          <label>Job Code/ Job ID/ Phase ID</label>
+      <div class="form-row">
+        <div class="form-group col-lg-6">
+            <select class='custom-select country' id='inputGroupSelect04' name='selproj[]'><option selected value=''>Choose Project</option><?php  $sqlopt = $db->prepare("SELECT * FROM tbl_country"); $sqlopt->execute();while ($rowopt = $sqlopt->fetch(PDO::FETCH_ASSOC)){ ?>
+            <optgroup label='<?php echo $rowopt['country_name']; ?>'><?php
+            echo $cou_id = $rowopt['country_id'];
+            $sql = $db->prepare("SELECT * FROM tbl_project WHERE country_id='$cou_id'"); $sql->execute();
+             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
+              <option value='<?php echo $row['project_id'] ?>'><?php echo $row['project_name'] ?></option><?php }?>
+             </optgroup><?php } ?></select>
+        </div>
+        <div class="col-lg-6">
             <select class='custom-select city' id='inputGroupSelect05' name='seljob[]' required><option value="">Choose Job Code</option></select>
         </div>
-    </div>
 
-    <div class="form-group">
-      <label>Description</label>
-        <textarea class="form-control" name='desc[]' id="desc" rows='3' cols='80' required></textarea>
-    </div>
+        <div class="form-group col-lg-12">
+           <label>Description</label>
+            <textarea class="form-control" name='desc[]' id="desc" rows='3' cols='80' required></textarea>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="wrkhrs">Working Hours</label>
-        <input type='text' class="form-control" class='num' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+        <div class="form-group">
+          <label>Total hours remaining:</label>
+            <input type='text' class='num form-control' name='num[]' id='tsMon' size='3'  min='0' max='8' step='.01' onblur='findTotal()' required>
+        </div>
       </div>
-    </div>
 
-<div class="form-row">
-    <div class="form-group col-md-6">
+
+
     <?php if ($showremaining==0) { ?>
-    <label>Total</label>
-    <input type="text" class="form-control" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></div>
+    <div class="form-group"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></div>
     <?php }else{ ?>
-        <div class="form-control"><input type="text" id="total" name="total" value="" required readonly size="2"/></div>
+        <div style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="" required readonly size="2"/></div>
     <?php } ?>
-</div>
-
-
-
+    </div>
     <?php }else{ ?>
 
         <div  id="addedrow">
@@ -194,12 +195,118 @@
     <?php } ?>
 
 
-    <!--START TABLE-->
 
-    <!--END TABLE-->
-    <!--SUBMIT BUTTON-->
-    <button type="submit" name="submit" id="submit" value="Submit" class="btn btn-success">Submit</button>
+    <!-- end input details -->
 
+
+
+
+
+
+
+
+
+     <br>
+     <!-- <img src="img/decimal.png" style="float: right;"> -->
+     <div class="table-responsive">
+    <table style="height: 29px; width: 100%;" border="1" id="sampleTable">
+    <tbody>
+    <tr style="height: 29px;" class="sampleHeader">
+    <td style="width: 800; text-align: center; height: 29px;" rowspan="2">
+    <p>Project Name</p>
+    </td>
+    <td style="width: 800; text-align: center; height: 29px;" rowspan="2">Job Code<br />Job ID Phase ID</td>
+    <td style="width: 492px; text-align: center; height: 29px;" rowspan="2">
+    <p>Description</p>
+    </td>
+    <td style="width: 30px; text-align: center; height: 29px;" colspan="2">Working <br> Hours
+    <!-- <table style="height: 21px; width: 357px; margin-left: auto; margin-right: auto;" border="1">
+    <tbody>
+    <tr style="height: 13px;">
+
+    </tr>
+    </tbody>
+    </table> -->
+    </td>
+    </tr>
+    <!-- <tr></tr>
+    <tr></tr> -->
+    <tr class="daytotal">
+    <td style="width: 44px; height: 13px; text-align: center;"><?php echo date("D", strtotime($date)); ?></td>
+    <td style="width: 20px; height: 13px; text-align: center;">Total</td>
+
+    </tr>
+
+
+
+            <script type="text/javascript">
+    function findTotal(){
+        var arr = document.getElementsByClassName('num');
+        var tot=0;
+        var qwe=0;
+        for(var i=0;i<arr.length;i++){
+            if(parseFloat(arr[i].value))
+                tot += parseFloat(arr[i].value);
+        }
+        var totaltime = document.getElementById('totaltime').value;
+
+        if(totaltime < tot){
+    alert("The textfield is greater than "+totaltime);
+       document.getElementById('total').value = "";
+       document.getElementById("submit").style.visibility = "hidden";
+    }else{
+    document.getElementById('total').value = tot;
+       document.getElementById("submit").style.visibility = "visible";
+    }
+    }
+    </script>
+    <?php
+    if ($numcount!=0) {
+        $sqltsi = $db->prepare("SELECT * FROM tbl_timesheetinfo WHERE tsinfo_date='$todate' AND ts_id='$rowts_id'");
+    $sqltsi->execute();
+        while ($rowtsi = $sqltsi->fetch(PDO::FETCH_ASSOC)){
+            $compproj = $rowtsi['project_id'];
+            $compprojinfo = $rowtsi['proj_info_id'];
+
+            $sqlproj = $db->prepare("SELECT * FROM tbl_project WHERE project_id='$compproj'");
+    $sqlproj->execute();
+    $rowproj = $sqlproj->fetch(PDO::FETCH_ASSOC);
+
+    $sqlproji = $db->prepare("SELECT * FROM tbl_project_info WHERE proj_info_id='$compprojinfo'");
+    $sqlproji->execute();
+    $rowproji = $sqlproji->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <tr>
+    <td><?php echo $rowproj['project_name'];?>  </td>
+    <td><?php echo $rowproji['proj_info_codes']." - ".$rowproji['proj_info_building'];?></td>
+    <td style="width: 44px; height: 13px;"><?php echo $rowtsi['tsinfo_desc']; ?></td>
+    <td  style="width: 20px; height: 13px;"><input type="text" name="showtime" class="num" value="<?php echo $rowtsi['tsinfo_time']; ?>" readonly></td>
+    <td style="width: 20px; height: 13px;"></td>
+    </tr>
+    <?php } }?>
+
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td style="width: 44px; height: 13px;"></td>
+     <?php if ($showremaining==0) { ?>
+    <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="<?php echo $tottime; ?>" required readonly size="2"/></td>
+    <?php }else{ ?>
+        <td style="width: 20px; height: 13px;"><input type="text" id="total" name="total" value="" required readonly size="2"/></td>
+    <?php } ?>
+
+
+    </tr>
+
+    </tbody>
+    </table>
+    </div>
+    <br>
+    <center>
+    <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-outline-success" style="visibility:hidden; float: left;">
+    </center>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script>
       $(document).ready(function(){
@@ -239,8 +346,10 @@
     //         }
     //   });
     </script>
-</div>
-</form>
+    </form>
+
+
+
 
     <?php include 'includes/config.php'; ?>
 
@@ -284,8 +393,8 @@
     });
     });
     </script>
+  </div>
+</div>
+    </body>
 
-</div>
-</div>
-</body>
-</html>
+    </html>
